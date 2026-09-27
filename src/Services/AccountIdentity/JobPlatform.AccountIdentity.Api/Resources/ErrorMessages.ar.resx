@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="E-JSRPM-DUPLICATE" xml:space="preserve"><value>يوجد حساب مسجّل بهذا الرقم أو البريد الإلكتروني.</value></data>
+  <data name="E-JSRPM-EXPIRED" xml:space="preserve"><value>رمز التفعيل غير صحيح أو انتهت صلاحيته.</value></data>
+  <data name="E-JSRPM-RATE-LIMITED" xml:space="preserve"><value>محاولات كثيرة جداً. يرجى المحاولة لاحقاً.</value></data>
+  <data name="E-ERPM-DUPLICATE" xml:space="preserve"><value>يوجد حساب صاحب عمل مسجّل بهذا الرقم التعريفي للشركة.</value></data>
+  <data name="E-ERPM-EXPIRED" xml:space="preserve"><value>الرمز غير صحيح أو انتهت صلاحيته.</value></data>
+  <data name="E-ERPM-RATE-LIMITED" xml:space="preserve"><value>محاولات كثيرة جداً. يرجى المحاولة لاحقاً.</value></data>
+  <data name="E-TPJPRI-DUPLICATE" xml:space="preserve"><value>هذا الشريك مسجّل مسبقاً.</value></data>
+  <data name="E-TPJPRI-EXPIRED" xml:space="preserve"><value>انتهت صلاحية بيانات اعتماد واجهة البرمجة.</value></data>
+  <data name="E-TPJPRI-REVOKED" xml:space="preserve"><value>تم إلغاء بيانات اعتماد واجهة البرمجة.</value></data>
+  <data name="E-TPJPRI-PARTNER-NOT-ACTIVE" xml:space="preserve"><value>يجب أن يكون حساب الشريك نشطاً لاستخدام بيانات اعتماد واجهة البرمجة.</value></data>
+  <data name="E-TPJPRI-IP-NOT-ALLOWED" xml:space="preserve"><value>الطلبات القادمة من عنوان IP هذا غير مسموح بها لهذه البيانات.</value></data>
+  <data name="E-AAFR-RATE-LIMITED" xml:space="preserve"><value>محاولات كثيرة جداً. تم قفل الحساب مؤقتاً، يرجى المحاولة لاحقاً.</value></data>
+  <data name="E-AAFR-INVALID-FIELD" xml:space="preserve"><value>حقل واحد أو أكثر غير صالح.</value></data>
+  <data name="E-AAFR-FORBIDDEN" xml:space="preserve"><value>ليست لديك صلاحية تنفيذ هذا الإجراء.</value></data>
+  <data name="E-AAFR-UNAUTHORIZED" xml:space="preserve"><value>المصادقة مطلوبة.</value></data>
+  <data name="E-AAFR-INVALID-CREDENTIALS" xml:space="preserve"><value>بيانات الدخول غير صحيحة.</value></data>
+  <data name="E-AAFR-ACCOUNT-PENDING" xml:space="preserve"><value>لم يتم تفعيل الحساب بعد.</value></data>
+  <data name="E-AAFR-ACCOUNT-DEACTIVATED" xml:space="preserve"><value>تم تعطيل الحساب.</value></data>
+  <data name="E-AAFR-SESSION-EXPIRED" xml:space="preserve"><value>انتهت جلستك. يرجى تسجيل الدخول مرة أخرى.</value></data>
+  <data name="E-AAFR-MFA-REQUIRED" xml:space="preserve"><value>المصادقة متعددة العوامل مطلوبة.</value></data>
+  <data name="E-AAFR-PASSWORD-CHANGE-REQUIRED" xml:space="preserve"><value>يجب تغيير كلمة المرور قبل المتابعة.</value></data>
+  <data name="E-AUM-STATE-BANNED" xml:space="preserve"><value>الحساب محظور.</value></data>
+  <data name="E-AUM-FORBIDDEN" xml:space="preserve"><value>يمكن للمسؤولين فقط تنفيذ هذا الإجراء.</value></data>
+  <data name="E-AUM-STATE-CONFLICT" xml:space="preserve"><value>حالة الحساب لا تسمح بهذا الإجراء.</value></data>
+  <data name="E-APIF-EXPIRED" xml:space="preserve"><value>انتهت صلاحية رمز الوصول.</value></data>
+  <data name="E-APIF-RATE-LIMITED" xml:space="preserve"><value>محاولات مصادقة فاشلة كثيرة جداً. يرجى المحاولة لاحقاً.</value></data>
+  <data name="E-APIF-INVALID-CLIENT" xml:space="preserve"><value>بيانات اعتماد العميل غير صحيحة.</value></data>
+  <data name="E-ACCOUNT-NOT-FOUND" xml:space="preserve"><value>لم يتم العثور على الحساب.</value></data>
+  <data name="E-ROLE-NOT-FOUND" xml:space="preserve"><value>لم يتم العثور على الدور.</value></data>
+  <data name="E-API-CREDENTIAL-NOT-FOUND" xml:space="preserve"><value>لم يتم العثور على بيانات اعتماد واجهة البرمجة.</value></data>
+  <data name="E-CONCURRENCY-CONFLICT" xml:space="preserve"><value>تم تعديل المورد بواسطة طلب آخر. أعد التحميل وحاول مجدداً.</value></data>
+  <data name="E-PRECONDITION-FAILED" xml:space="preserve"><value>تم تعديل المورد منذ قراءته. أعد تحميله وحاول مجدداً باستخدام وسم ETag الحالي.</value></data>
+  <data name="E-DUPLICATE" xml:space="preserve"><value>يوجد سجل بالقيم نفسها.</value></data>
+  <data name="E-IDEMPOTENCY-KEY-REUSED" xml:space="preserve"><value>تم استخدام مفتاح Idempotency-Key مع طلب مختلف.</value></data>
+  <data name="E-IDEMPOTENCY-IN-PROGRESS" xml:space="preserve"><value>ما زال الطلب ذو مفتاح Idempotency-Key نفسه قيد المعالجة.</value></data>
+  <data name="E-UNEXPECTED" xml:space="preserve"><value>حدث خطأ غير متوقع.</value></data>
+  <data name="VAL.INVALID_REQUEST" xml:space="preserve"><value>الطلب غير صالح. راجع تفاصيل الأخطاء.</value></data>
+</root>

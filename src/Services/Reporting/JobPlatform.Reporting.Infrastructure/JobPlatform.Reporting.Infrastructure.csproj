@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.Reporting.Infrastructure</AssemblyName>
+    <RootNamespace>JobPlatform.Reporting.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.Reporting.Application\JobPlatform.Reporting.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.Reporting.Domain\JobPlatform.Reporting.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.Reporting.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.Reporting.Api.IntegrationTests" />
+  </ItemGroup>
+</Project>

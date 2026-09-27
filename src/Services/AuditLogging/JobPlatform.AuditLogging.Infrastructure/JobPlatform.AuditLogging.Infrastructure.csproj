@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.AuditLogging.Infrastructure</AssemblyName>
+    <RootNamespace>JobPlatform.AuditLogging.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.AuditLogging.Application\JobPlatform.AuditLogging.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.AuditLogging.Domain\JobPlatform.AuditLogging.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.AuditLogging.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.AuditLogging.Api.IntegrationTests" />
+  </ItemGroup>
+</Project>

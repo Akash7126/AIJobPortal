@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.AccountIdentity.Api</AssemblyName>
+    <RootNamespace>JobPlatform.AccountIdentity.Api</RootNamespace>
+    <UserSecretsId>jobplatform-account-identity</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.AccountIdentity.Application\JobPlatform.AccountIdentity.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.AccountIdentity.Infrastructure\JobPlatform.AccountIdentity.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.AccountIdentity.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.AccountIdentity.ArchitectureTests" />
+  </ItemGroup>
+</Project>

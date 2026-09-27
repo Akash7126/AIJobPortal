@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.AccountIdentity.Infrastructure</AssemblyName>
+    <RootNamespace>JobPlatform.AccountIdentity.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.AccountIdentity.Application\JobPlatform.AccountIdentity.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.AccountIdentity.Domain\JobPlatform.AccountIdentity.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.AccountIdentity.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.AccountIdentity.Api.IntegrationTests" />
+  </ItemGroup>
+</Project>

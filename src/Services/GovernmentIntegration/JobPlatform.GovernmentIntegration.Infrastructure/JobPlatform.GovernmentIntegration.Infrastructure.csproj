@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.GovernmentIntegration.Infrastructure</AssemblyName>
+    <RootNamespace>JobPlatform.GovernmentIntegration.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.GovernmentIntegration.Application\JobPlatform.GovernmentIntegration.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.GovernmentIntegration.Domain\JobPlatform.GovernmentIntegration.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.GovernmentIntegration.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.GovernmentIntegration.Api.IntegrationTests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.AiMatching.Infrastructure.IntegrationTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/AiMatching/JobPlatform.AiMatching.Api/JobPlatform.AiMatching.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/AiMatching/JobPlatform.AiMatching.Infrastructure/JobPlatform.AiMatching.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/AiMatching/JobPlatform.AiMatching.Application/JobPlatform.AiMatching.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/AiMatching/JobPlatform.AiMatching.Domain/JobPlatform.AiMatching.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.ExternalIntegration.Application.UnitTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/ExternalIntegration/JobPlatform.ExternalIntegration.Api/JobPlatform.ExternalIntegration.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/ExternalIntegration/JobPlatform.ExternalIntegration.Infrastructure/JobPlatform.ExternalIntegration.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/ExternalIntegration/JobPlatform.ExternalIntegration.Application/JobPlatform.ExternalIntegration.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/ExternalIntegration/JobPlatform.ExternalIntegration.Domain/JobPlatform.ExternalIntegration.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

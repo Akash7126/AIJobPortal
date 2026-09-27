@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.EmployerOnboarding.ArchitectureTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NetArchTest.Rules" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/EmployerOnboarding/JobPlatform.EmployerOnboarding.Api/JobPlatform.EmployerOnboarding.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/EmployerOnboarding/JobPlatform.EmployerOnboarding.Infrastructure/JobPlatform.EmployerOnboarding.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/EmployerOnboarding/JobPlatform.EmployerOnboarding.Application/JobPlatform.EmployerOnboarding.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/EmployerOnboarding/JobPlatform.EmployerOnboarding.Domain/JobPlatform.EmployerOnboarding.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

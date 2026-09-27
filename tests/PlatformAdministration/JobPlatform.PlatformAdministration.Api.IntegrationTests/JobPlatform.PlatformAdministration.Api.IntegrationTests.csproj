@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.PlatformAdministration.Api.IntegrationTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/PlatformAdministration/JobPlatform.PlatformAdministration.Api/JobPlatform.PlatformAdministration.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/PlatformAdministration/JobPlatform.PlatformAdministration.Infrastructure/JobPlatform.PlatformAdministration.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/PlatformAdministration/JobPlatform.PlatformAdministration.Application/JobPlatform.PlatformAdministration.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/PlatformAdministration/JobPlatform.PlatformAdministration.Domain/JobPlatform.PlatformAdministration.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

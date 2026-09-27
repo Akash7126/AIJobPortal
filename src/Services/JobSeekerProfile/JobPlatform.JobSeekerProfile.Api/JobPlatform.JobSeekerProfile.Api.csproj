@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.JobSeekerProfile.Api</AssemblyName>
+    <RootNamespace>JobPlatform.JobSeekerProfile.Api</RootNamespace>
+    <UserSecretsId>jobplatform-job-seeker-profile</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.JobSeekerProfile.Application\JobPlatform.JobSeekerProfile.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.JobSeekerProfile.Infrastructure\JobPlatform.JobSeekerProfile.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Api\JobPlatform.BuildingBlocks.Api.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.ArchitectureTests" />
+  </ItemGroup>
+</Project>

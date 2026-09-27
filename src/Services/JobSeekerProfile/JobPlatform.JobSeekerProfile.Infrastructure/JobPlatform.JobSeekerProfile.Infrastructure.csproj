@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.JobSeekerProfile.Infrastructure</AssemblyName>
+    <RootNamespace>JobPlatform.JobSeekerProfile.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.JobSeekerProfile.Application\JobPlatform.JobSeekerProfile.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.JobSeekerProfile.Domain\JobPlatform.JobSeekerProfile.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.Api.IntegrationTests" />
+  </ItemGroup>
+</Project>

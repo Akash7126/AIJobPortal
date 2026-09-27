@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.AccountIdentity.Infrastructure.IntegrationTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Testcontainers.RabbitMq" />
+    <PackageReference Include="Testcontainers.Redis" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/AccountIdentity/JobPlatform.AccountIdentity.Infrastructure/JobPlatform.AccountIdentity.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/AccountIdentity/JobPlatform.AccountIdentity.Application/JobPlatform.AccountIdentity.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/AccountIdentity/JobPlatform.AccountIdentity.Domain/JobPlatform.AccountIdentity.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

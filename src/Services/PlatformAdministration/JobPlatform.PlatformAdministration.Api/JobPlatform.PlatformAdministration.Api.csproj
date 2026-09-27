@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.PlatformAdministration.Api</AssemblyName>
+    <RootNamespace>JobPlatform.PlatformAdministration.Api</RootNamespace>
+    <UserSecretsId>jobplatform-platform-administration</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.PlatformAdministration.Application\JobPlatform.PlatformAdministration.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.PlatformAdministration.Infrastructure\JobPlatform.PlatformAdministration.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Api\JobPlatform.BuildingBlocks.Api.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.PlatformAdministration.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.PlatformAdministration.ArchitectureTests" />
+  </ItemGroup>
+</Project>

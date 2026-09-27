@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.EmployerOnboarding.Domain.UnitTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/EmployerOnboarding/JobPlatform.EmployerOnboarding.Domain/JobPlatform.EmployerOnboarding.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+  </ItemGroup>
+</Project>

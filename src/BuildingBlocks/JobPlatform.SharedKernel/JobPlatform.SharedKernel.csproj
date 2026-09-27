@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.SharedKernel</AssemblyName>
+    <RootNamespace>JobPlatform.SharedKernel</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Application\Concurrency\" />
+    <Folder Include="IntegrationEvents\Audit\" />
+  </ItemGroup>
+</Project>

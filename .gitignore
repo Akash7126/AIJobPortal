@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+TestResults/
+coverage/
+coveragereport/
+*.db
+*.db-shm
+*.db-wal
+launchSettings.json.bak
+.idea/
+.env

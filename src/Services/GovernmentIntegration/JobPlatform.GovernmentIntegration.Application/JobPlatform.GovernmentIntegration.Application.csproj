@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.GovernmentIntegration.Application</AssemblyName>
+    <RootNamespace>JobPlatform.GovernmentIntegration.Application</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.GovernmentIntegration.Domain\JobPlatform.GovernmentIntegration.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.GovernmentIntegration.Application.UnitTests" />
+    <InternalsVisibleTo Include="JobPlatform.GovernmentIntegration.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.GovernmentIntegration.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+</Project>

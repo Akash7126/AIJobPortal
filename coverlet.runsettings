@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Usage: dotnet test JobPlatform.sln (settings option) coverlet.runsettings (collect option) "XPlat Code Coverage" - see README -->
+
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <!-- Generated code is excluded from the gates (foundation 14.2): migrations, program boilerplate, source generators. -->
+          <ExcludeByFile>**/Migrations/**/*.cs,**/obj/**/*.cs</ExcludeByFile>
+          <ExcludeByAttribute>GeneratedCodeAttribute,CompilerGeneratedAttribute,ExcludeFromCodeCoverageAttribute</ExcludeByAttribute>
+          <SkipAutoProps>false</SkipAutoProps>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

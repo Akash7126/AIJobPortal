@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.JobSeekerProfile.Application</AssemblyName>
+    <RootNamespace>JobPlatform.JobSeekerProfile.Application</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.JobSeekerProfile.Domain\JobPlatform.JobSeekerProfile.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.Application.UnitTests" />
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.JobSeekerProfile.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.JobPosting.Application.UnitTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/JobPosting/JobPlatform.JobPosting.Api/JobPlatform.JobPosting.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/JobPosting/JobPlatform.JobPosting.Infrastructure/JobPlatform.JobPosting.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/JobPosting/JobPlatform.JobPosting.Application/JobPlatform.JobPosting.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/JobPosting/JobPlatform.JobPosting.Domain/JobPlatform.JobPosting.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

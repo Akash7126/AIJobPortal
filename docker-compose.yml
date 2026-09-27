@@ -1,0 +1,105 @@
+# Local stack for BC-03 Account Identity: SQL Server, RabbitMQ (management UI), Redis and the API.
+# Authored on a machine without Docker - this file has NOT been executed. Copy .env.example to .env first.
+#
+#   docker compose up --build
+#   API:      http://localhost:8080   (Swagger UI: http://localhost:8080/swagger, enabled by Swagger__Enabled below)
+#   RabbitMQ: http://localhost:15672  (guest / guest)
+#
+# Production applies EF migrations with a separate migration job (foundation section 8); for local convenience the API applies
+# them at startup here via Database__ApplyMigrationsOnStartup=true.
+
+name: jobplatform-account-identity
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD:?set SQL_SA_PASSWORD in .env}
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7.2-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  account-identity-api:
+    build:
+      context: .
+      dockerfile: src/Services/AccountIdentity/JobPlatform.AccountIdentity.Api/Dockerfile
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__Identity: "Server=sqlserver,1433;Database=JobPlatform_AccountIdentity;User Id=sa;Password=${SQL_SA_PASSWORD};TrustServerCertificate=True"
+      Database__Provider: SqlServer
+      Database__ApplyMigrationsOnStartup: "true"
+      Cache__Provider: Redis
+      Cache__ConnectionString: redis:6379
+      Cache__KeyPrefix: local:account-identity
+      Messaging__Provider: RabbitMq
+      Messaging__RabbitMq__HostName: rabbitmq
+      Messaging__RabbitMq__UserName: ${RABBITMQ_USER:-guest}
+      Messaging__RabbitMq__Password: ${RABBITMQ_PASSWORD:-guest}
+      Messaging__RabbitMq__Exchange: jobplatform.account-identity.events
+      Security__MasterKey: ${SECURITY_MASTER_KEY:?set SECURITY_MASTER_KEY (base64 of 32 random bytes) in .env}
+      Security__Pepper: ${SECURITY_PEPPER:?set SECURITY_PEPPER in .env}
+      Bootstrap__AdminEmail: ${BOOTSTRAP_ADMIN_EMAIL:-admin@jobplatform.local}
+      Bootstrap__AdminMobile: ${BOOTSTRAP_ADMIN_MOBILE:-+970590000000}
+      Bootstrap__AdminPassword: ${BOOTSTRAP_ADMIN_PASSWORD:?set BOOTSTRAP_ADMIN_PASSWORD in .env}
+      ServiceClients__Clients__0__ClientId: ${SERVICE_CLIENT_ID:-svc-local}
+      ServiceClients__Clients__0__Secret: ${SERVICE_CLIENT_SECRET:?set SERVICE_CLIENT_SECRET in .env}
+      Delivery__Provider: Log
+      Telemetry__Otlp__Endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      Swagger__Enabled: "true"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health/ready"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 40s
+
+volumes:
+  sqlserver-data:
+  rabbitmq-data:
+  redis-data:

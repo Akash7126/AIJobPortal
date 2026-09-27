@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.Reporting.Infrastructure.IntegrationTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/Reporting/JobPlatform.Reporting.Api/JobPlatform.Reporting.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/Reporting/JobPlatform.Reporting.Infrastructure/JobPlatform.Reporting.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/Reporting/JobPlatform.Reporting.Application/JobPlatform.Reporting.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/Reporting/JobPlatform.Reporting.Domain/JobPlatform.Reporting.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

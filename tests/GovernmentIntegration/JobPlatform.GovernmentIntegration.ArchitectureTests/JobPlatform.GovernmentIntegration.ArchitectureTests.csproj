@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>JobPlatform.GovernmentIntegration.ArchitectureTests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NetArchTest.Rules" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/Services/GovernmentIntegration/JobPlatform.GovernmentIntegration.Api/JobPlatform.GovernmentIntegration.Api.csproj" />
+    <ProjectReference Include="../../../src/Services/GovernmentIntegration/JobPlatform.GovernmentIntegration.Infrastructure/JobPlatform.GovernmentIntegration.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/Services/GovernmentIntegration/JobPlatform.GovernmentIntegration.Application/JobPlatform.GovernmentIntegration.Application.csproj" />
+    <ProjectReference Include="../../../src/Services/GovernmentIntegration/JobPlatform.GovernmentIntegration.Domain/JobPlatform.GovernmentIntegration.Domain.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Api/JobPlatform.BuildingBlocks.Api.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
+  </ItemGroup>
+</Project>

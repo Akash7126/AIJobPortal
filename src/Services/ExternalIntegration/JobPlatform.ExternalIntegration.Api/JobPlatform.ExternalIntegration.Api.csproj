@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.ExternalIntegration.Api</AssemblyName>
+    <RootNamespace>JobPlatform.ExternalIntegration.Api</RootNamespace>
+    <UserSecretsId>jobplatform-external-integration</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.ExternalIntegration.Application\JobPlatform.ExternalIntegration.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.ExternalIntegration.Infrastructure\JobPlatform.ExternalIntegration.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Api\JobPlatform.BuildingBlocks.Api.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.ExternalIntegration.Api.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.ExternalIntegration.ArchitectureTests" />
+  </ItemGroup>
+</Project>

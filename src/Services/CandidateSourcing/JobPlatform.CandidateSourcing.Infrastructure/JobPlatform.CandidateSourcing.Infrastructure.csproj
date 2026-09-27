@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>JobPlatform.CandidateSourcing.Infrastructure</AssemblyName>
+    <RootNamespace>JobPlatform.CandidateSourcing.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPlatform.CandidateSourcing.Application\JobPlatform.CandidateSourcing.Application.csproj" />
+    <ProjectReference Include="..\JobPlatform.CandidateSourcing.Domain\JobPlatform.CandidateSourcing.Domain.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.SharedKernel\JobPlatform.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\JobPlatform.BuildingBlocks.Infrastructure\JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="JobPlatform.CandidateSourcing.Infrastructure.IntegrationTests" />
+    <InternalsVisibleTo Include="JobPlatform.CandidateSourcing.Api.IntegrationTests" />
+  </ItemGroup>
+</Project>
