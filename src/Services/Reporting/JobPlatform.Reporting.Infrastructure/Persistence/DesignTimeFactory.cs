@@ -9,7 +9,7 @@ internal sealed class ReportingDbContextDesignTimeFactory : IDesignTimeDbContext
     public ReportingDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<ReportingDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_Reporting;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_Reporting;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", ReportingDbContext.Schema))
             .Options;
         return new ReportingDbContext(options);

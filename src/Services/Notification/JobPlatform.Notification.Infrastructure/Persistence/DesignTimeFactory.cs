@@ -9,7 +9,7 @@ internal sealed class NotificationDbContextDesignTimeFactory : IDesignTimeDbCont
     public NotificationDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<NotificationDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_Notification;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_Notification;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", NotificationDbContext.Schema))
             .Options;
         return new NotificationDbContext(options);

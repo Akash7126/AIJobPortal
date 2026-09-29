@@ -146,7 +146,7 @@ Write-New "$src/$p.Api/appsettings.json" @"
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "$Connection": "Server=DESKTOP-1MJCTDJ;Database=$Database;Integrated Security=True;TrustServerCertificate=True"
+    "$Connection": "Server=IT-Akash;Database=$Database;Integrated Security=True;TrustServerCertificate=True"
   },
   "Database": { "Provider": "SqlServer", "ApplyMigrationsOnStartup": false },
   "Cache": { "Provider": "Redis", "ConnectionString": "redis:6379", "KeyPrefix": "prod:$Slug" },
@@ -184,8 +184,8 @@ Write-New "$src/$p.Api/appsettings.Development.json" @"
     },
     "WriteTo": [ { "Name": "Console" } ]
   },
-  "ConnectionStrings": { "$Connection": "Data Source=$Slug-dev.db" },
-  "Database": { "Provider": "Sqlite" },
+  "ConnectionStrings": { "$Connection": "Server=IT-Akash;Database=$Database;Integrated Security=True;TrustServerCertificate=True" },
+  "Database": { "Provider": "SqlServer", "ApplyMigrationsOnStartup": true },
   "Cache": { "Provider": "InMemory", "KeyPrefix": "dev:$Slug" },
   "Messaging": { "Provider": "InMemory" },
   "Jwt": { "JwksUri": "http://localhost:5100/.well-known/jwks.json" },

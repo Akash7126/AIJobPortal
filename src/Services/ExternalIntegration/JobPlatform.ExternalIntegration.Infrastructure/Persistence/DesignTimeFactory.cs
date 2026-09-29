@@ -9,7 +9,7 @@ internal sealed class ExternalIntegrationDbContextDesignTimeFactory : IDesignTim
     public ExternalIntegrationDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<ExternalIntegrationDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_ExternalIntegration;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_ExternalIntegration;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", ExternalIntegrationDbContext.Schema))
             .Options;
         return new ExternalIntegrationDbContext(options);

@@ -9,7 +9,7 @@ internal sealed class JobSeekerProfileDbContextDesignTimeFactory : IDesignTimeDb
     public JobSeekerProfileDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<JobSeekerProfileDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_JobSeekerProfile;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_JobSeekerProfile;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", JobSeekerProfileDbContext.Schema))
             .Options;
         return new JobSeekerProfileDbContext(options);

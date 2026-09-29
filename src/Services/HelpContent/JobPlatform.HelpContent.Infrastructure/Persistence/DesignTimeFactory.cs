@@ -9,7 +9,7 @@ internal sealed class HelpContentDbContextDesignTimeFactory : IDesignTimeDbConte
     public HelpContentDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<HelpContentDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_HelpContent;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_HelpContent;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", HelpContentDbContext.Schema))
             .Options;
         return new HelpContentDbContext(options);

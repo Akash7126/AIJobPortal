@@ -9,7 +9,7 @@ internal sealed class GovernmentIntegrationDbContextDesignTimeFactory : IDesignT
     public GovernmentIntegrationDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<GovernmentIntegrationDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_GovernmentIntegration;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_GovernmentIntegration;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", GovernmentIntegrationDbContext.Schema))
             .Options;
         return new GovernmentIntegrationDbContext(options);

@@ -9,7 +9,7 @@ internal sealed class AuditDbContextDesignTimeFactory : IDesignTimeDbContextFact
     public AuditDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<AuditDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_AuditLogging;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_AuditLogging;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", AuditDbContext.Schema))
             .Options;
         return new AuditDbContext(options);

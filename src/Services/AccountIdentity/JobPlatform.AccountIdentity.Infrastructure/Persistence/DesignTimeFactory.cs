@@ -9,7 +9,7 @@ internal sealed class IdentityDbContextDesignTimeFactory : IDesignTimeDbContextF
     public IdentityDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<IdentityDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_AccountIdentity;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_AccountIdentity;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", IdentityDbContext.Schema))
             .Options;
         return new IdentityDbContext(options);

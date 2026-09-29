@@ -9,7 +9,7 @@ internal sealed class AdminDbContextDesignTimeFactory : IDesignTimeDbContextFact
     public AdminDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<AdminDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_PlatformAdministration;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_PlatformAdministration;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", AdminDbContext.Schema))
             .Options;
         return new AdminDbContext(options);

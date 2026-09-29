@@ -9,7 +9,7 @@ internal sealed class AiMatchingDbContextDesignTimeFactory : IDesignTimeDbContex
     public AiMatchingDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<AiMatchingDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_AiMatching;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_AiMatching;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", AiMatchingDbContext.Schema))
             .Options;
         return new AiMatchingDbContext(options);

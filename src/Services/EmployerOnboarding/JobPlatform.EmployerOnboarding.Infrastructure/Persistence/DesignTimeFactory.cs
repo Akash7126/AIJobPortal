@@ -9,7 +9,7 @@ internal sealed class EmployerOnboardingDbContextDesignTimeFactory : IDesignTime
     public EmployerOnboardingDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<EmployerOnboardingDbContext>()
-            .UseSqlServer("Server=(local);Database=JobPlatform_EmployerOnboarding;Trusted_Connection=True;TrustServerCertificate=True",
+            .UseSqlServer("Server=IT-Akash;Database=JobPlatform_EmployerOnboarding;Trusted_Connection=True;TrustServerCertificate=True",
                 sql => sql.MigrationsHistoryTable("__EFMigrationsHistory", EmployerOnboardingDbContext.Schema))
             .Options;
         return new EmployerOnboardingDbContext(options);
