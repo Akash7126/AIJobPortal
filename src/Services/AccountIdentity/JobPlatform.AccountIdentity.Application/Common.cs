@@ -1,14 +1,12 @@
 using System.Reflection;
-using FluentValidation;
-using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Services.Accounts;
+using JobPlatform.AccountIdentity.Application.Services.Consent;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
-using JobPlatform.AccountIdentity.Domain.Sessions;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
-using JobPlatform.SharedKernel.Common.ValueObjects;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobPlatform.AccountIdentity.Application;
@@ -23,11 +21,13 @@ public static class ApplicationAssembly
     {
         services.AddScoped<AccountRegistrar>();
         services.AddScoped<Security.SessionIssuer>();
-        services.AddScoped<Accounts.RegistrationWorkflow>();
+        services.AddScoped<Services.Accounts.RegistrationWorkflow>();
         services.AddScoped<IAccessAuthorizer, Security.AccessAuthorizer>();
         services.AddSingleton<Events.AccountIdentityEventMapper>();
         services.AddSingleton<SharedKernel.Messaging.IDomainEventMapper>(sp => sp.GetRequiredService<Events.AccountIdentityEventMapper>());
-        return services;
+services.AddScoped<AdminAccountService>();
+        services.AddScoped<ConsentService>();
+                return services;
     }
 }
 
@@ -52,15 +52,6 @@ public abstract record ServiceAuthorized : IAuthorizedRequest
     public IReadOnlyCollection<ActorType> AllowedActorTypes => new[] { ActorType.System };
 }
 
-public static class ValidationExtensions
-{
-    public static IRuleBuilderOptions<T, string> ValidMobile<T>(this IRuleBuilder<T, string> rule) =>
-        rule.Must(v => MobileNumber.TryCreate(v, out _)).WithErrorCode("VAL.MobileNumber.Invalid");
-
-    public static IRuleBuilderOptions<T, string> ValidEmail<T>(this IRuleBuilder<T, string> rule) =>
-        rule.Must(v => Email.TryCreate(v, out _)).WithErrorCode("VAL.Email.Invalid");
-}
-
 /// <summary>Masks PII for admin read models (THR-038).</summary>
 public static class Masking
 {
@@ -78,8 +69,6 @@ public static class Masking
     }
 }
 
-public sealed record TokenPairDto(string AccessToken, string RefreshToken, string TokenType, int ExpiresInSeconds, DateTime ExpiresAtUtc);
-
 public static class AuthenticationStatus
 {
     public const string Authenticated = "Authenticated";
@@ -87,8 +76,6 @@ public static class AuthenticationStatus
     public const string MfaEnrollmentRequired = "MfaEnrollmentRequired";
     public const string EmailCodeSent = "EmailCodeSent";
 }
-
-public sealed record AuthenticationResultDto(string Status, TokenPairDto? Tokens, string? MfaToken, DateTime? MfaTokenExpiresAtUtc, bool MustChangePassword);
 
 /// <summary>Translates domain login outcomes to the published errors. The invalid-credentials error is identical for unknown user and wrong password.</summary>
 internal static class LoginErrors

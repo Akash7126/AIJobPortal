@@ -1,3 +1,7 @@
+using JobPlatform.HelpContent.Application.Commands.News;
+using JobPlatform.HelpContent.Application.DTOs.News;
+using JobPlatform.HelpContent.Application.Handlers.News;
+using JobPlatform.HelpContent.Application.Queries.News;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 

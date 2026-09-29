@@ -1,4 +1,6 @@
 using System.Reflection;
+using JobPlatform.JobPosting.Application.DTOs.Common;
+using JobPlatform.JobPosting.Application.DTOs.Postings;
 using JobPlatform.JobPosting.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
@@ -77,14 +79,6 @@ public abstract record ServiceQuery<TResponse> : IQuery<TResponse>, IAuthorizedR
     public IReadOnlyCollection<ActorType> AllowedActorTypes => new[] { ActorType.System };
 }
 
-/// <summary>
-/// Result of a posting mutation. Deliberately does not carry the aggregate's RowVersion: a SQL Server rowversion (and the SQLite-stamped
-/// equivalent) is only assigned when SaveChanges runs, which happens after the handler returns inside the same command pipeline
-/// (foundation section 6) - any byte[] captured here would be the pre-save value, not the true new ETag. Callers that need the current
-/// ETag re-read it from <see cref="JobPostingView"/> (GetJobPostingQuery), which always reflects the committed state.
-/// </summary>
-public sealed record PostingMutationResult(Guid JobPostingId, bool Existing = false, bool Overwritten = false);
-
 public static class ActorFactory
 {
     public static Actor From(ICurrentUser user) =>
@@ -106,41 +100,6 @@ public static class SchemaValidationGuard
     }
 }
 
-// ---------------------------------------------------------------------- read models
-
-public sealed record LocalizedView(string Ar, string En);
-
-public sealed record SalaryRangeView(decimal? Min, decimal? Max, string? Currency);
-
-public sealed record JobLocationView(string? Governorate, string? City);
-
-public sealed record JobVisibilityView(string Scope, IReadOnlyList<Guid> TargetJobSeekerIds);
-
-public sealed record JobPostingView(
-    Guid JobPostingId, Guid? EmployerAccountId, string Source, LocalizedView Title, LocalizedView Summary, IReadOnlyList<string> Skills,
-    string CategoryCode, string ContractType, string? EducationLevel, IReadOnlyList<string> RequiredTraining, string WorkFormat,
-    JobLocationView? Location, SalaryRangeView? Salary, int? MinExperienceYears, int? MaxExperienceYears, IReadOnlyList<string> RequiredLanguages,
-    DateTime DeadlineUtc, bool AutoClose, string? JobLink, IReadOnlyDictionary<string, string> OtherFields, JobVisibilityView Visibility,
-    string Status, bool AdminSuspended, int TaxonomyVersion, DateTime CreatedAtUtc, DateTime? PublishedAtUtc, DateTime UpdatedAtUtc, byte[] RowVersion);
-
-public sealed record JobPostingSummaryView(
-    Guid JobPostingId, LocalizedView Title, string CategoryCode, JobLocationView? Location, SalaryRangeView? Salary, DateTime DeadlineUtc, string Status,
-    string ContractType, DateTime? PublishedAtUtc, decimal? RelevanceScore);
-
-public sealed record JobPostingSchemaFieldView(string Name, bool Required, string Type, IReadOnlyList<string>? AllowedValues);
-
-public sealed record JobPostingSchemaView(int TaxonomyVersion, IReadOnlyList<JobPostingSchemaFieldView> Fields, IReadOnlyList<string> CategoryCodes,
-    IReadOnlyList<string> SkillCodes);
-
-/// <summary>Result of a job-posting search (foundation section 12: THR-013 &lt;= 2s).</summary>
-public sealed record SearchCriteriaInput(
-    string? Keyword, string? Governorate, string? City, decimal? SalaryMin, decimal? SalaryMax, string? ContractType, DateTime? PostedAfterUtc,
-    DateTime? DeadlineBeforeUtc, string? CategoryCode)
-{
-    public SearchCriteria ToDomain() => new(Keyword, Governorate, City, SalaryMin, SalaryMax,
-        ContractType is null ? null : Enum.Parse<Domain.ContractType>(ContractType, true), PostedAfterUtc, DeadlineBeforeUtc, CategoryCode);
-}
-
 // ---------------------------------------------------------------------- ports
 
 /// <summary>Read/search side (foundation section 3.5): dedicated projections over EF, never the aggregate. Backed by SQL Server full-text search
@@ -160,12 +119,6 @@ public interface IJobPostingSearchReadModel
 
     Task<JobPostingSchemaView> GetSchemaAsync(CancellationToken ct = default);
 }
-
-public sealed record FavoriteListView(Guid FavoriteJobListId, IReadOnlyList<Guid> JobPostingIds);
-
-public sealed record SavedSearchView(Guid SavedSearchId, SearchCriteriaInput Criteria, bool NotifyOnMatch, DateTime CreatedAtUtc, DateTime? LastEvaluatedAtUtc);
-
-public sealed record InterestedListItemView(Guid InterestedListEntryId, string ReferenceType, Guid? PostingId, SearchCriteriaInput? Criteria, DateTime CreatedAtUtc);
 
 public sealed record MatchRankingItemView(Guid JobPostingId, string TitleEn, decimal Score);
 

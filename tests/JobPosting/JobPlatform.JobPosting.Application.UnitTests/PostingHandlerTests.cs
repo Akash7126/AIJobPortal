@@ -1,4 +1,6 @@
+using JobPlatform.JobPosting.Application.Commands.Postings;
 using JobPlatform.JobPosting.Application.Events;
+using JobPlatform.JobPosting.Application.Handlers.Postings;
 using JobPlatform.JobPosting.Domain;
 using JobPlatform.SharedKernel.Domain;
 

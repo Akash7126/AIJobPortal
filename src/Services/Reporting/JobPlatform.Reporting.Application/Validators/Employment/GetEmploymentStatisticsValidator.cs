@@ -1,0 +1,10 @@
+using FluentValidation;
+using JobPlatform.Reporting.Application.Queries.Employment;
+using JobPlatform.Reporting.Application.Validators.Common;
+
+namespace JobPlatform.Reporting.Application.Validators.Employment;
+
+public sealed class GetEmploymentStatisticsValidator : AbstractValidator<GetEmploymentStatisticsQuery>
+{
+    public GetEmploymentStatisticsValidator() => DateRangeRules.AddTo(this, x => x.From, x => x.To);
+}

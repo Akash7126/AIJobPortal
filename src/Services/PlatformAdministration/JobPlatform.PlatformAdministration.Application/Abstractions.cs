@@ -1,4 +1,10 @@
 using System.Reflection;
+using JobPlatform.PlatformAdministration.Application.DTOs.Entities;
+using JobPlatform.PlatformAdministration.Application.DTOs.Offerings;
+using JobPlatform.PlatformAdministration.Application.DTOs.Reference;
+using JobPlatform.PlatformAdministration.Application.DTOs.Settings;
+using JobPlatform.PlatformAdministration.Application.DTOs.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.DTOs.Users;
 using JobPlatform.PlatformAdministration.Domain.Common;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
@@ -59,33 +65,6 @@ public static class ActorFactory
 {
     public static Actor From(ICurrentUser user) => new(user.UserId ?? Guid.Empty, user.ActorType == ActorType.Administrator);
 }
-
-// ---------------------------------------------------------------------- read models
-
-public sealed record LocalizedNameView(string Ar, string En);
-
-public sealed record TaxonomyNodeView(string Code, LocalizedNameView Name, string? ParentCode, IReadOnlyList<string> Synonyms, bool IsActive);
-
-public sealed record TaxonomyView(Guid TaxonomyId, string Type, int Version, IReadOnlyList<TaxonomyNodeView> Nodes);
-
-public sealed record ReferenceEntryView(Guid EntryId, string Code, LocalizedNameView Name, bool IsActive);
-
-public sealed record ReferenceFileView(Guid ReferenceFileId, string Type, int Version, IReadOnlyList<ReferenceEntryView> Entries);
-
-public sealed record SettingBoundsView(decimal? Min, decimal? Max, IReadOnlyList<string> AllowedValues, int? MaxLength);
-
-public sealed record SettingView(string Key, string ValueType, string Value, int Version, SettingBoundsView Bounds, Guid? UpdatedBy, DateTime UpdatedAtUtc);
-
-public sealed record JobOfferingListItem(
-    Guid JobOfferingId, Guid EmployerId, string Title, string Status, string? Moderation, Guid? SuspendedBy, DateTime? SuspendedAtUtc, string? Reason,
-    DateTime RegisteredAtUtc);
-
-public sealed record EntityRecordView(Guid Id, string EntityType, string IdentityKey, string Status, Guid CreatedBy, DateTime CreatedAtUtc);
-
-public sealed record PlatformUserListItem(Guid AccountId, string ActorType, string DisplayName, string? Email, string? Mobile, string Standing, DateTime CreatedAtUtc);
-
-/// <summary>Result of a command that bumps a version (settings, reference files, taxonomies).</summary>
-public sealed record VersionResult(int Version);
 
 // ---------------------------------------------------------------------- ports
 

@@ -1,12 +1,18 @@
 using System.Reflection;
-using JobPlatform.Notification.Application.Delivery;
-using JobPlatform.Notification.Application.Events;
 using JobPlatform.Notification.Application.Composition;
+using JobPlatform.Notification.Application.Delivery;
+using JobPlatform.Notification.Application.DTOs.Admin;
+using JobPlatform.Notification.Application.DTOs.Delivery;
+using JobPlatform.Notification.Application.DTOs.InApp;
+using JobPlatform.Notification.Application.Events;
+using JobPlatform.Notification.Application.Services.Admin;
+using JobPlatform.Notification.Application.Services.Delivery;
+using JobPlatform.Notification.Application.Services.InApp;
+using JobPlatform.Notification.Application.Services.Preferences;
 using JobPlatform.Notification.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Common.Enums;
-using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.SharedKernel.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +28,11 @@ public static class ApplicationAssembly
         services.AddScoped<OutboundDispatcher>();
         services.AddSingleton<NotificationEventMapper>();
         services.AddSingleton<IDomainEventMapper>(sp => sp.GetRequiredService<NotificationEventMapper>());
-        return services;
+services.AddScoped<AdminService>();
+        services.AddScoped<DeliveryService>();
+        services.AddScoped<InAppService>();
+        services.AddScoped<PreferenceService>();
+                return services;
     }
 }
 
@@ -125,22 +135,6 @@ public interface IWebhookVerifier
 {
     bool IsValid(string body, string? signature);
 }
-
-// ---------------------------------------------------------------------- read models
-
-public sealed record InAppNotificationDto(Guid Id, string TypeCode, string Title, string Body, string? ActionUrl, string Status, DateTime CreatedAtUtc, DateTime? ReadAtUtc,
-    string Icon, string Colour, string IconTextAlternative);
-
-public sealed record NotificationPreferencesDto(IReadOnlyDictionary<string, bool> Categories, IReadOnlyCollection<string> Mandatory, string? Mode, bool? SmsOptedIn,
-    string? MobileMasked, IReadOnlyCollection<string> Unsubscribed);
-
-public sealed record SmsDeliveryDto(Guid Id, string MaskedRecipient, string Category, string Status, string DeliveryStatus, string? ErrorCode, DateTime CreatedAtUtc);
-
-public sealed record NotificationDetailDto(Guid Id, string Channel, string Category, string Status, string DeliveryStatus, string? Subject, DateTime CreatedAtUtc, DateTime? SentAtUtc);
-
-public sealed record EmailTemplateDto(string Code, string Locale, int Version, string Subject, string Body, IReadOnlyDictionary<string, string> Placeholders);
-
-public sealed record NotificationTypeDto(string Code, string Icon, string Colour, string TextAlternative, bool IsMandatory);
 
 public interface INotificationReadStore
 {

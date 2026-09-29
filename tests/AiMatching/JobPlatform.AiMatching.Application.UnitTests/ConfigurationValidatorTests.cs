@@ -1,4 +1,6 @@
 using FluentValidation.TestHelper;
+using JobPlatform.AiMatching.Application.Commands.Configuration;
+using JobPlatform.AiMatching.Application.Validators.Configuration;
 
 namespace JobPlatform.AiMatching.Application.UnitTests;
 

@@ -1,3 +1,5 @@
+using JobPlatform.AiMatching.Application.Commands.Configuration;
+using JobPlatform.AiMatching.Application.Handlers.Configuration;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.SharedKernel.Application.Concurrency;
 using JobPlatform.SharedKernel.Application.Ports;

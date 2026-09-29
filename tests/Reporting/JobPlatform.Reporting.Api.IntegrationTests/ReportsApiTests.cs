@@ -1,5 +1,4 @@
 using System.Net;
-using System.Net.Http.Json;
 using JobPlatform.TestSupport;
 
 namespace JobPlatform.Reporting.Api.IntegrationTests;

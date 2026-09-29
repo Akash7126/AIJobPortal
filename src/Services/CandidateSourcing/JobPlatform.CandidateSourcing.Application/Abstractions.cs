@@ -1,4 +1,6 @@
 using System.Reflection;
+using JobPlatform.CandidateSourcing.Application.DTOs.Search;
+using JobPlatform.CandidateSourcing.Application.DTOs.TalentPool;
 using JobPlatform.CandidateSourcing.Domain.Common;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
@@ -18,7 +20,7 @@ public static class ApplicationAssembly
     {
         services.AddSingleton<Events.CandidateSourcingEventMapper>();
         services.AddSingleton<IDomainEventMapper>(sp => sp.GetRequiredService<Events.CandidateSourcingEventMapper>());
-        services.AddScoped<Recommendations.CandidateQualificationService>();
+        services.AddScoped<Services.Recommendations.CandidateQualificationService>();
         return services;
     }
 }
@@ -47,27 +49,6 @@ public static class ActorFactory
 // ---------------------------------------------------------------------- read models
 
 public sealed record FitCriterionView(string Criterion, decimal Score, bool IsStrength, bool IsGap);
-
-public sealed record CandidateRecommendationItemView(Guid CandidateProfileId, decimal Score);
-
-public sealed record CandidateRankingItemView(Guid CandidateProfileId, int Rank, decimal Score, IReadOnlyList<string> Strengths, IReadOnlyList<string> Gaps);
-
-public sealed record TalentPoolEntryView(Guid TalentPoolEntryId, Guid CandidateProfileId, Guid JobPostingId, string? Note, DateTime AddedAtUtc);
-
-public sealed record CandidateSearchResultItemView(
-    Guid CandidateProfileId, IReadOnlyList<string> Skills, string? EducationLevel, decimal? YearsOfExperience, string? LocationCode,
-    decimal? SalaryMin, decimal? SalaryMax);
-
-public sealed record CandidateInsightView(
-    Guid CandidateInsightId, Guid CandidateProfileId, Guid JobPostingId, string? Availability, decimal? ExpectedSalaryMin, decimal? ExpectedSalaryMax,
-    decimal OverallScore, IReadOnlyList<string> Strengths, IReadOnlyList<string> Gaps, IReadOnlyList<string> WithheldFields, DateTime ComputedAtUtc);
-
-// ---------------------------------------------------------------------- search criteria
-
-/// <summary>US-3.3.3-04 GAP-001 (proposed set): skills, education, experience, location, salary, availability, language.</summary>
-public sealed record CandidateSearchCriteria(
-    IReadOnlyList<string>? Skills, string? EducationLevel, decimal? MinExperienceYears, decimal? MaxExperienceYears, string? LocationCode,
-    decimal? SalaryMin, decimal? SalaryMax, string? Availability);
 
 // ---------------------------------------------------------------------- ports
 

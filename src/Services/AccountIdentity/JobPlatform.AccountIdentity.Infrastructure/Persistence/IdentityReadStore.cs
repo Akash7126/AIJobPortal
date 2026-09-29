@@ -1,4 +1,7 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
+using JobPlatform.AccountIdentity.Application.DTOs.Administration;
+using JobPlatform.AccountIdentity.Application.DTOs.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Common;

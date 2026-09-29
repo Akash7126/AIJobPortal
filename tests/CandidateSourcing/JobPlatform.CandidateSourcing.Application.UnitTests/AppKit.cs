@@ -1,4 +1,5 @@
-using JobPlatform.CandidateSourcing.Application;
+using JobPlatform.CandidateSourcing.Application.DTOs.Search;
+using JobPlatform.CandidateSourcing.Application.DTOs.TalentPool;
 using JobPlatform.CandidateSourcing.Domain;
 using JobPlatform.CandidateSourcing.Domain.Insight;
 using JobPlatform.CandidateSourcing.Domain.Projection;

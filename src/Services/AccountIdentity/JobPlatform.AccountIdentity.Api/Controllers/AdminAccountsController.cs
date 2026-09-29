@@ -1,10 +1,7 @@
 using JobPlatform.AccountIdentity.Api.Contracts;
 using JobPlatform.AccountIdentity.Api.Security;
-using JobPlatform.AccountIdentity.Application.Accounts;
-using JobPlatform.AccountIdentity.Application.Administration;
-using JobPlatform.AccountIdentity.Application.ApiCredentials;
-using JobPlatform.AccountIdentity.Application.Internal;
-using JobPlatform.SharedKernel.ApiContracts.AccountIdentity;
+using JobPlatform.AccountIdentity.Application.Commands.Accounts;
+using JobPlatform.AccountIdentity.Application.Queries.Accounts;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -21,7 +21,11 @@ src/BuildingBlocks/
                                               ProblemDetails mapping, correlation-id middleware, health checks, durable idempotency store (`messaging.IdempotencyKeys`), telemetry source/meter, ETag helper (SharedKernel)
 src/Services/AccountIdentity/
   JobPlatform.AccountIdentity.Domain          aggregates, value objects, business rules, domain events, domain services (no framework, no crypto, no HTTP)
-  JobPlatform.AccountIdentity.Application     commands/queries/handlers/validators, ports, event mapper, access authorizer
+  JobPlatform.AccountIdentity.Application     feature-based CQRS layout (one type per file, namespace = folder):
+                                                Commands/<Feature>/  Queries/<Feature>/  Handlers/<Feature>/ (one handler per request)
+                                                DTOs/<Feature>/ (request/response models; DTOs/Common when shared)  Services/<Feature>/ (application services)
+                                                Validators/<Feature>/ (FluentValidation) + Validators/Common (shared rules)
+                                              plus ports (Abstractions), base request records, event mapper + domain-event handlers, access authorizer
   JobPlatform.AccountIdentity.Infrastructure  DbContext + configurations + migration, repositories, read store, hashers, TOTP, JWT + signing keys, stores, delivery adapters
   JobPlatform.AccountIdentity.Api             controllers, auth/authorization, ProblemDetails, localisation (ar/en), Swagger/OpenAPI, Serilog, Program.cs
 tests/
@@ -30,6 +34,10 @@ tests/
 ```
 
 Dependency rule (enforced by `ArchitectureTests`): Domain -> SharedKernel; Application -> Domain + SharedKernel; Infrastructure -> Application/Domain/SharedKernel/BuildingBlocks; Api is the composition root. No other BC is referenced anywhere.
+
+Application layout (enforced by `ArchitectureTests`): commands live in `<Application>.Commands.<Feature>`, queries in `.Queries.<Feature>`, and request handlers in `.Handlers.<Feature>`, one handler class per request. Orchestration shared by several handlers (e.g. `RegistrationWorkflow`, or the load/map helpers of a feature) is an application service in `Services/<Feature>`, registered in the BC's `Add<Bc>Application`. Handlers and validators are found by assembly scanning. Unit tests call handlers directly through `TestSupport.RequestHandlerSet`, which builds the handler for a request from the test's dependencies.
+
+Validation: every command/query validator lives in the Application layer's `Validators` folder (namespace `<Application>.Validators.<Feature>`, enforced by `ArchitectureTests`); duplicated rule chains are shared per BC as extension methods in `Validators/Common`. Validators are registered by assembly scanning (`AddRequestHandlersFrom` -> `AddValidatorsFromAssembly`) and run by `ValidationBehavior` before the handler (malformed input = 400 with `VAL.*` codes); business rules stay in the domain.
 
 ## Running it
 
@@ -137,4 +145,4 @@ All routes of the table are implemented. Differences and additions:
 * Not implemented: an inbox consumer for BC-03 (it consumes nothing; the inbox infrastructure and `RabbitMqInboxConsumer` are wired and unit-tested with SQLite), consumers of `AccountSuspended` in other BCs, the interactive OIDC authorization-code flow (discovery advertises client-credentials only), a distributed lock helper (none is required by BC-03), an OpenAPI diff in CI, `traceparent` extraction on the consumer side (BC-03 has no consumer).
 * Access tokens are 15 minutes (`Jwt:AccessTokenMinutes`) and are checked against the live session on every request.
 * Cache failures degrade to the database for the role map and password policy, but session/rate-limit/MFA state fails **closed** by design (auth-critical).
-* Secrets in `appsettings.json` are placeholders; the master key, pepper, bootstrap admin password and service-client secrets must come from a secret store / environment.
+* Secrets in `appsettings.json` are placeholders; the master key, pepper, bootstrap admin password and service-client secrets must come from a secret store / environment.

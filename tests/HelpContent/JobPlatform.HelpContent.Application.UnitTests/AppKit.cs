@@ -1,3 +1,7 @@
+using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
+using JobPlatform.HelpContent.Application.DTOs.Feedback;
+using JobPlatform.HelpContent.Application.DTOs.Help;
+using JobPlatform.HelpContent.Application.DTOs.News;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Ports;

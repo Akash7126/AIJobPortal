@@ -1,4 +1,8 @@
 using JobPlatform.GovernmentIntegration.Application;
+using JobPlatform.GovernmentIntegration.Application.DTOs.Connections;
+using JobPlatform.GovernmentIntegration.Application.DTOs.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.DTOs.Migration;
+using JobPlatform.GovernmentIntegration.Application.DTOs.Verifications;
 using JobPlatform.GovernmentIntegration.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;

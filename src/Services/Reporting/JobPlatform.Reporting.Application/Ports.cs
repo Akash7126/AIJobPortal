@@ -1,3 +1,5 @@
+using JobPlatform.Reporting.Application.DTOs.Activity;
+using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.Application.Results;
 
@@ -91,8 +93,6 @@ public interface IMetricsSource
     Task<IReadOnlyDictionary<string, decimal>> SampleAsync(CancellationToken ct = default);
 }
 
-public sealed record ActiveSession(string SessionKey, string ActorType, DateTime StartedAtUtc, DateTime LastSeenAtUtc, string ProfileLink);
-
 /// <summary>Anti-corruption port to BC-03's proposed <c>GET /internal/v1/sessions/active</c> (Q-03). Null = source unavailable (the dashboard degrades).</summary>
 public interface ISessionSource
 {
@@ -129,8 +129,3 @@ public interface IReportAccessGuard
 {
     Task<Result<Unit>> EnsureAsync(ReportCategory category, string requestName, CancellationToken ct = default);
 }
-
-/// <summary>Column-oriented result of a report run.</summary>
-public sealed record ReportColumn(string Name, string Kind);
-
-public sealed record ReportTable(IReadOnlyList<ReportColumn> Columns, IReadOnlyList<IReadOnlyList<object?>> Rows, bool Truncated = false, int SuppressedRows = 0);

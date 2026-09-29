@@ -1,5 +1,9 @@
-using JobPlatform.CandidateSourcing.Application.TalentPool;
-using JobPlatform.CandidateSourcing.Application.Threshold;
+using JobPlatform.CandidateSourcing.Application.Commands.TalentPool;
+using JobPlatform.CandidateSourcing.Application.Commands.Threshold;
+using JobPlatform.CandidateSourcing.Application.Handlers.TalentPool;
+using JobPlatform.CandidateSourcing.Application.Handlers.Threshold;
+using JobPlatform.CandidateSourcing.Application.Queries.TalentPool;
+using JobPlatform.CandidateSourcing.Application.Queries.Threshold;
 using JobPlatform.CandidateSourcing.Domain.Privacy;
 using JobPlatform.CandidateSourcing.Domain.Projection;
 using JobPlatform.SharedKernel.Application.Results;

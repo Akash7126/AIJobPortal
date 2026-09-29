@@ -1,4 +1,5 @@
 using JobPlatform.Reporting.Application.Ingestion;
+using JobPlatform.Reporting.Application.Services.Ingestion;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;

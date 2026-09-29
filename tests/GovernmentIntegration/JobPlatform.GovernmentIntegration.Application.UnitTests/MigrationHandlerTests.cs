@@ -1,3 +1,5 @@
+using JobPlatform.GovernmentIntegration.Application.Commands.Migration;
+using JobPlatform.GovernmentIntegration.Application.Handlers.Migration;
 using JobPlatform.GovernmentIntegration.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 

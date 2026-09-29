@@ -1,4 +1,4 @@
-using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.Queries.Matching;
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
 using Microsoft.AspNetCore.Authorization;

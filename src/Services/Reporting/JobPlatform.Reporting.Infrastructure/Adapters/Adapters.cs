@@ -3,6 +3,8 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using JobPlatform.Reporting.Application;
+using JobPlatform.Reporting.Application.DTOs.Activity;
+using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

@@ -1,4 +1,8 @@
 using FluentValidation.TestHelper;
+using JobPlatform.EmployerOnboarding.Application.Commands.Media;
+using JobPlatform.EmployerOnboarding.Application.Commands.Registration;
+using JobPlatform.EmployerOnboarding.Application.Validators.Media;
+using JobPlatform.EmployerOnboarding.Application.Validators.Registration;
 using JobPlatform.EmployerOnboarding.Domain;
 
 namespace JobPlatform.EmployerOnboarding.Application.UnitTests;

@@ -1,4 +1,6 @@
 using JobPlatform.CandidateSourcing.Application;
+using JobPlatform.CandidateSourcing.Application.DTOs.Search;
+using JobPlatform.CandidateSourcing.Application.DTOs.TalentPool;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
-using JobPlatform.AccountIdentity.Application.Accounts;
-using JobPlatform.AccountIdentity.Application.Administration;
+using JobPlatform.AccountIdentity.Application.Commands.Accounts;
+using JobPlatform.AccountIdentity.Application.Commands.Administration;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
@@ -10,6 +10,7 @@ using JobPlatform.SharedKernel.Application.Concurrency;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Security;
+using JobPlatform.TestSupport;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
 
@@ -36,7 +37,7 @@ public class PreconditionHandlerTests
     public async Task ConfigurePasswordPolicy_WithAStaleIfMatch_IsRefused_AndLeavesThePolicyUntouched()
     {
         var policy = PasswordPolicy.CreateDefault(_clock);
-        var handlers = new PasswordPolicyHandlers(AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
 
         ShouldBePreconditionFailed(await handlers.Handle(new ConfigurePasswordPolicyCommand(12, true, true, true, Stale), default));
 
@@ -49,7 +50,7 @@ public class PreconditionHandlerTests
     public async Task ConfigurePasswordPolicy_WithoutAPreconditionOrWithStar_IsApplied(string? ifMatch)
     {
         var policy = PasswordPolicy.CreateDefault(_clock);
-        var handlers = new PasswordPolicyHandlers(AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
 
         (await handlers.Handle(new ConfigurePasswordPolicyCommand(12, true, true, true, ifMatch), default)).IsSuccess.Should().BeTrue();
 
@@ -60,7 +61,7 @@ public class PreconditionHandlerTests
     public async Task ConfigurePasswordPolicy_WithTheCurrentETag_IsApplied()
     {
         var policy = PasswordPolicy.CreateDefault(_clock);
-        var handlers = new PasswordPolicyHandlers(AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
 
         (await handlers.Handle(new ConfigurePasswordPolicyCommand(12, true, true, true, ETag.From(policy.RowVersion)), default)).IsSuccess.Should().BeTrue();
     }
@@ -69,7 +70,7 @@ public class PreconditionHandlerTests
     public async Task ConfigureSessionTimeout_WithAStaleIfMatch_IsRefused()
     {
         var setting = SessionTimeoutSetting.CreateDefault(_clock);
-        var handlers = new SessionTimeoutHandlers(AppKit.TimeoutRepo(_clock, setting), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.TimeoutRepo(_clock, setting), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
 
         ShouldBePreconditionFailed(await handlers.Handle(new ConfigureSessionTimeoutCommand(60, Stale), default));
 
@@ -82,7 +83,7 @@ public class PreconditionHandlerTests
         var role = Role.Create(RoleId.New(), "Custom", false, new[] { Permissions.JobsBrowse });
         var roles = Substitute.For<IRoleRepository>();
         roles.GetByIdAsync(role.Id, Arg.Any<CancellationToken>()).Returns(role);
-        var handlers = new RoleHandlers(roles, Substitute.For<IIdentityReadStore>(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, roles, Substitute.For<IIdentityReadStore>(), Admin(), _clock);
 
         ShouldBePreconditionFailed(await handlers.Handle(new GrantPermissionCommand(role.Id.Value, Permissions.AccountsRead, Stale), default));
         ShouldBePreconditionFailed(await handlers.Handle(new RevokePermissionCommand(role.Id.Value, Permissions.JobsBrowse, Stale), default));
@@ -98,7 +99,7 @@ public class PreconditionHandlerTests
         var sessions = new InMemorySessionStore();
         var account = AppKit.Active(_clock);
         accounts.Add(account);
-        var handlers = new AdminAccountHandlers(accounts, sessions, Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, accounts, sessions, Admin(), _clock);
         var id = account.Id.Value;
 
         var results = new[]
@@ -123,7 +124,7 @@ public class PreconditionHandlerTests
         var accounts = new InMemoryAccounts();
         var account = AppKit.Active(_clock);
         accounts.Add(account);
-        var handlers = new AdminAccountHandlers(accounts, new InMemorySessionStore(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, accounts, new InMemorySessionStore(), Admin(), _clock);
 
         (await handlers.Handle(new BanUserAccountCommand(account.Id.Value, "fraud", ETag.From(account.RowVersion)), default)).IsSuccess.Should().BeTrue();
 

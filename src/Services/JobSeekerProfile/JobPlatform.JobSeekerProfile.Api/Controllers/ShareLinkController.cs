@@ -1,7 +1,8 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.JobSeekerProfile.Application.ShareLink;
+using JobPlatform.JobSeekerProfile.Application.Commands.ShareLink;
+using JobPlatform.JobSeekerProfile.Application.Queries.ShareLink;
 using JobPlatform.JobSeekerProfile.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

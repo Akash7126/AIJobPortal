@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
 using JobPlatform.EmployerOnboarding.Application;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Standing;
 
 namespace JobPlatform.EmployerOnboarding.Infrastructure.Adapters;
 

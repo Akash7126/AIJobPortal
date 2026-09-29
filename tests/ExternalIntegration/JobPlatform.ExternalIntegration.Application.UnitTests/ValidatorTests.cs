@@ -1,4 +1,13 @@
 using FluentValidation.TestHelper;
+using JobPlatform.ExternalIntegration.Application.Commands.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.Commands.Integrations;
+using JobPlatform.ExternalIntegration.Application.Commands.JobDataFlows;
+using JobPlatform.ExternalIntegration.Application.Commands.Mapping;
+using JobPlatform.ExternalIntegration.Application.DTOs.Mapping;
+using JobPlatform.ExternalIntegration.Application.Validators.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.Validators.Integrations;
+using JobPlatform.ExternalIntegration.Application.Validators.JobDataFlows;
+using JobPlatform.ExternalIntegration.Application.Validators.Mapping;
 
 namespace JobPlatform.ExternalIntegration.Application.UnitTests;
 

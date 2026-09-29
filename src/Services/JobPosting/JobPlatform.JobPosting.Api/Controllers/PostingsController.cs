@@ -1,6 +1,8 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.JobPosting.Application;
+using JobPlatform.JobPosting.Application.Commands.Postings;
+using JobPlatform.JobPosting.Application.DTOs.Postings;
+using JobPlatform.JobPosting.Application.Queries.Postings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;

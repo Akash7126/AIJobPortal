@@ -3,8 +3,8 @@ using JobPlatform.JobPosting.Application;
 using JobPlatform.JobPosting.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Domain;
-using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.TestSupport;
 using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
 
@@ -111,6 +111,13 @@ public class ArchitectureTests
         roots.Select(r => r.Name).Should().BeEquivalentTo("JobPosting", "FavoriteJobList", "SavedSearch", "InterestedListEntry");
         roots.Should().OnlyContain(r => r.IsSealed);
     }
+
+    [Fact]
+    public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
+        ArchitectureRules.CqrsLayoutViolations(Application).Should().BeEmpty();
+
+    [Fact]
+    public void Validators_LiveInTheValidatorsFolder() => ArchitectureRules.ValidatorsOutsideValidatorsFolder(Application).Should().BeEmpty();
 
     [Fact]
     public void Handlers_AreInternalAndSealed()

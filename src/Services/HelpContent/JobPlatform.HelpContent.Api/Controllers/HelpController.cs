@@ -1,9 +1,8 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.HelpContent.Application;
+using JobPlatform.HelpContent.Application.Commands.Feedback;
+using JobPlatform.HelpContent.Application.Queries.Help;
 using JobPlatform.HelpContent.Domain;
-using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,13 @@
 using FluentValidation.TestHelper;
+using JobPlatform.HelpContent.Application.Commands.CompanyPage;
+using JobPlatform.HelpContent.Application.Commands.Feedback;
+using JobPlatform.HelpContent.Application.Commands.Help;
+using JobPlatform.HelpContent.Application.Commands.News;
+using JobPlatform.HelpContent.Application.Queries.Help;
+using JobPlatform.HelpContent.Application.Validators.CompanyPage;
+using JobPlatform.HelpContent.Application.Validators.Feedback;
+using JobPlatform.HelpContent.Application.Validators.Help;
+using JobPlatform.HelpContent.Application.Validators.News;
 using JobPlatform.HelpContent.Domain;
 
 namespace JobPlatform.HelpContent.Application.UnitTests;

@@ -1,7 +1,9 @@
 using JobPlatform.Notification.Application;
+using JobPlatform.Notification.Application.DTOs.Admin;
+using JobPlatform.Notification.Application.DTOs.Delivery;
+using JobPlatform.Notification.Application.DTOs.InApp;
 using JobPlatform.Notification.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobPlatform.Notification.Infrastructure.Persistence;

@@ -1,5 +1,7 @@
 using System.Reflection;
-using JobPlatform.EmployerOnboarding.Domain;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Media;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Standing;
 using JobPlatform.EmployerOnboarding.Domain.Common;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
@@ -65,22 +67,6 @@ public static class ActorFactory
 {
     public static Actor From(SharedKernel.Application.Ports.ICurrentUser user) => new(user.UserId ?? Guid.Empty, user.ActorType == ActorType.Administrator);
 }
-
-// ---------------------------------------------------------------------- read models
-
-public sealed record CompanyIdentityView(string Name, string CompanyId, string RegistrationNumber);
-
-public sealed record Level2View(string Website, string Industry, string Size, string Governorate, string City, string? Street, string Description);
-
-public sealed record EmployerRegistrationView(
-    Guid EmployerRegistrationId, Guid EmployerAccountId, string Status, CompanyIdentityView? Identity, Level2View? Level2, DateTime OpenedAtUtc,
-    Guid? ApprovedBy, DateTime? ApprovedAtUtc, byte[] RowVersion);
-
-public sealed record CompanyMediaView(Guid CompanyMediaId, string Kind, string FileName, string ContentType, long SizeBytes, bool IsPrimaryLogo, DateTime UploadedAtUtc);
-
-public sealed record EmployerStandingView(Guid EmployerAccountId, bool Approved, bool Verified, string? Badge);
-
-public sealed record CompanyPublicInfoView(Guid EmployerAccountId, string Name, string? LogoUrl, string Industry, string Size, string Website);
 
 // ---------------------------------------------------------------------- ports
 

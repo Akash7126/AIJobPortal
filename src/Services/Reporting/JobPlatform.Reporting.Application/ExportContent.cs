@@ -1,4 +1,5 @@
 using System.Text.Json;
+using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Domain;
 
 namespace JobPlatform.Reporting.Application;

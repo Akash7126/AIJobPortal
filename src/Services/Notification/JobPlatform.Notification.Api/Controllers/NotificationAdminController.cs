@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.Notification.Application.Admin;
+using JobPlatform.Notification.Application.Commands.Admin;
+using JobPlatform.Notification.Application.Queries.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,11 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.JobPosting.Application;
+using JobPlatform.JobPosting.Application.Commands.Favorites;
+using JobPlatform.JobPosting.Application.Commands.Interested;
+using JobPlatform.JobPosting.Application.Commands.SavedSearches;
+using JobPlatform.JobPosting.Application.Queries.Favorites;
+using JobPlatform.JobPosting.Application.Queries.Interested;
+using JobPlatform.JobPosting.Application.Queries.SavedSearches;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

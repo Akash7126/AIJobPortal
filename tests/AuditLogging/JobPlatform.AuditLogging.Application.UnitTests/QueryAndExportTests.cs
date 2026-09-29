@@ -1,12 +1,19 @@
 using FluentValidation.TestHelper;
-using JobPlatform.AuditLogging.Application;
+using JobPlatform.AuditLogging.Application.Commands.Exports;
+using JobPlatform.AuditLogging.Application.DTOs.AuditLog;
+using JobPlatform.AuditLogging.Application.DTOs.Exports;
 using JobPlatform.AuditLogging.Application.Exports;
+using JobPlatform.AuditLogging.Application.Queries.AuditLog;
+using JobPlatform.AuditLogging.Application.Queries.Exports;
+using JobPlatform.AuditLogging.Application.Validators.AuditLog;
+using JobPlatform.AuditLogging.Application.Validators.Exports;
 using JobPlatform.AuditLogging.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.TestSupport;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
@@ -18,20 +25,19 @@ public class QueryHandlerTests
     private static readonly Guid Me = Guid.NewGuid();
     private static readonly PagedResult<AuditEntryDto> EmptyPage = new(Array.Empty<AuditEntryDto>(), 1, 20, 0);
 
-    private static AuditLogQueryHandlersHarness Harness(ActorType? actor, Guid? id)
+    private static AuditLogQueryHarness Harness(ActorType? actor, Guid? id)
     {
         var store = Substitute.For<IAuditReadStore>();
         store.ListEntriesAsync(default!, default!, default).ReturnsForAnyArgs(EmptyPage);
-        return new AuditLogQueryHandlersHarness(store, Users.Of(actor, id));
+        return new AuditLogQueryHarness(store, Users.Of(actor, id));
     }
 
-    private sealed record AuditLogQueryHandlersHarness(IAuditReadStore Store, JobPlatform.SharedKernel.Application.Ports.ICurrentUser User);
+    private sealed record AuditLogQueryHarness(IAuditReadStore Store, JobPlatform.SharedKernel.Application.Ports.ICurrentUser User);
 
-    private static IQueryHandler<TQuery, TResult> Handler<TQuery, TResult>(object harness) where TQuery : IQuery<TResult>
+    private static IRequestHandler<TQuery, TResult> Handler<TQuery, TResult>(object harness) where TQuery : IQuery<TResult>
     {
-        var h = (AuditLogQueryHandlersHarness)harness;
-        var type = typeof(ApplicationAssembly).Assembly.GetTypes().Single(t => t.Name == "AuditLogQueryHandlers");
-        return (IQueryHandler<TQuery, TResult>)Activator.CreateInstance(type, h.Store, h.User)!;
+        var h = (AuditLogQueryHarness)harness;
+        return new RequestHandlerSet(typeof(ApplicationAssembly).Assembly, h.Store, h.User).For<TQuery, TResult>();
     }
 
     [Fact]
@@ -98,7 +104,7 @@ public class QueryHandlerTests
     public async Task UsageStatistics_EndBeforeStart_IsInvalidFieldAndNeverReadsTheStore()
     {
         var store = Substitute.For<IAuditReadStore>();
-        var handlers = Create<PartnerDashboardHandlers>(store, Users.Of(ActorType.ExternalJobSite, Me), new FakeTimeProvider());
+        var handlers = Handlers(store, Users.Of(ActorType.ExternalJobSite, Me), new FakeTimeProvider());
 
         var act = () => handlers.Handle(new GetIntegrationUsageStatisticsQuery(new DateOnly(2026, 3, 5), new DateOnly(2026, 3, 1)), default);
 
@@ -112,7 +118,7 @@ public class QueryHandlerTests
         var store = Substitute.For<IAuditReadStore>();
         store.GetIntegrationStatusAsync(default, default, default).ReturnsForAnyArgs(new IntegrationStatusDto("Healthy", 0, 1, 0, 0, null, 3));
         var clock = new FakeTimeProvider(new DateTimeOffset(2026, 6, 15, 0, 0, 0, TimeSpan.Zero));
-        var handlers = Create<PartnerDashboardHandlers>(store, Users.Of(ActorType.ExternalJobSite, Me), clock);
+        var handlers = Handlers(store, Users.Of(ActorType.ExternalJobSite, Me), clock);
 
         var result = await handlers.Handle(new GetIntegrationStatusDashboardQuery(), default);
 
@@ -128,7 +134,7 @@ public class QueryHandlerTests
         var owner = Guid.NewGuid();
         var store = Substitute.For<IAuditReadStore>();
         store.GetJobStatusHistoryAsync(default, default).ReturnsForAnyArgs(new JobHistoryOwnerView(owner, Array.Empty<JobStatusHistoryDto>()));
-        var handlers = Create<EmployerViewHandlers>(store, Users.Of(ActorType.Employer, Me));
+        var handlers = Handlers(store, Users.Of(ActorType.Employer, Me));
 
         var act = () => handlers.Handle(new GetJobStatusHistoryQuery(Guid.NewGuid()), default);
 
@@ -141,7 +147,7 @@ public class QueryHandlerTests
         var store = Substitute.For<IAuditReadStore>();
         var row = new JobStatusHistoryDto(Guid.NewGuid(), Me, "Draft", "Active", null, Ids.T0);
         store.GetJobStatusHistoryAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>()).Returns(new JobHistoryOwnerView(Me, new[] { row }), new JobHistoryOwnerView(null, Array.Empty<JobStatusHistoryDto>()));
-        var handlers = Create<EmployerViewHandlers>(store, Users.Of(ActorType.Employer, Me));
+        var handlers = Handlers(store, Users.Of(ActorType.Employer, Me));
 
         (await handlers.Handle(new GetJobStatusHistoryQuery(Guid.NewGuid()), default)).Value.Should().ContainSingle();
         (await handlers.Handle(new GetJobStatusHistoryQuery(Guid.NewGuid()), default)).Value.Should().BeEmpty();
@@ -154,7 +160,7 @@ public class QueryHandlerTests
     {
         var store = Substitute.For<IAuditReadStore>();
         store.GetCandidateInsightAsync(default, default, default).ReturnsForAnyArgs(new CandidateInsightRaw(Me, "Immediate", 1500m, 88m, new[] { "expectedSalary" }, Ids.T0));
-        var handlers = Create<EmployerViewHandlers>(store, Users.Of(ActorType.Employer, Me));
+        var handlers = Handlers(store, Users.Of(ActorType.Employer, Me));
 
         var result = await handlers.Handle(new GetCandidateInsightQuery(Guid.NewGuid(), Guid.NewGuid()), default);
 
@@ -168,7 +174,7 @@ public class QueryHandlerTests
     {
         var store = Substitute.For<IAuditReadStore>();
         store.GetCandidateInsightAsync(default, default, default).ReturnsForAnyArgs(new CandidateInsightRaw(Guid.NewGuid(), "x", 1m, 1m, Array.Empty<string>(), Ids.T0), (CandidateInsightRaw?)null);
-        var handlers = Create<EmployerViewHandlers>(store, Users.Of(ActorType.Employer, Me));
+        var handlers = Handlers(store, Users.Of(ActorType.Employer, Me));
 
         var act = () => handlers.Handle(new GetCandidateInsightQuery(Guid.NewGuid(), Guid.NewGuid()), default);
         (await act.Should().ThrowAsync<BusinessRuleViolationException>()).Which.ExternalCode.Should().Be("E-AUDIT-INSIGHT-FORBIDDEN");
@@ -185,7 +191,7 @@ public class QueryHandlerTests
     {
         var store = Substitute.For<IAuditReadStore>();
         store.GetEmployerDashboardAsync(default, default).ReturnsForAnyArgs((EmployerDashboardDto?)null);
-        var handlers = Create<EmployerViewHandlers>(store, Users.Of(ActorType.Employer, Me));
+        var handlers = Handlers(store, Users.Of(ActorType.Employer, Me));
 
         var result = await handlers.Handle(new GetEmployerDashboardQuery(), default);
 
@@ -199,7 +205,7 @@ public class QueryHandlerTests
     {
         var store = Substitute.For<IAuditReadStore>();
         store.ListNotificationLogAsync(default!, default, default!, default).ReturnsForAnyArgs(new PagedResult<NotificationLogDto>(Array.Empty<NotificationLogDto>(), 1, 20, 0));
-        var jobSeeker = Create<NotificationLogQueryHandlers>(store, Users.Of(ActorType.JobSeeker, Me));
+        var jobSeeker = Handlers(store, Users.Of(ActorType.JobSeeker, Me));
 
         await jobSeeker.Handle(new ListNotificationHistoryQuery(), default);
         await store.Received(1).ListNotificationLogAsync(Arg.Any<string[]>(), Me, Arg.Any<PageRequest>(), Arg.Any<CancellationToken>());
@@ -209,13 +215,12 @@ public class QueryHandlerTests
         var sms = () => jobSeeker.Handle(new ListSmsMessageLogQuery(), default);
         (await sms.Should().ThrowAsync<BusinessRuleViolationException>()).Which.ExternalCode.Should().Be("E-SMSN-FORBIDDEN");
 
-        var admin = Create<NotificationLogQueryHandlers>(store, Users.Of(ActorType.Administrator, Me));
+        var admin = Handlers(store, Users.Of(ActorType.Administrator, Me));
         (await admin.Handle(new ListEmailLogQuery(), default)).IsSuccess.Should().BeTrue();
         await store.Received().ListNotificationLogAsync(Arg.Is<string[]>(c => c.SequenceEqual(new[] { "Email" })), null, Arg.Any<PageRequest>(), Arg.Any<CancellationToken>());
     }
 
-    private static T Create<T>(params object[] args) => (T)Activator.CreateInstance(typeof(T), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic,
-        null, args, null)!;
+    private static RequestHandlerSet Handlers(params object[] dependencies) => new(typeof(ApplicationAssembly).Assembly, dependencies);
 }
 
 public class ExportHandlerTests
@@ -224,11 +229,11 @@ public class ExportHandlerTests
     private readonly FakeStore _store = new();
     private readonly FakeTimeProvider _clock = new(new DateTimeOffset(2026, 6, 1, 8, 0, 0, TimeSpan.Zero));
 
-    private object Handlers(Guid? user = null) => Activator.CreateInstance(typeof(ApplicationAssembly).Assembly.GetTypes().Single(t => t.Name == "ExportHandlers"),
-        _store, Users.Of(ActorType.Administrator, user ?? Admin), _clock)!;
+    private RequestHandlerSet Handlers(Guid? user = null) => new(typeof(ApplicationAssembly).Assembly,
+        _store, Users.Of(ActorType.Administrator, user ?? Admin), _clock);
 
     private Task<Result<ExportRequestResult>> Request(string type = "PostingsByRegion", string format = "Csv", Dictionary<string, string>? parameters = null, Guid? user = null) =>
-        ((ICommandHandler<RequestAdministratorReportExportCommand, ExportRequestResult>)Handlers(user)).Handle(
+        Handlers(user).Handle(
             new RequestAdministratorReportExportCommand(type, format, parameters ?? new Dictionary<string, string> { ["year"] = "2026" }), default);
 
     [Fact]
@@ -282,7 +287,7 @@ public class ExportHandlerTests
     [Fact]
     public async Task Get_UnknownJob_IsNotFound()
     {
-        var result = await ((IQueryHandler<GetExportJobQuery, ExportJobDto>)Handlers()).Handle(new GetExportJobQuery(Guid.NewGuid()), default);
+        var result = await Handlers().Handle(new GetExportJobQuery(Guid.NewGuid()), default);
 
         result.Error!.Code.Should().Be("E-AUDIT-EXPORT-NOT-FOUND");
     }
@@ -357,11 +362,11 @@ public class ExportHandlerTests
         var handlers = Handlers();
         var sender = Substitute.For<ISender>();
         sender.Send(Arg.Any<IRequest<ExportJobSpec>>(), Arg.Any<CancellationToken>()).Returns(ci =>
-            ((ICommandHandler<StartExportGenerationCommand, ExportJobSpec>)handlers).Handle((StartExportGenerationCommand)ci[0], default));
+            handlers.Handle((StartExportGenerationCommand)ci[0], default));
         sender.Send(Arg.Any<IRequest<Unit>>(), Arg.Any<CancellationToken>()).Returns(ci => ci[0] switch
         {
-            CompleteExportJobCommand c => ((ICommandHandler<CompleteExportJobCommand, Unit>)handlers).Handle(c, default),
-            FailExportJobCommand f => ((ICommandHandler<FailExportJobCommand, Unit>)handlers).Handle(f, default),
+            CompleteExportJobCommand c => handlers.Handle(c, default),
+            FailExportJobCommand f => handlers.Handle(f, default),
             _ => throw new NotSupportedException()
         });
         return sender;

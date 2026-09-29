@@ -1,0 +1,33 @@
+using JobPlatform.ExternalIntegration.Application.Commands.ApiFramework;
+using JobPlatform.ExternalIntegration.Domain;
+using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Results;
+
+namespace JobPlatform.ExternalIntegration.Application.Handlers.ApiFramework;
+
+internal sealed class DeprecateApiVersionHandler : ICommandHandler<DeprecateApiVersionCommand, Unit>
+{
+    private readonly IApiVersionRepository _versions;
+    private readonly ICurrentUser _user;
+    private readonly TimeProvider _clock;
+
+    public DeprecateApiVersionHandler(IApiVersionRepository versions, ICurrentUser user, TimeProvider clock)
+    {
+        _versions = versions;
+        _user = user;
+        _clock = clock;
+    }
+
+    public async Task<Result<Unit>> Handle(DeprecateApiVersionCommand request, CancellationToken ct)
+    {
+        var version = await _versions.GetAsync(request.Version, ct);
+        if (version is null)
+        {
+            return Error.NotFound(ErrorCodes.NotFound, "The API version was not found.");
+        }
+
+        version.Deprecate(request.SunsetAtUtc, _clock.GetUtcNow().UtcDateTime, ActorFactory.From(_user));
+        return Result.Success();
+    }
+}

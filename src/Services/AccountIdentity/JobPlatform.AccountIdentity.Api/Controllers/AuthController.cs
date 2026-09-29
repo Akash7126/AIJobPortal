@@ -1,14 +1,7 @@
 using JobPlatform.AccountIdentity.Api.Contracts;
 using JobPlatform.AccountIdentity.Api.Security;
-using JobPlatform.AccountIdentity.Application;
-using JobPlatform.AccountIdentity.Application.Accounts;
-using JobPlatform.AccountIdentity.Application.ApiCredentials;
-using JobPlatform.AccountIdentity.Application.Authentication;
-using JobPlatform.AccountIdentity.Application.Consent;
-using JobPlatform.AccountIdentity.Infrastructure.Security;
-using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Results;
+using JobPlatform.AccountIdentity.Application.Commands.Authentication;
+using JobPlatform.AccountIdentity.Application.DTOs.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;

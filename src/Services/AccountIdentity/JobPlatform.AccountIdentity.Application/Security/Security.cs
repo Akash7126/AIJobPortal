@@ -1,4 +1,5 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.DTOs.Authentication;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Domain.Rbac;

@@ -1,6 +1,7 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.HelpContent.Application;
+using JobPlatform.HelpContent.Application.Commands.Tutorials;
+using JobPlatform.HelpContent.Application.Queries.Tutorials;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

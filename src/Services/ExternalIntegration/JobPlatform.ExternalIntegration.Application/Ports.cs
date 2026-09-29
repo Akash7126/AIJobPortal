@@ -1,3 +1,6 @@
+using JobPlatform.ExternalIntegration.Application.DTOs.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.DTOs.Integrations;
+
 namespace JobPlatform.ExternalIntegration.Application;
 
 /// <summary>Read side (foundation section 3.5): dedicated projections, never aggregates.</summary>

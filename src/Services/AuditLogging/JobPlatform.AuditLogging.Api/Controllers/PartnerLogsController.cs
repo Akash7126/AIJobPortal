@@ -1,7 +1,5 @@
-using JobPlatform.AuditLogging.Application;
-using JobPlatform.AuditLogging.Application.Exports;
+using JobPlatform.AuditLogging.Application.Queries.AuditLog;
 using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.BuildingBlocks.Api.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,13 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.ExternalIntegration.Application;
+using JobPlatform.ExternalIntegration.Application.Commands.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.Commands.Integrations;
+using JobPlatform.ExternalIntegration.Application.Commands.JobDataFlows;
+using JobPlatform.ExternalIntegration.Application.Commands.Mapping;
+using JobPlatform.ExternalIntegration.Application.DTOs.Mapping;
+using JobPlatform.ExternalIntegration.Application.Queries.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.Queries.Integrations;
+using JobPlatform.ExternalIntegration.Application.Queries.Mapping;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

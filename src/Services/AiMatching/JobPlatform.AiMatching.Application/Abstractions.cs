@@ -1,10 +1,11 @@
 using System.Reflection;
-using FluentValidation;
+using JobPlatform.AiMatching.Application.Services.Matching;
+using JobPlatform.AiMatching.Application.Services.Parsing;
+using JobPlatform.AiMatching.Application.Services.Semantics;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Common.Enums;
-using JobPlatform.SharedKernel.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobPlatform.AiMatching.Application;
@@ -97,15 +98,6 @@ public sealed class UpstreamUnavailableException : Exception
     public UpstreamUnavailableException(string message, Exception? inner = null) : base(message, inner)
     {
     }
-}
-
-public static class ValidationExtensions
-{
-    public static IRuleBuilderOptions<T, int> ValidPageSize<T>(this IRuleBuilder<T, int> rule, int max = 50) =>
-        rule.InclusiveBetween(1, max).WithErrorCode("VAL.PageSize.OutOfRange");
-
-    public static IRuleBuilderOptions<T, int> ValidPage<T>(this IRuleBuilder<T, int> rule) =>
-        rule.GreaterThanOrEqualTo(1).WithErrorCode("VAL.Page.OutOfRange");
 }
 
 /// <summary>Skill embedding/vector entity types.</summary>

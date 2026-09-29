@@ -1,3 +1,5 @@
+using JobPlatform.EmployerOnboarding.Application.Commands.Media;
+using JobPlatform.EmployerOnboarding.Application.Handlers.Media;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 

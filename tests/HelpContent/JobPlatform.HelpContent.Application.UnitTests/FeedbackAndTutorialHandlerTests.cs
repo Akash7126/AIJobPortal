@@ -1,3 +1,10 @@
+using JobPlatform.HelpContent.Application.Commands.Feedback;
+using JobPlatform.HelpContent.Application.Commands.Tutorials;
+using JobPlatform.HelpContent.Application.DTOs.Help;
+using JobPlatform.HelpContent.Application.Handlers.Feedback;
+using JobPlatform.HelpContent.Application.Handlers.Tutorials;
+using JobPlatform.HelpContent.Application.Queries.Feedback;
+using JobPlatform.HelpContent.Application.Queries.Tutorials;
 using JobPlatform.HelpContent.Domain;
 
 namespace JobPlatform.HelpContent.Application.UnitTests;

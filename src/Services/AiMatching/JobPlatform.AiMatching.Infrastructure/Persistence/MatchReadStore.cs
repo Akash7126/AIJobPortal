@@ -1,4 +1,9 @@
 using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.DTOs.Configuration;
+using JobPlatform.AiMatching.Application.DTOs.Matching;
+using JobPlatform.AiMatching.Application.DTOs.Parsing;
+using JobPlatform.AiMatching.Application.DTOs.Recommendations;
+using JobPlatform.AiMatching.Application.DTOs.Shortlists;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
 using JobPlatform.SharedKernel.Application.Concurrency;

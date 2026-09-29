@@ -1,6 +1,7 @@
-using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.Commands.Shortlists;
+using JobPlatform.AiMatching.Application.Queries.Matching;
+using JobPlatform.AiMatching.Application.Queries.Shortlists;
 using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.BuildingBlocks.Api.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

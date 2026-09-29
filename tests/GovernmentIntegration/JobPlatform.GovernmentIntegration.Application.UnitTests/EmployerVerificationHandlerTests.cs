@@ -1,3 +1,7 @@
+using JobPlatform.GovernmentIntegration.Application.Commands.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.DTOs.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.Handlers.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.Queries.EmployerVerifications;
 using JobPlatform.GovernmentIntegration.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 

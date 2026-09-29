@@ -39,6 +39,45 @@ public static class ArchitectureRules
             .Where(t => t.IsPublic || !t.IsSealed)
             .Select(t => t.FullName!).ToArray();
 
+    /// <summary>
+    /// FluentValidation validators (and validator bases) live in the Application layer's Validators folder, namespace
+    /// <c>&lt;Application&gt;.Validators.&lt;Feature&gt;</c>, never next to the commands or handlers they check.
+    /// </summary>
+    public static IReadOnlyList<string> ValidatorsOutsideValidatorsFolder(Assembly application)
+    {
+        var validatorsNs = application.GetName().Name + ".Validators";
+        return application.GetTypes()
+            .Where(t => t.IsClass && IsFluentValidator(t))
+            .Where(t => t.Namespace is null || !(t.Namespace == validatorsNs || t.Namespace.StartsWith(validatorsNs + ".", StringComparison.Ordinal)))
+            .Select(t => t.FullName!).ToArray();
+    }
+
+    /// <summary>
+    /// CQRS layout of the Application layer: commands live in <c>&lt;Application&gt;.Commands.&lt;Feature&gt;</c>, queries in <c>.Queries.&lt;Feature&gt;</c>
+    /// and request handlers in <c>.Handlers.&lt;Feature&gt;</c>, one handler class per request. Returns "type: reason" for each offender.
+    /// </summary>
+    public static IReadOnlyList<string> CqrsLayoutViolations(Assembly application)
+    {
+        var root = application.GetName().Name!;
+        bool In(Type t, string folder) => t.Namespace is { } ns && ns.StartsWith($"{root}.{folder}.", StringComparison.Ordinal);
+        var offenders = new List<string>();
+        foreach (var type in application.GetTypes().Where(t => t is { IsClass: true, IsAbstract: false } || t is { IsValueType: true, IsEnum: false }))
+        {
+            var interfaces = type.GetInterfaces().Where(i => i.IsGenericType).Select(i => i.GetGenericTypeDefinition()).ToList();
+            if (interfaces.Contains(typeof(IRequest<>)))
+            {
+                var folder = typeof(ICommandBase).IsAssignableFrom(type) ? "Commands" : "Queries";
+                if (!In(type, folder)) offenders.Add($"{type.FullName}: request outside {folder}");
+            }
+
+            var handled = interfaces.Count(i => i == typeof(IRequestHandler<,>));
+            if (handled > 0 && !In(type, "Handlers")) offenders.Add($"{type.FullName}: request handler outside Handlers");
+            if (handled > 1) offenders.Add($"{type.FullName}: handles {handled} requests (one handler class per request)");
+        }
+
+        return offenders;
+    }
+
     /// <summary>Aggregates are changed through behaviour methods only: no public setters on aggregate roots or their entities.</summary>
     public static IReadOnlyList<string> PublicSettersInDomain(Assembly domain) =>
         domain.GetTypes()
@@ -61,6 +100,19 @@ public static class ArchitectureRules
         for (var current = type.BaseType; current is not null; current = current.BaseType)
         {
             if (current.IsGenericType && current.GetGenericTypeDefinition() == typeof(Entity<>))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool IsFluentValidator(Type type)
+    {
+        for (var current = type.BaseType; current is not null; current = current.BaseType)
+        {
+            if (current.IsGenericType && current.GetGenericTypeDefinition().FullName == "FluentValidation.AbstractValidator`1")
             {
                 return true;
             }

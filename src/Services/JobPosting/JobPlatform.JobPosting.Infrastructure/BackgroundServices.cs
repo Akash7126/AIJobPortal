@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
 using JobPlatform.JobPosting.Application;
+using JobPlatform.JobPosting.Application.Commands.Postings;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

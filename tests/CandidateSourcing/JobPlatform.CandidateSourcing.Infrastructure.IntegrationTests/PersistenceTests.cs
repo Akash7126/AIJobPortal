@@ -1,4 +1,4 @@
-using JobPlatform.CandidateSourcing.Application;
+using JobPlatform.CandidateSourcing.Application.DTOs.Search;
 using JobPlatform.CandidateSourcing.Application.Events;
 using JobPlatform.CandidateSourcing.Domain.Insight;
 using JobPlatform.CandidateSourcing.Domain.Privacy;

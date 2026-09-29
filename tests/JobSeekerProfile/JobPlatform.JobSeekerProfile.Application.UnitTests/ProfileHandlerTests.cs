@@ -1,4 +1,6 @@
-using JobPlatform.JobSeekerProfile.Application.Profile;
+using JobPlatform.JobSeekerProfile.Application.Commands.Profile;
+using JobPlatform.JobSeekerProfile.Application.Handlers.Profile;
+using JobPlatform.JobSeekerProfile.Application.Validators.Profile;
 using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.SharedKernel.Application.Concurrency;
 using JobPlatform.SharedKernel.Application.Results;

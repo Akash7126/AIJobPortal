@@ -1,4 +1,5 @@
 using JobPlatform.AuditLogging.Application;
+using JobPlatform.AuditLogging.Application.Commands.Exports;
 using JobPlatform.AuditLogging.Application.Exports;
 using JobPlatform.AuditLogging.Application.Ingestion;
 using JobPlatform.AuditLogging.Domain;

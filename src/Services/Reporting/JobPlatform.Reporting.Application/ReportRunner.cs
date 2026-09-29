@@ -1,5 +1,6 @@
+using JobPlatform.Reporting.Application.DTOs.Common;
+using JobPlatform.Reporting.Application.DTOs.ReportRuns;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.Reporting.Application;

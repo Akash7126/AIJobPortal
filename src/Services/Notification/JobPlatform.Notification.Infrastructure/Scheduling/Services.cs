@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
 using JobPlatform.Notification.Application;
+using JobPlatform.Notification.Application.Commands.Delivery;
 using JobPlatform.Notification.Application.Delivery;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using Microsoft.Extensions.DependencyInjection;

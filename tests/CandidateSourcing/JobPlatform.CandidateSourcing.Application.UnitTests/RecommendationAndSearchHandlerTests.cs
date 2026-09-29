@@ -1,5 +1,9 @@
-using JobPlatform.CandidateSourcing.Application.Recommendations;
-using JobPlatform.CandidateSourcing.Application.Search;
+using JobPlatform.CandidateSourcing.Application.DTOs.Search;
+using JobPlatform.CandidateSourcing.Application.Handlers.Recommendations;
+using JobPlatform.CandidateSourcing.Application.Handlers.Search;
+using JobPlatform.CandidateSourcing.Application.Queries.Recommendations;
+using JobPlatform.CandidateSourcing.Application.Queries.Search;
+using JobPlatform.CandidateSourcing.Application.Services.Recommendations;
 using JobPlatform.CandidateSourcing.Domain.Privacy;
 using JobPlatform.CandidateSourcing.Domain.Projection;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;

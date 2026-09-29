@@ -1,4 +1,9 @@
 using System.Reflection;
+using JobPlatform.HelpContent.Application.DTOs.Common;
+using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
+using JobPlatform.HelpContent.Application.DTOs.Feedback;
+using JobPlatform.HelpContent.Application.DTOs.Help;
+using JobPlatform.HelpContent.Application.DTOs.News;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.HelpContent.Domain.Common;
 using JobPlatform.SharedKernel.Application.Abstractions;
@@ -50,45 +55,7 @@ public static class ActorFactory
     public static Actor From(SharedKernel.Application.Ports.ICurrentUser user) => new(user.UserId ?? Guid.Empty, user.ActorType == ActorType.Administrator);
 }
 
-// ---------------------------------------------------------------------- read models
-
-public sealed record LocalizedView(string? Ar, string? En);
-
-public sealed record NewsMediaView(Guid MediaId, string Type, string Url, string? AltText);
-
-public sealed record NewsArticleView(
-    Guid NewsArticleId, string Kind, LocalizedView Title, LocalizedView Body, string Status, IReadOnlyList<NewsMediaView> Media,
-    IReadOnlyList<Guid> CategoryIds, IReadOnlyList<string> Tags, Guid CreatedBy, DateTime CreatedAtUtc, DateTime? PublishedAtUtc,
-    DateTime? ArchivedAtUtc, byte[] RowVersion);
-
-public sealed record NewsListItemView(
-    Guid NewsArticleId, string Kind, LocalizedView Title, string Status, IReadOnlyList<string> CategoryNames, DateTime? PublishedAtUtc);
-
-public sealed record ContentCategoryView(Guid CategoryId, LocalizedView Name, bool IsDeleted);
-
-public sealed record HelpMediaView(Guid MediaId, string Type, string Url, string? CaptionsRef, string? TextAlternative);
-
 public sealed record HelpContentVersionView(int VersionNo, LocalizedView Title, LocalizedView Body, Guid EditedBy, DateTime EditedAtUtc);
-
-public sealed record HelpContentView(
-    Guid HelpContentId, string Kind, LocalizedView Title, LocalizedView Body, int CurrentVersion, Guid? TopicId, IReadOnlyList<string> Roles,
-    IReadOnlyList<HelpMediaView> Media, byte[] RowVersion);
-
-public sealed record HelpSearchResultView(Guid HelpContentId, string Kind, LocalizedView Title, string? TopicName);
-
-public sealed record HelpTopicView(Guid TopicId, LocalizedView Name, bool IsRemoved);
-
-public sealed record HelpCenterTopicView(Guid? TopicId, string? TopicName, IReadOnlyList<HelpSearchResultView> Items);
-
-public sealed record HelpFeedbackSummaryView(Guid HelpContentId, int HelpfulCount, int NotHelpfulCount);
-
-public sealed record TutorialView(Guid TutorialId, LocalizedView Title, LocalizedView Body, bool Completed, DateTime? CompletedAtUtc);
-
-public sealed record OpenPostingView(Guid JobPostingId, string Title, string? Governorate, string? City, DateTime DeadlineUtc);
-
-public sealed record CompanyPageView(
-    Guid EmployerAccountId, string Name, string? LogoUrl, string Industry, string CompanySize, string Website, bool Verified, string? Badge,
-    LocalizedView Background, IReadOnlyList<string> Highlights, IReadOnlyList<OpenPostingView> OpenPostings, bool OpenPostingsDegraded);
 
 // ---------------------------------------------------------------------- ports
 

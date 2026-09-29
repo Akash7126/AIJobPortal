@@ -1,9 +1,9 @@
 using System.Text.Json.Nodes;
+using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.EmployerOnboarding.Domain.Common;
 using JobPlatform.EmployerOnboarding.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobPlatform.EmployerOnboarding.Infrastructure.IntegrationTests;
@@ -97,7 +97,7 @@ public class ReadStoreTests
         var pending = await store.ListRegistrationsAsync("Pending", new PageRequest(1, 1));
 
         approved.TotalCount.Should().Be(1);
-        pending.Should().Match<PagedResult<Application.EmployerRegistrationView>>(p => p.TotalCount == 2 && p.Items.Count == 1);
+        pending.Should().Match<PagedResult<Application.DTOs.Registration.EmployerRegistrationView>>(p => p.TotalCount == 2 && p.Items.Count == 1);
     }
 
     [Fact]

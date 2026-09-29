@@ -1,4 +1,5 @@
-using JobPlatform.CandidateSourcing.Application.Insight;
+using JobPlatform.CandidateSourcing.Application.Handlers.Insight;
+using JobPlatform.CandidateSourcing.Application.Queries.Insight;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;
 using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;

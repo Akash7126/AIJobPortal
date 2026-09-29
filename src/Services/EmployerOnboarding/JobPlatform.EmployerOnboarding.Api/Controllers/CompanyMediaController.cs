@@ -1,10 +1,8 @@
-using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.BuildingBlocks.Api.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.EmployerOnboarding.Application;
+using JobPlatform.EmployerOnboarding.Application.Commands.Media;
+using JobPlatform.EmployerOnboarding.Application.Queries.Media;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.SharedKernel.Application.Results;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobPlatform.EmployerOnboarding.Api.Controllers;

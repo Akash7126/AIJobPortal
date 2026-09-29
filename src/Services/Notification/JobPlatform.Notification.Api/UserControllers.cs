@@ -1,6 +1,8 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.Notification.Application.InApp;
-using JobPlatform.Notification.Application.Preferences;
+using JobPlatform.Notification.Application.Commands.InApp;
+using JobPlatform.Notification.Application.Commands.Preferences;
+using JobPlatform.Notification.Application.Queries.InApp;
+using JobPlatform.Notification.Application.Queries.Preferences;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

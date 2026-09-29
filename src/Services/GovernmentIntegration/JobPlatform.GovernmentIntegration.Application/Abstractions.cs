@@ -1,4 +1,8 @@
 using System.Reflection;
+using JobPlatform.GovernmentIntegration.Application.DTOs.Connections;
+using JobPlatform.GovernmentIntegration.Application.DTOs.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.DTOs.Migration;
+using JobPlatform.GovernmentIntegration.Application.DTOs.Verifications;
 using JobPlatform.GovernmentIntegration.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Paging;
@@ -70,34 +74,6 @@ public static class ActorFactory
     public static Domain.Common.Actor From(SharedKernel.Application.Ports.ICurrentUser user) =>
         new(user.UserId ?? Guid.Empty, user.ActorType == ActorType.Administrator);
 }
-
-// ---------------------------------------------------------------------- read models (foundation section 3.5: dedicated projections, never aggregates)
-
-public sealed record VerificationAttemptView(int AttemptNo, string Source, string Outcome, string? ErrorCode, DateTime StartedAtUtc);
-
-public sealed record EmployerVerificationView(
-    Guid EmployerVerificationId, Guid EmployerAccountId, string State, string Method, int AttemptCount, Guid? DecidedBy, DateTime? DecidedAtUtc,
-    string? FailureReason, IReadOnlyList<VerificationAttemptView> Attempts, byte[] RowVersion);
-
-public sealed record SubjectVerificationStatusView(string SubjectType, Guid SubjectId, string? GovernmentDataStatus, string? EducationalStatus,
-    string? IdentityStatus);
-
-public sealed record GovernmentSourceConnectionView(
-    Guid Id, string Source, string Endpoint, string AuthMethod, bool Enabled, string Health, DateTime? LastSuccessfulSyncAtUtc);
-
-public sealed record MigrationPhaseView(string Name, string Status, string? TestOutcome);
-
-public sealed record MigrationLogEntryView(string Phase, string Outcome, string Message, DateTime AtUtc);
-
-public sealed record MigrationRunView(Guid Id, Guid InitiatedBy, string Status, IReadOnlyList<MigrationPhaseView> Phases,
-    IReadOnlyList<MigrationLogEntryView> Log);
-
-public sealed record DataQualityView(
-    Guid Id, Guid MigrationRunId, Guid BatchId, string Status, int IssuesResolved, int DuplicatesRemoved, int FormatsStandardized,
-    int RecordsChecked, int RecordsRejected);
-
-public sealed record GovernmentAccessLogView(Guid Id, DateTime OccurredAtUtc, string Component, string Purpose, string SubjectRef, string Decision,
-    string? ErrorCode);
 
 /// <summary>Read side (handover section 8.3): dedicated projections, joined and paged in SQL - never via the aggregates.</summary>
 public interface IGovernmentIntegrationReadStore

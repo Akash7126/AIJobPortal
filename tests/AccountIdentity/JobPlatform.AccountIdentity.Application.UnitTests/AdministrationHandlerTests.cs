@@ -1,9 +1,16 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
-using JobPlatform.AccountIdentity.Application.Accounts;
-using JobPlatform.AccountIdentity.Application.Administration;
-using JobPlatform.AccountIdentity.Application.Consent;
+using JobPlatform.AccountIdentity.Application.Commands.Accounts;
+using JobPlatform.AccountIdentity.Application.Commands.Administration;
+using JobPlatform.AccountIdentity.Application.Commands.Consent;
+using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
+using JobPlatform.AccountIdentity.Application.DTOs.Administration;
+using JobPlatform.AccountIdentity.Application.DTOs.Consent;
 using JobPlatform.AccountIdentity.Application.Events;
-using JobPlatform.AccountIdentity.Application.Internal;
+using JobPlatform.AccountIdentity.Application.Handlers.Accounts;
+using JobPlatform.AccountIdentity.Application.Queries.Accounts;
+using JobPlatform.AccountIdentity.Application.Queries.Administration;
+using JobPlatform.AccountIdentity.Application.Queries.Consent;
+using JobPlatform.AccountIdentity.Application.Queries.Internal;
 using JobPlatform.AccountIdentity.Application.Security;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
@@ -20,6 +27,7 @@ using JobPlatform.SharedKernel.Domain;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.Messaging;
 using JobPlatform.SharedKernel.Security;
+using JobPlatform.TestSupport;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
@@ -33,7 +41,7 @@ public class AdminAccountHandlerTests
     private readonly InMemorySessionStore _sessions = new();
     private readonly Guid _adminId = Guid.NewGuid();
 
-    private AdminAccountHandlers Handlers() => new(_accounts, _sessions, AppKit.User(_adminId, ActorType.Administrator, mfa: true), _clock);
+    private RequestHandlerSet Handlers() => new(ApplicationAssembly.Assembly, _accounts, _sessions, AppKit.User(_adminId, ActorType.Administrator, mfa: true), _clock);
 
     private Account Add(Account account)
     {
@@ -170,7 +178,7 @@ public class AdminAccountHandlerTests
     [Trait("Story", "US-3.1.4-03")]
     [Trait("AC", "AC-02")]
     public void AvailableActions_FollowTheAccountStanding(string standing, string[] expected) =>
-        AccountQueryHandlers.ActionsFor(standing).Should().Equal(expected);
+        GetAccountStandingHandler.ActionsFor(standing).Should().Equal(expected);
 
     [Fact]
     public async Task AccountQueries_MaskPersonalData_AndReportNotFound()
@@ -182,7 +190,7 @@ public class AdminAccountHandlerTests
         store.ListAccountsAsync(Arg.Any<AccountListFilter>(), Arg.Any<PageRequest>(), Arg.Any<CancellationToken>()).Returns(new PagedResult<AccountListItemView>(
             new[] { new AccountListItemView(id, ActorType.JobSeeker, "Sara", "sara@example.com", "+970591111111", "Active", DateTime.UtcNow) }, 1, 20, 1));
         store.GetAccountSummaryAsync(id, Arg.Any<CancellationToken>()).Returns(new AccountSummaryDto(id, ActorType.JobSeeker, "Active", DateTime.UtcNow, null));
-        var handlers = new AccountQueryHandlers(store);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, store);
 
         var standing = (await handlers.Handle(new GetAccountStandingQuery(id), default)).Value;
         var list = (await handlers.Handle(new ListAccountsQuery(null, null, null), default)).Value;
@@ -219,7 +227,7 @@ public class ConfigurationHandlerTests
     public async Task ConfigurePasswordPolicy_UpdatesTheSingletonAndBumpsItsVersion()
     {
         var policy = PasswordPolicy.CreateDefault(_clock);
-        var handlers = new PasswordPolicyHandlers(AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.PolicyRepo(_clock, policy), Substitute.For<IIdentityReadStore>(), Admin(), _clock);
 
         var result = await handlers.Handle(new ConfigurePasswordPolicyCommand(12, true, false, true), default);
 
@@ -236,7 +244,7 @@ public class ConfigurationHandlerTests
         var store = Substitute.For<IIdentityReadStore>();
         var view = new PasswordPolicyView(8, true, true, true, 1, DateTime.UtcNow);
         store.GetPasswordPolicyAsync(Arg.Any<CancellationToken>()).Returns(view);
-        var handlers = new PasswordPolicyHandlers(AppKit.PolicyRepo(_clock), store, Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.PolicyRepo(_clock), store, Admin(), _clock);
 
         (await handlers.Handle(new GetPasswordPolicyQuery(), default)).Value.Should().Be(view);
     }
@@ -249,7 +257,7 @@ public class ConfigurationHandlerTests
         var setting = SessionTimeoutSetting.CreateDefault(_clock);
         var store = Substitute.For<IIdentityReadStore>();
         store.GetSessionTimeoutAsync(Arg.Any<CancellationToken>()).Returns(new SessionTimeoutView(60, 2, DateTime.UtcNow));
-        var handlers = new SessionTimeoutHandlers(AppKit.TimeoutRepo(_clock, setting), store, Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, AppKit.TimeoutRepo(_clock, setting), store, Admin(), _clock);
 
         (await handlers.Handle(new ConfigureSessionTimeoutCommand(60), default)).IsSuccess.Should().BeTrue();
 
@@ -267,7 +275,7 @@ public class ConfigurationHandlerTests
         roles.GetByIdAsync(role.Id, Arg.Any<CancellationToken>()).Returns(role);
         var store = Substitute.For<IIdentityReadStore>();
         store.ListRolesAsync(Arg.Any<CancellationToken>()).Returns(new[] { new RoleView(role.Id.Value, "Custom", false, new[] { Permissions.JobsBrowse }) });
-        var handlers = new RoleHandlers(roles, store, Admin(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, roles, store, Admin(), _clock);
 
         await handlers.Handle(new GrantPermissionCommand(role.Id.Value, Permissions.AccountsRead), default);
         role.Has(Permissions.AccountsRead).Should().BeTrue();
@@ -306,7 +314,7 @@ public class ConfigurationHandlerTests
         var repo = Substitute.For<IPrivacyConsentRepository>();
         PrivacyConsent? added = null;
         repo.When(r => r.Add(Arg.Any<PrivacyConsent>())).Do(ci => added = ci.Arg<PrivacyConsent>());
-        var handlers = new ConsentHandlers(repo, Substitute.For<IIdentityReadStore>(), Options(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, repo, Substitute.For<IIdentityReadStore>(), Options(), _clock);
         var guest = Guid.NewGuid();
 
         var first = await handlers.Handle(new RecordPrivacyConsentCommand(guest, "v1", true, false, false, "ar", null), default);
@@ -323,7 +331,7 @@ public class ConfigurationHandlerTests
     [Fact]
     public async Task RecordConsent_WithoutGuestId_MintsOne()
     {
-        var handlers = new ConsentHandlers(Substitute.For<IPrivacyConsentRepository>(), Substitute.For<IIdentityReadStore>(), Options(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, Substitute.For<IPrivacyConsentRepository>(), Substitute.For<IIdentityReadStore>(), Options(), _clock);
 
         var result = await handlers.Handle(new RecordPrivacyConsentCommand(null, "v1", false, false, false, null, null), default);
 
@@ -336,7 +344,7 @@ public class ConfigurationHandlerTests
     public async Task GetCurrentConsent_WithoutADecision_WithholdsNonEssentialCollectionAndRequiresTheBanner()
     {
         var store = Substitute.For<IIdentityReadStore>();
-        var handlers = new ConsentHandlers(Substitute.For<IPrivacyConsentRepository>(), store, Options(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, Substitute.For<IPrivacyConsentRepository>(), store, Options(), _clock);
 
         var anonymous = (await handlers.Handle(new GetCurrentConsentQuery(null), default)).Value;
         var unknownGuest = (await handlers.Handle(new GetCurrentConsentQuery(Guid.NewGuid()), default)).Value;
@@ -359,7 +367,7 @@ public class ConfigurationHandlerTests
         var store = Substitute.For<IIdentityReadStore>();
         var guest = Guid.NewGuid();
         store.GetConsentAsync(guest, "v1", Arg.Any<CancellationToken>()).Returns(new ConsentDecisionView(guest, "v1", true, false, true, DateTime.UtcNow, "En"));
-        var handlers = new ConsentHandlers(Substitute.For<IPrivacyConsentRepository>(), store, Options(), _clock);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, Substitute.For<IPrivacyConsentRepository>(), store, Options(), _clock);
 
         var status = (await handlers.Handle(new GetCurrentConsentQuery(guest), default)).Value;
 
@@ -381,7 +389,7 @@ public class ConfigurationHandlerTests
         {
             Role.Create(RoleId.New(), "X", false, new[] { Permissions.JobsBrowse }).ToRolePermissions()
         });
-        var handlers = new InternalQueryHandlers(store, roles);
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, store, roles);
 
         (await handlers.Handle(new ListAccessLogQuery(null, null, null), default)).Value.TotalCount.Should().Be(0);
         (await handlers.Handle(new CheckPermissionQuery(accountId, Permissions.JobsBrowse), default)).Value.Allowed.Should().BeTrue();

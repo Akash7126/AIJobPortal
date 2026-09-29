@@ -2,6 +2,7 @@ using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
 using JobPlatform.BuildingBlocks.Infrastructure.Messaging;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.Reporting.Application;
+using JobPlatform.Reporting.Application.DTOs.Activity;
 using JobPlatform.Reporting.Application.Ingestion;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.Reporting.Infrastructure.Adapters;

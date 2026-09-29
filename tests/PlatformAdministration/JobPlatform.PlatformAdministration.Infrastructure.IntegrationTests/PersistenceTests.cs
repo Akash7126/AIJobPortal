@@ -166,9 +166,9 @@ public class RepositoryTests
         await using var read = database.NewContext();
         var store = new AdminReadStore(read);
         var inactive = await store.ListJobOfferingsAsync("inactive", new(1, 10));
-        inactive.Items.Should().ContainSingle().Which.Should().Match<JobPlatform.PlatformAdministration.Application.JobOfferingListItem>(
+        inactive.Items.Should().ContainSingle().Which.Should().Match<JobPlatform.PlatformAdministration.Application.DTOs.Offerings.JobOfferingListItem>(
             i => i.Title == "Job 0" && i.Moderation == "Suspended" && i.Reason == "Misleading");
-        (await store.ListJobOfferingsAsync("active", new(1, 1))).Should().Match<JobPlatform.SharedKernel.Application.Paging.PagedResult<JobPlatform.PlatformAdministration.Application.JobOfferingListItem>>(
+        (await store.ListJobOfferingsAsync("active", new(1, 1))).Should().Match<JobPlatform.SharedKernel.Application.Paging.PagedResult<JobPlatform.PlatformAdministration.Application.DTOs.Offerings.JobOfferingListItem>>(
             p => p.TotalCount == 2 && p.Items.Count == 1 && p.TotalPages == 2);
         (await store.ListJobOfferingsAsync(null, new(1, 10))).TotalCount.Should().Be(3);
     }

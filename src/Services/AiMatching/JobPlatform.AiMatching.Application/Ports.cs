@@ -1,3 +1,9 @@
+using JobPlatform.AiMatching.Application.DTOs.Configuration;
+using JobPlatform.AiMatching.Application.DTOs.Matching;
+using JobPlatform.AiMatching.Application.DTOs.Parsing;
+using JobPlatform.AiMatching.Application.DTOs.Recommendations;
+using JobPlatform.AiMatching.Application.DTOs.Semantics;
+using JobPlatform.AiMatching.Application.DTOs.Shortlists;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
 using JobPlatform.SharedKernel.Application.Paging;
@@ -13,15 +19,6 @@ public interface IProfileDirectory
 
     /// <summary>Text used to embed the profile (headline, skills, training, education, location).</summary>
     Task<string?> GetEmbeddingTextAsync(Guid profileId, CancellationToken ct = default);
-}
-
-/// <summary>A posting as BC-09 publishes it for matching, translated into this BC's language.</summary>
-public sealed record PostingSource(
-    Guid JobPostingId, Guid EmployerAccountId, string Status, bool Suspended, long Version, string Title, string Category, string? Description,
-    IReadOnlyList<string> Skills, EducationLevel? EducationLevel, IReadOnlyList<string> Training, string? Governorate, string? City, WorkArrangement Arrangement,
-    int? MinExperienceYears, int? MaxExperienceYears, decimal? SalaryMin, decimal? SalaryMax)
-{
-    public bool IsActive => !Suspended && string.Equals(Status, "active", StringComparison.OrdinalIgnoreCase);
 }
 
 public interface IPostingDirectory
@@ -95,12 +92,6 @@ public interface IMatchingConfigurationProvider
     Task InvalidateAsync(CancellationToken ct = default);
 }
 
-// ---------------------------------------------------------------------- read side
-
-public sealed record MatchedJobDto(Guid MatchScoreId, Guid JobPostingId, string Title, decimal Score, DateTime ComputedAtUtc);
-
-public sealed record MatchedCandidateDto(Guid MatchScoreId, Guid ProfileId, decimal Score, DateTime ComputedAtUtc);
-
 /// <summary>Read side (foundation section 3.5): projections over the stored scores and replicas, never aggregates.</summary>
 public interface IMatchReadStore
 {
@@ -122,29 +113,3 @@ public interface IMatchReadStore
 
     Task<MatchingConfigurationDto?> GetConfigurationAsync(CancellationToken ct = default);
 }
-
-// ---------------------------------------------------------------------- read models
-
-public sealed record WeightsDto(decimal SkillOverlap, decimal Education, decimal Training, decimal Location, decimal Experience, decimal Salary);
-
-public sealed record MatchingConfigurationDto(
-    int Version, decimal MatchThresholdPercent, WeightsDto Weights, int ShortlistSize, decimal LowConfidenceThresholdPercent, DateTime UpdatedAtUtc, string ETag);
-
-public sealed record MatchScoreDetailDto(
-    Guid? MatchScoreId, Guid JobPostingId, string? Title, decimal Score, bool MeetsThreshold, int ConfigVersion, bool Stored, DateTime ComputedAtUtc,
-    IReadOnlyList<MatchCriterionDto> Breakdown);
-
-public sealed record ShortlistEntryDto(int Rank, Guid ProfileId, decimal Score);
-
-public sealed record ShortlistDto(
-    Guid Id, Guid JobPostingId, Guid EmployerAccountId, string Status, int RequestedSize, int ConfigVersion, IReadOnlyList<ShortlistEntryDto> Items,
-    string? FailureReason, DateTime RequestedAtUtc, DateTime? ComputedAtUtc);
-
-public sealed record RecommendedJobDto(Guid JobPostingId, string Title, decimal Score, string Reason);
-
-public sealed record JobRecommendationDto(Guid Id, string Strategy, DateTime ComputedAtUtc, IReadOnlyList<RecommendedJobDto> Items);
-
-public sealed record ParsedProfileFieldDto(string Name, string Value, string Source, decimal Confidence, bool NeedsReview);
-
-public sealed record ParsedProfileDataDto(
-    Guid ParsedProfileDataId, Guid ResumeId, Guid ProfileId, string Status, decimal LowConfidenceThresholdPercent, IReadOnlyList<ParsedProfileFieldDto> Fields);

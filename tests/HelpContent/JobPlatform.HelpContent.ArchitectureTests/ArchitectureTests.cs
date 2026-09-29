@@ -6,7 +6,6 @@ using JobPlatform.SharedKernel.Domain;
 using JobPlatform.SharedKernel.IntegrationEvents.HelpContent;
 using JobPlatform.SharedKernel.Messaging;
 using JobPlatform.TestSupport;
-using Microsoft.AspNetCore.Mvc;
 
 namespace JobPlatform.HelpContent.ArchitectureTests;
 
@@ -40,6 +39,13 @@ public class ArchitectureTests
     [Fact]
     public void Api_NeverReferencesAnotherBoundedContext() =>
         ArchitectureRules.ReferencedOtherBoundedContexts("HelpContent", Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
+    public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
+        ArchitectureRules.CqrsLayoutViolations(Application).Should().BeEmpty();
+
+    [Fact]
+    public void Validators_LiveInTheValidatorsFolder() => ArchitectureRules.ValidatorsOutsideValidatorsFolder(Application).Should().BeEmpty();
 
     [Fact]
     public void Handlers_AreInternalAndSealed() => ArchitectureRules.HandlersNotInternalSealed(Application).Should().BeEmpty();

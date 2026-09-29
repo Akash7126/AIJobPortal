@@ -1,4 +1,6 @@
-using JobPlatform.AccountIdentity.Domain.Accounts;
+using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
+using JobPlatform.AccountIdentity.Application.DTOs.Administration;
+using JobPlatform.AccountIdentity.Application.DTOs.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Domain.Rbac;
 using JobPlatform.AccountIdentity.Domain.Sessions;
@@ -174,43 +176,7 @@ public sealed class ConsentOptions
     public string BannerTextAr { get; set; } = "نستخدم ملفات تعريف الارتباط الأساسية لتشغيل المنصة. وبموافقتك نستخدم أيضاً ملفات التحليلات والتفضيلات والتسويق. اطلع على سياسة الخصوصية.";
 }
 
-// ------------------------------------------------------------------ read side (projections, never aggregates)
-
-public sealed record AccountStatusChangeView(string? From, string To, Guid By, string? Reason, DateTime AtUtc);
-
-public sealed record AccountStandingView(
-    Guid AccountId,
-    ActorType ActorType,
-    string DisplayName,
-    string? Email,
-    string Mobile,
-    string Standing,
-    bool IsLocked,
-    DateTime? LockedUntilUtc,
-    bool MfaEnabled,
-    bool EmailVerified,
-    bool MustChangePassword,
-    DateTime CreatedAtUtc,
-    DateTime? ActivatedAtUtc,
-    IReadOnlyList<AccountStatusChangeView> History,
-    IReadOnlyList<string> AvailableActions,
-    string ETag = "");
-
-public sealed record AccountListItemView(Guid AccountId, ActorType ActorType, string DisplayName, string? Email, string Mobile, string Standing,
-    DateTime CreatedAtUtc);
-
 public sealed record AccountListFilter(ActorType? ActorType, string? Standing, string? Search);
-
-public sealed record PasswordPolicyView(int MinLength, bool RequireUpper, bool RequireLower, bool RequireDigit, int PolicyVersion, DateTime UpdatedAtUtc,
-    string ETag = "");
-
-public sealed record SessionTimeoutView(int IdleTimeoutMinutes, int SettingVersion, DateTime UpdatedAtUtc, string ETag = "");
-
-/// <param name="ETag">Strong tag of the role (RowVersion): send it as If-Match when changing the role. Lists have no single ETag header, so it travels in the body.</param>
-public sealed record RoleView(Guid RoleId, string Name, bool IsSystem, IReadOnlyList<string> Permissions, string ETag = "");
-
-public sealed record ApiCredentialView(Guid ApiCredentialId, string KeyId, string Status, IReadOnlyList<string> IpWhitelist, int MaxRequests,
-    int PeriodSeconds, DateTime IssuedAtUtc, DateTime ExpiresAtUtc);
 
 public sealed record ConsentDecisionView(Guid GuestId, string PolicyVersion, bool Analytics, bool Preferences, bool Marketing, DateTime DecidedAtUtc,
     string Locale);

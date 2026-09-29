@@ -1,6 +1,10 @@
 using FluentValidation.TestHelper;
+using JobPlatform.JobPosting.Application.Commands.Interested;
+using JobPlatform.JobPosting.Application.Commands.Postings;
+using JobPlatform.JobPosting.Application.Queries.Postings;
+using JobPlatform.JobPosting.Application.Validators.Interested;
+using JobPlatform.JobPosting.Application.Validators.Postings;
 using JobPlatform.JobPosting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
 
 namespace JobPlatform.JobPosting.Application.UnitTests;
 

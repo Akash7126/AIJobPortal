@@ -1,5 +1,5 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.ExternalIntegration.Application;
+using JobPlatform.ExternalIntegration.Application.Queries.ApiFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

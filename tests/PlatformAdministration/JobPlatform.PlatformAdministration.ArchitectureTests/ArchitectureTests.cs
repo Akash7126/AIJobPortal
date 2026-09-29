@@ -1,11 +1,6 @@
 using System.Reflection;
 using JobPlatform.PlatformAdministration.Application;
-using JobPlatform.PlatformAdministration.Domain;
 using JobPlatform.PlatformAdministration.Domain.Entities;
-using JobPlatform.PlatformAdministration.Domain.Offerings;
-using JobPlatform.PlatformAdministration.Domain.Reference;
-using JobPlatform.PlatformAdministration.Domain.Settings;
-using JobPlatform.PlatformAdministration.Domain.Taxonomy;
 using JobPlatform.PlatformAdministration.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Domain;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;
@@ -44,6 +39,13 @@ public class ArchitectureTests
     [Fact]
     public void Api_NeverReferencesAnotherBoundedContext() =>
         ArchitectureRules.ReferencedOtherBoundedContexts("PlatformAdministration", Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
+    public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
+        ArchitectureRules.CqrsLayoutViolations(Application).Should().BeEmpty();
+
+    [Fact]
+    public void Validators_LiveInTheValidatorsFolder() => ArchitectureRules.ValidatorsOutsideValidatorsFolder(Application).Should().BeEmpty();
 
     [Fact]
     public void Handlers_AreInternalAndSealed() => ArchitectureRules.HandlersNotInternalSealed(Application).Should().BeEmpty();

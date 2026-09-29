@@ -1,7 +1,11 @@
 using FluentValidation.TestHelper;
-using JobPlatform.CandidateSourcing.Application.Search;
-using JobPlatform.CandidateSourcing.Application.TalentPool;
-using JobPlatform.CandidateSourcing.Application.Threshold;
+using JobPlatform.CandidateSourcing.Application.Commands.TalentPool;
+using JobPlatform.CandidateSourcing.Application.Commands.Threshold;
+using JobPlatform.CandidateSourcing.Application.DTOs.Search;
+using JobPlatform.CandidateSourcing.Application.Queries.Search;
+using JobPlatform.CandidateSourcing.Application.Validators.Search;
+using JobPlatform.CandidateSourcing.Application.Validators.TalentPool;
+using JobPlatform.CandidateSourcing.Application.Validators.Threshold;
 
 namespace JobPlatform.CandidateSourcing.Application.UnitTests;
 

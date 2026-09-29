@@ -1,3 +1,8 @@
+using JobPlatform.AiMatching.Application.Commands.Matching;
+using JobPlatform.AiMatching.Application.Commands.Parsing;
+using JobPlatform.AiMatching.Application.Commands.Recommendations;
+using JobPlatform.AiMatching.Application.Commands.Semantics;
+using JobPlatform.AiMatching.Application.Commands.Shortlists;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Application.Persistence;

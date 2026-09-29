@@ -1,3 +1,5 @@
+using JobPlatform.GovernmentIntegration.Application.Commands.Connections;
+using JobPlatform.GovernmentIntegration.Application.Handlers.Connections;
 using JobPlatform.GovernmentIntegration.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 

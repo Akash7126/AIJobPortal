@@ -1,5 +1,8 @@
 using System.Reflection;
-using JobPlatform.JobSeekerProfile.Domain;
+using JobPlatform.JobSeekerProfile.Application.DTOs.Documents;
+using JobPlatform.JobSeekerProfile.Application.DTOs.Profile;
+using JobPlatform.JobSeekerProfile.Application.DTOs.Resume;
+using JobPlatform.JobSeekerProfile.Application.DTOs.ShareLink;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Messaging;
@@ -45,42 +48,6 @@ public abstract record ServiceQuery<TResponse> : IQuery<TResponse>, IAuthorizedR
 {
     public IReadOnlyCollection<ActorType> AllowedActorTypes => new[] { ActorType.System };
 }
-
-// ---------------------------------------------------------------------- read models
-
-public sealed record EducationView(Guid Id, string Degree, string Institution, DateTime? From, DateTime? To, string Source);
-public sealed record ExperienceView(Guid Id, string Company, string Role, DateTime? From, DateTime? To, string Source);
-public sealed record SkillView(Guid Id, string Name, string Kind, string Class, string Source);
-public sealed record TrainingView(Guid Id, string Name, string? Provider, DateTime? CompletedOn);
-public sealed record CertificateView(Guid Id, string Name, string? Issuer, DateTime? IssuedOn);
-public sealed record SalaryRangeView(decimal? Min, decimal? Max, string? Currency);
-public sealed record AddressView(string? Governorate, string? City, string? Street);
-public sealed record SocialLinkView(string Network, string Url);
-
-public sealed record ProfileView(
-    Guid ProfileId, Guid OwnerAccountId, string Status, string FullName, string Email, string MobileNumber, string Gender,
-    IReadOnlyList<EducationView> Education, IReadOnlyList<ExperienceView> Experience, IReadOnlyList<SkillView> Skills,
-    IReadOnlyList<TrainingView> Training, IReadOnlyList<CertificateView> Certificates, SalaryRangeView? SalaryExpectation, AddressView? Address,
-    decimal? YearsOfExperience, IReadOnlyList<SocialLinkView> SocialLinks, string? Statement, string? Bio, int CompletionPercent, byte[] RowVersion);
-
-public sealed record ProfileCompletionView(int Percent, IReadOnlyList<string> MissingSections);
-
-public sealed record SharedProfileView(
-    string FullName, IReadOnlyList<SkillView> Skills, IReadOnlyList<EducationView> Education, IReadOnlyList<ExperienceView> Experience, string? Statement,
-    string? Bio);
-
-public sealed record JobPreferenceView(
-    Guid ProfileId, IReadOnlyList<string> JobTypes, IReadOnlyList<string> Industries, IReadOnlyList<string> Locations, SalaryRangeView? SalaryExpectation,
-    IReadOnlyList<string> WorkArrangements, DateTime UpdatedAtUtc);
-
-public sealed record PrivacySettingView(Guid ProfileId, string Visibility, bool PublicSharingActive, string DeletionState, DateTime? DeactivationRequestedAtUtc);
-
-public sealed record ShareLinkView(Guid ShareLinkId, Guid ProfileId, string Token, string Url, bool IsActive, DateTime CreatedAtUtc);
-
-public sealed record DocumentView(Guid DocumentId, string OwnerType, Guid OwnerId, string FileName, long SizeBytes, string ContentType, string DocumentType,
-    DateTime UploadedAtUtc);
-
-public sealed record ResumeView(Guid ResumeId, Guid ProfileId, string FileName, long SizeBytes, string Format, DateTime UploadedAtUtc);
 
 // ---------------------------------------------------------------------- ports
 

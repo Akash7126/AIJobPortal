@@ -1,7 +1,10 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.JobSeekerProfile.Application.Documents;
-using JobPlatform.JobSeekerProfile.Application.Resume;
+using JobPlatform.JobSeekerProfile.Application.Commands.Documents;
+using JobPlatform.JobSeekerProfile.Application.Commands.Resume;
+using JobPlatform.JobSeekerProfile.Application.DTOs.Documents;
+using JobPlatform.JobSeekerProfile.Application.Queries.Documents;
+using JobPlatform.JobSeekerProfile.Application.Queries.Resume;
 using JobPlatform.JobSeekerProfile.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

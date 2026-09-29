@@ -1,5 +1,8 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
-using JobPlatform.AccountIdentity.Application.ApiCredentials;
+using JobPlatform.AccountIdentity.Application.Commands.ApiCredentials;
+using JobPlatform.AccountIdentity.Application.DTOs.ApiCredentials;
+using JobPlatform.AccountIdentity.Application.Handlers.ApiCredentials;
+using JobPlatform.AccountIdentity.Application.Queries.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Common;
@@ -10,6 +13,7 @@ using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;
 using JobPlatform.SharedKernel.Security;
+using JobPlatform.TestSupport;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
 
@@ -240,12 +244,12 @@ public class ApiCredentialHandlerTests
         store.GetActiveApiCredentialForPartnerAsync(_partner.Id.Value, Arg.Any<CancellationToken>()).Returns(view);
         var controls = new ApiCredentialControlsDto(id, _partner.Id.Value, "jp_key", "Active", Array.Empty<string>(), 10, 60, DateTime.UtcNow);
         store.GetApiCredentialControlsAsync(id, Arg.Any<CancellationToken>()).Returns(controls);
-        var handlers = new ApiCredentialQueryHandlers(store, Partner());
+        var handlers = new RequestHandlerSet(ApplicationAssembly.Assembly, store, Partner());
 
         (await handlers.Handle(new GetCurrentApiCredentialQuery(), default)).Value.Should().Be(view);
         (await handlers.Handle(new GetApiCredentialControlsQuery(id), default)).Value.Should().Be(controls);
         AppKit.ErrorOf(await handlers.Handle(new GetApiCredentialControlsQuery(Guid.NewGuid()), default)).Type.Should().Be(ErrorType.NotFound);
-        AppKit.ErrorOf(await new ApiCredentialQueryHandlers(store, AppKit.User(Guid.NewGuid(), ActorType.ExternalJobSite)).Handle(new GetCurrentApiCredentialQuery(), default))
+        AppKit.ErrorOf(await new RequestHandlerSet(ApplicationAssembly.Assembly, store, AppKit.User(Guid.NewGuid(), ActorType.ExternalJobSite)).Handle(new GetCurrentApiCredentialQuery(), default))
             .Type.Should().Be(ErrorType.NotFound);
     }
 

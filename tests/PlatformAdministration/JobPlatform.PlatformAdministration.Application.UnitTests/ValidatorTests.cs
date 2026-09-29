@@ -1,11 +1,20 @@
 using FluentValidation.TestHelper;
-using JobPlatform.PlatformAdministration.Application;
-using JobPlatform.PlatformAdministration.Application.Entities;
-using JobPlatform.PlatformAdministration.Application.Offerings;
-using JobPlatform.PlatformAdministration.Application.Reference;
-using JobPlatform.PlatformAdministration.Application.Settings;
-using JobPlatform.PlatformAdministration.Application.Taxonomy;
-using JobPlatform.PlatformAdministration.Application.Users;
+using JobPlatform.PlatformAdministration.Application.Commands.Entities;
+using JobPlatform.PlatformAdministration.Application.Commands.Offerings;
+using JobPlatform.PlatformAdministration.Application.Commands.Reference;
+using JobPlatform.PlatformAdministration.Application.Commands.Settings;
+using JobPlatform.PlatformAdministration.Application.Commands.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.DTOs.Common;
+using JobPlatform.PlatformAdministration.Application.DTOs.Reference;
+using JobPlatform.PlatformAdministration.Application.DTOs.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.Queries.Offerings;
+using JobPlatform.PlatformAdministration.Application.Queries.Users;
+using JobPlatform.PlatformAdministration.Application.Validators.Entities;
+using JobPlatform.PlatformAdministration.Application.Validators.Offerings;
+using JobPlatform.PlatformAdministration.Application.Validators.Reference;
+using JobPlatform.PlatformAdministration.Application.Validators.Settings;
+using JobPlatform.PlatformAdministration.Application.Validators.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.Validators.Users;
 using JobPlatform.PlatformAdministration.Domain.Entities;
 
 namespace JobPlatform.PlatformAdministration.Application.UnitTests;

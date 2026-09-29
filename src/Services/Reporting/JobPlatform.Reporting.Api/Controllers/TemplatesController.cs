@@ -1,5 +1,7 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
-using JobPlatform.Reporting.Application;
+using JobPlatform.Reporting.Application.Commands.ReportLibrary;
+using JobPlatform.Reporting.Application.DTOs.ReportLibrary;
+using JobPlatform.Reporting.Application.Queries.ReportLibrary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

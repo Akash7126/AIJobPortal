@@ -1,6 +1,8 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
 using JobPlatform.GovernmentIntegration.Application;
+using JobPlatform.GovernmentIntegration.Application.Commands.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.Queries.EmployerVerifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

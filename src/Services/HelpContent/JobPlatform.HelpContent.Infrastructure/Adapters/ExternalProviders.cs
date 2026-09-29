@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.HelpContent.Application;
+using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
 using JobPlatform.SharedKernel.ApiContracts.EmployerOnboarding;
 using JobPlatform.SharedKernel.Application.Paging;
 
@@ -64,7 +65,7 @@ internal sealed record OpenPostingTitleDto(string? Ar, string? En);
 
 internal sealed record OpenPostingLocationDto(string? Governorate, string? City);
 
-/// <summary>Wire shape of BC-09's GET /internal/v1/employers/{id}/open-postings (JobPlatform.JobPosting.Application.JobPostingSummaryView).</summary>
+/// <summary>Wire shape of BC-09's GET /internal/v1/employers/{id}/open-postings (JobPlatform.JobPosting.Application.DTOs.Common.JobPostingSummaryView).</summary>
 internal sealed record OpenPostingDto(Guid JobPostingId, OpenPostingTitleDto Title, OpenPostingLocationDto? Location, DateTime DeadlineUtc);
 
 /// <summary>Calls BC-09's open-postings internal API; degrades to an empty list with Degraded=true rather than failing the whole company

@@ -1,7 +1,7 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.JobPosting.Application;
+using JobPlatform.JobPosting.Application.Queries.InternalApi;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

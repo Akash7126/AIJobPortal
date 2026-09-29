@@ -37,6 +37,13 @@ public class ArchitectureTests
         ArchitectureRules.ReferencedOtherBoundedContexts(Bc, Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
+    public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
+        ArchitectureRules.CqrsLayoutViolations(Application).Should().BeEmpty();
+
+    [Fact]
+    public void Validators_LiveInTheValidatorsFolder() => ArchitectureRules.ValidatorsOutsideValidatorsFolder(Application).Should().BeEmpty();
+
+    [Fact]
     public void RequestHandlers_AreInternalSealed() => ArchitectureRules.HandlersNotInternalSealed(Application).Should().BeEmpty();
 
     [Fact]

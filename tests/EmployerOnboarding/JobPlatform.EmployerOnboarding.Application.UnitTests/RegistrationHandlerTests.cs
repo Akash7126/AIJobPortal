@@ -1,3 +1,7 @@
+using JobPlatform.EmployerOnboarding.Application.Commands.Registration;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
+using JobPlatform.EmployerOnboarding.Application.Handlers.Registration;
+using JobPlatform.EmployerOnboarding.Application.Queries.Registration;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;

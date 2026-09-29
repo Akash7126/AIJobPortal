@@ -10,5 +10,6 @@
     <ProjectReference Include="../../../src/Services/AccountIdentity/JobPlatform.AccountIdentity.Domain/JobPlatform.AccountIdentity.Domain.csproj" />
     <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
     <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../../BuildingBlocks/JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
   </ItemGroup>
 </Project>

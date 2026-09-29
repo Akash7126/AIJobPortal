@@ -9,6 +9,7 @@ using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.TestSupport;
 using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
 
@@ -119,6 +120,19 @@ public class ArchitectureTests
 
         roots.Select(r => r.Name).Should().BeEquivalentTo("Account", "ApiCredential", "PasswordPolicy", "Role", "SessionTimeoutSetting", "PrivacyConsent");
         roots.Should().OnlyContain(r => r.IsSealed);
+    }
+
+    [Fact]
+    public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
+        ArchitectureRules.CqrsLayoutViolations(Application).Should().BeEmpty();
+
+    [Fact]
+    public void Validators_LiveInTheValidatorsFolder()
+    {
+        var validatorsNs = Application.GetName().Name + ".Validators";
+        Application.GetTypes().Where(t => t.IsClass && InheritsFromGeneric(t, typeof(FluentValidation.AbstractValidator<>)))
+            .Where(t => t.Namespace is null || !(t.Namespace == validatorsNs || t.Namespace.StartsWith(validatorsNs + ".", StringComparison.Ordinal)))
+            .Select(t => t.FullName).Should().BeEmpty();
     }
 
     [Fact]

@@ -1,3 +1,7 @@
+using JobPlatform.HelpContent.Application.Commands.CompanyPage;
+using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
+using JobPlatform.HelpContent.Application.Handlers.CompanyPage;
+using JobPlatform.HelpContent.Application.Queries.CompanyPage;
 using JobPlatform.SharedKernel.Common.Enums;
 
 namespace JobPlatform.HelpContent.Application.UnitTests;

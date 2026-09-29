@@ -1,5 +1,8 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
-using JobPlatform.AccountIdentity.Application.Accounts;
+using JobPlatform.AccountIdentity.Application.Commands.Accounts;
+using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
+using JobPlatform.AccountIdentity.Application.Handlers.Accounts;
+using JobPlatform.AccountIdentity.Application.Services.Accounts;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;

@@ -1,6 +1,7 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.EmployerOnboarding.Application;
+using JobPlatform.EmployerOnboarding.Application.Commands.Registration;
+using JobPlatform.EmployerOnboarding.Application.Queries.Registration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

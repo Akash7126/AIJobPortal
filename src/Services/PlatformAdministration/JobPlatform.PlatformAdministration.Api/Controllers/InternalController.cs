@@ -1,9 +1,8 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.PlatformAdministration.Application;
-using JobPlatform.PlatformAdministration.Application.Reference;
-using JobPlatform.PlatformAdministration.Application.Settings;
-using JobPlatform.PlatformAdministration.Application.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.Queries.Reference;
+using JobPlatform.PlatformAdministration.Application.Queries.Settings;
+using JobPlatform.PlatformAdministration.Application.Queries.Taxonomy;
 using JobPlatform.SharedKernel.ApiContracts.PlatformAdministration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

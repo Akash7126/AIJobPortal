@@ -1,6 +1,4 @@
 using JobPlatform.EmployerOnboarding.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
 using JobPlatform.SharedKernel.Messaging;
 
@@ -34,69 +32,5 @@ public sealed class MarkEmployerVerifiedHandler : IIntegrationEventHandler<Emplo
 
         standing.MarkVerified(integrationEvent.MessageId, integrationEvent.AggregateVersion, _clock.GetUtcNow().UtcDateTime);
         await _cache.InvalidateAsync(integrationEvent.EmployerAccountId, ct);
-    }
-}
-
-// ---------------------------------------------------------------------- internal queries (foundation section 9.5: /internal/v1)
-
-public sealed record GetEmployerStandingQuery(Guid EmployerAccountId) : ServiceQuery<EmployerStandingView>;
-
-internal sealed class GetEmployerStandingHandler : IQueryHandler<GetEmployerStandingQuery, EmployerStandingView>
-{
-    private readonly IEmployerCache _cache;
-    private readonly IEmployerReadStore _store;
-
-    public GetEmployerStandingHandler(IEmployerCache cache, IEmployerReadStore store)
-    {
-        _cache = cache;
-        _store = store;
-    }
-
-    public async Task<Result<EmployerStandingView>> Handle(GetEmployerStandingQuery request, CancellationToken ct)
-    {
-        if (await _cache.GetStandingAsync(request.EmployerAccountId, ct) is { } cached)
-        {
-            return cached;
-        }
-
-        var view = await _store.GetStandingAsync(request.EmployerAccountId, ct);
-        if (view is null)
-        {
-            return Error.NotFound(Domain.Common.ErrorCodes.NotFound, "The employer was not found.");
-        }
-
-        await _cache.SetStandingAsync(request.EmployerAccountId, view, ct);
-        return view;
-    }
-}
-
-public sealed record GetCompanyPublicInfoQuery(Guid EmployerAccountId) : ServiceQuery<CompanyPublicInfoView>;
-
-internal sealed class GetCompanyPublicInfoHandler : IQueryHandler<GetCompanyPublicInfoQuery, CompanyPublicInfoView>
-{
-    private readonly IEmployerCache _cache;
-    private readonly IEmployerReadStore _store;
-
-    public GetCompanyPublicInfoHandler(IEmployerCache cache, IEmployerReadStore store)
-    {
-        _cache = cache;
-        _store = store;
-    }
-
-    public async Task<Result<CompanyPublicInfoView>> Handle(GetCompanyPublicInfoQuery request, CancellationToken ct)
-    {
-        if (await _cache.GetCompanyAsync(request.EmployerAccountId, ct) is { } cached)
-        {
-            return cached;
-        }
-
-        var view = await _store.GetCompanyPublicInfoAsync(request.EmployerAccountId, ct);
-        if (view is null)
-        {
-            return Error.NotFound(Domain.Common.ErrorCodes.NotFound, "The employer was not found.");
-        }
-
-        await _cache.SetCompanyAsync(request.EmployerAccountId, view, ct);
-        return view;
     }
 }

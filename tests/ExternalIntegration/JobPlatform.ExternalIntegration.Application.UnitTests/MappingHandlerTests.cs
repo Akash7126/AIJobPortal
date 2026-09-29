@@ -1,3 +1,7 @@
+using JobPlatform.ExternalIntegration.Application.Commands.Mapping;
+using JobPlatform.ExternalIntegration.Application.DTOs.Mapping;
+using JobPlatform.ExternalIntegration.Application.Handlers.Mapping;
+using JobPlatform.ExternalIntegration.Application.Queries.Mapping;
 using JobPlatform.ExternalIntegration.Domain;
 
 namespace JobPlatform.ExternalIntegration.Application.UnitTests;

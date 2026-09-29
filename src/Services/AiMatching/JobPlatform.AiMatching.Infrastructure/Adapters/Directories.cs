@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.DTOs.Semantics;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;

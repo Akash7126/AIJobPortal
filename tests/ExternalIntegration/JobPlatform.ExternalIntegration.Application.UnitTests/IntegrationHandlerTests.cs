@@ -1,5 +1,7 @@
+using JobPlatform.ExternalIntegration.Application.Commands.Integrations;
+using JobPlatform.ExternalIntegration.Application.Handlers.Integrations;
+using JobPlatform.ExternalIntegration.Application.Services.JobDataFlows;
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.ExternalIntegration.Application.UnitTests;
 

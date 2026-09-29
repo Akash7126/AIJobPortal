@@ -1,4 +1,6 @@
 using JobPlatform.JobPosting.Application;
+using JobPlatform.JobPosting.Application.DTOs.Common;
+using JobPlatform.JobPosting.Application.DTOs.Postings;
 using JobPlatform.JobPosting.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;

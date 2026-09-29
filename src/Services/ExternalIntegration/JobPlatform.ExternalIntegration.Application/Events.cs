@@ -1,5 +1,4 @@
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;

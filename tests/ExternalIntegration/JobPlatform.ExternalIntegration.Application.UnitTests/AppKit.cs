@@ -1,4 +1,5 @@
-using JobPlatform.ExternalIntegration.Application;
+using JobPlatform.ExternalIntegration.Application.DTOs.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.DTOs.Integrations;
 using JobPlatform.ExternalIntegration.Domain;
 using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Common.Enums;

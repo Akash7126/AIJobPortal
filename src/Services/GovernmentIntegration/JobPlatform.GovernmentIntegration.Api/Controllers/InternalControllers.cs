@@ -1,6 +1,9 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.GovernmentIntegration.Application;
+using JobPlatform.GovernmentIntegration.Application.Commands.Verifications;
+using JobPlatform.GovernmentIntegration.Application.Queries.Connections;
+using JobPlatform.GovernmentIntegration.Application.Queries.Migration;
+using JobPlatform.GovernmentIntegration.Application.Queries.Verifications;
 using JobPlatform.GovernmentIntegration.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

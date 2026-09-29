@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.PlatformAdministration.Application;
+using JobPlatform.PlatformAdministration.Application.DTOs.Users;
 using JobPlatform.PlatformAdministration.Domain.Common;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;

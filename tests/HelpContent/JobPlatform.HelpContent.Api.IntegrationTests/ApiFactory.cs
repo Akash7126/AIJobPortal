@@ -1,5 +1,5 @@
 using JobPlatform.HelpContent.Application;
-using JobPlatform.HelpContent.Infrastructure;
+using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
 using JobPlatform.HelpContent.Infrastructure.Persistence;
 using JobPlatform.TestSupport;
 using Microsoft.Extensions.DependencyInjection;

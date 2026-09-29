@@ -1,9 +1,12 @@
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
-using JobPlatform.JobSeekerProfile.Application;
-using JobPlatform.JobSeekerProfile.Application.Preferences;
-using JobPlatform.JobSeekerProfile.Application.Privacy;
-using JobPlatform.JobSeekerProfile.Application.Profile;
+using JobPlatform.JobSeekerProfile.Application.Commands.Preferences;
+using JobPlatform.JobSeekerProfile.Application.Commands.Privacy;
+using JobPlatform.JobSeekerProfile.Application.Commands.Profile;
+using JobPlatform.JobSeekerProfile.Application.DTOs.Profile;
+using JobPlatform.JobSeekerProfile.Application.Queries.Preferences;
+using JobPlatform.JobSeekerProfile.Application.Queries.Privacy;
+using JobPlatform.JobSeekerProfile.Application.Queries.Profile;
 using JobPlatform.JobSeekerProfile.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

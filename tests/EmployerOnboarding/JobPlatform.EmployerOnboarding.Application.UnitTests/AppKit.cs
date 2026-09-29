@@ -1,4 +1,6 @@
-using JobPlatform.EmployerOnboarding.Application;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Media;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
+using JobPlatform.EmployerOnboarding.Application.DTOs.Standing;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Ports;

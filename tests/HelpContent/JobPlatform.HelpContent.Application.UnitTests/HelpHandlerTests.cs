@@ -1,3 +1,6 @@
+using JobPlatform.HelpContent.Application.Commands.Help;
+using JobPlatform.HelpContent.Application.Handlers.Help;
+using JobPlatform.HelpContent.Application.Queries.Help;
 using JobPlatform.HelpContent.Domain;
 
 namespace JobPlatform.HelpContent.Application.UnitTests;

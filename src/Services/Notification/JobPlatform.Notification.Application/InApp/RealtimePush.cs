@@ -1,3 +1,4 @@
+using JobPlatform.Notification.Application.DTOs.InApp;
 using JobPlatform.Notification.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 

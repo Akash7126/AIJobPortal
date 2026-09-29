@@ -1,5 +1,14 @@
 using System.Reflection;
 using JobPlatform.Reporting.Application.Ingestion;
+using JobPlatform.Reporting.Application.Services.Activity;
+using JobPlatform.Reporting.Application.Services.Employment;
+using JobPlatform.Reporting.Application.Services.Exports;
+using JobPlatform.Reporting.Application.Services.Ingestion;
+using JobPlatform.Reporting.Application.Services.LaborMarket;
+using JobPlatform.Reporting.Application.Services.Performance;
+using JobPlatform.Reporting.Application.Services.ReportLibrary;
+using JobPlatform.Reporting.Application.Services.ReportRuns;
+using JobPlatform.Reporting.Application.Services.Schedules;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.Application.Abstractions;
 using JobPlatform.SharedKernel.Common.Enums;
@@ -41,7 +50,15 @@ public static class ApplicationAssembly
             }
         }
 
-        return services;
+services.AddScoped<ActivityService>();
+        services.AddScoped<EmploymentService>();
+        services.AddScoped<ExportService>();
+        services.AddScoped<LaborMarketService>();
+        services.AddScoped<PerformanceService>();
+        services.AddScoped<ReportLibraryService>();
+        services.AddScoped<ReportRunService>();
+        services.AddScoped<ScheduleService>();
+                return services;
     }
 }
 

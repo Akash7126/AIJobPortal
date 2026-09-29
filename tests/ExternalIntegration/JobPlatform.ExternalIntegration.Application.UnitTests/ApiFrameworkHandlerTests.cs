@@ -1,3 +1,5 @@
+using JobPlatform.ExternalIntegration.Application.Commands.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.Handlers.ApiFramework;
 using JobPlatform.ExternalIntegration.Domain;
 using JobPlatform.SharedKernel.Common.Enums;
 
