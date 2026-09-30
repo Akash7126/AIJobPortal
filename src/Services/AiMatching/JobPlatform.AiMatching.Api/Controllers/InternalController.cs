@@ -13,18 +13,21 @@ public sealed class InternalController : ApiControllerBase
     [HttpGet("match-ranking")]
     public Task<IActionResult> Ranking([FromQuery] Guid profileId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetJobMatchRankingForProfileQuery(profileId, page, pageSize), ct);
+        var query = new GetJobMatchRankingForProfileQuery(profileId, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("match-scores")]
     public Task<IActionResult> Scores([FromQuery] Guid jobPostingId, [FromQuery] decimal? min, [FromQuery] int page = 1, [FromQuery] int pageSize = 50, CancellationToken ct = default)
     {
-        return Send(new ListMatchScoresQuery(jobPostingId, min, page, pageSize), ct);
+        var query = new ListMatchScoresQuery(jobPostingId, min, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("resume-parsed-data/{id:guid}")]
     public Task<IActionResult> ResumeParsedData(Guid id, CancellationToken ct)
     {
-        return Send(new GetResumeParsedDataQuery(id), ct);
+        var query = new GetResumeParsedDataQuery(id);
+        return Send(query, ct);
     }
 }

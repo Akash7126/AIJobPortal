@@ -15,12 +15,14 @@ public sealed class AccessRulesController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListAccessRulesQuery(), ct);
+        var query = new ListAccessRulesQuery();
+        return Send(query, ct);
     }
 
     [HttpPut]
     public Task<IActionResult> Configure([FromBody] RuleBody body, CancellationToken ct)
     {
-        return Send(new ConfigureReportAccessCommand(body.Role, body.Categories), ct);
+        var command = new ConfigureReportAccessCommand(body.Role, body.Categories);
+        return Send(command, ct);
     }
 }

@@ -26,6 +26,7 @@ internal sealed class GetJobRecommendationsHandler(IKnownProfileRepository profi
             return latest;
         }
 
-        return await sender.Send(new ComputeJobRecommendationCommand(profile.Id, user.UserId!.Value), ct);
+        var command = new ComputeJobRecommendationCommand(profile.Id, user.UserId!.Value);
+        return await sender.Send(command, ct);
     }
 }

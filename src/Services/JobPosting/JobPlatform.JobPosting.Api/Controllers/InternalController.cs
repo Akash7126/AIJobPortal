@@ -18,7 +18,8 @@ public sealed class InternalController : ApiControllerBase
     [HttpGet("postings/{id:guid}")]
     public async Task<IActionResult> GetPostingForMatching(Guid id, CancellationToken ct)
     {
-        var result = await Sender.Send(new GetPostingForMatchingQuery(id), ct);
+        var query = new GetPostingForMatchingQuery(id);
+        var result = await Sender.Send(query, ct);
         if (result.IsFailure)
         {
             return result.Error!.ToActionResult(HttpContext);
@@ -38,14 +39,16 @@ public sealed class InternalController : ApiControllerBase
     [HttpGet("employers/{id:guid}/open-postings")]
     public Task<IActionResult> ListOpenPostings(Guid id, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListOpenPostingsByEmployerQuery(id, page, pageSize), ct);
+        var query = new ListOpenPostingsByEmployerQuery(id, page, pageSize);
+        return Send(query, ct);
     }
 
     /// <summary>US-3.1.4-07 (INV-04): which of these reference codes (skills/jobs/trainings) does BC-09 still use?</summary>
     [HttpPost("reference-usage/check")]
     public async Task<IActionResult> CheckReferenceUsage([FromBody] ReferenceUsageCheckRequest body, CancellationToken ct)
     {
-        var result = await Sender.Send(new CheckReferenceUsageQuery(body.Type, body.Codes), ct);
+        var query = new CheckReferenceUsageQuery(body.Type, body.Codes);
+        var result = await Sender.Send(query, ct);
         return result.ToActionResult(HttpContext, inUse => Ok(new ReferenceUsageCheckResponse(inUse.ToArray())));
     }
 }

@@ -71,7 +71,8 @@ public sealed class ReportingJobs
     /// <summary>Generates the previous month's labor-market report when it does not exist yet (idempotent per period). Returns 1 when a report was created.</summary>
     public Task<int> GenerateLaborMarketReportAsync(CancellationToken ct) => LockedAsync("labor-market", async sp =>
     {
-        var result = await sp.GetRequiredService<ISender>().Send(new RunScheduledLaborMarketReportCommand(), ct);
+        var command = new RunScheduledLaborMarketReportCommand();
+        var result = await sp.GetRequiredService<ISender>().Send(command, ct);
         return result.IsSuccess && !result.Value.Existing ? 1 : 0;
     }, ct);
 

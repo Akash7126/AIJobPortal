@@ -15,14 +15,16 @@ public sealed class RegistrationController : EmployerControllerBase
     [HttpPut("registration/level2")]
     public Task<IActionResult> SubmitLevel2([FromBody] SubmitLevel2Request body, CancellationToken ct)
     {
-        return Send(new SubmitEmployerLevel2Command(body.CompanyName, body.CompanyId, body.RegistrationNumber, body.Website, body.Industry, body.Size,
-            body.Governorate, body.City, body.Street, body.Description), ct);
+        var command = new SubmitEmployerLevel2Command(body.CompanyName, body.CompanyId, body.RegistrationNumber, body.Website, body.Industry, body.Size,
+            body.Governorate, body.City, body.Street, body.Description);
+        return Send(command, ct);
     }
 
     [HttpGet("registration")]
     public Task<IActionResult> Get(CancellationToken ct)
     {
-        return Send(new GetEmployerRegistrationQuery(), value =>
+        var query = new GetEmployerRegistrationQuery();
+        return Send(query, value =>
         {
             SetETag(value.RowVersion);
             return Ok(value);

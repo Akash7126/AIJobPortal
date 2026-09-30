@@ -15,42 +15,49 @@ public sealed class SystemPerformanceController : ApiControllerBase
     [HttpGet("performance")]
     public Task<IActionResult> Performance([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetSystemPerformanceQuery(from, to), ct);
+        var query = new GetSystemPerformanceQuery(from, to);
+        return Send(query, ct);
     }
 
     [HttpGet("usage")]
     public Task<IActionResult> Usage([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetUsagePatternsQuery(from, to), ct);
+        var query = new GetUsagePatternsQuery(from, to);
+        return Send(query, ct);
     }
 
     [HttpGet("dashboard")]
     public Task<IActionResult> Dashboard([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetPerformanceDashboardQuery(from, to), ct);
+        var query = new GetPerformanceDashboardQuery(from, to);
+        return Send(query, ct);
     }
 
     [HttpGet("history")]
     public Task<IActionResult> History([FromQuery] string metric, [FromQuery] DateOnly? from, [FromQuery] DateOnly? to, [FromQuery] string? granularity, CancellationToken ct)
     {
-        return Send(new GetMetricHistoryQuery(metric, from, to, granularity), ct);
+        var query = new GetMetricHistoryQuery(metric, from, to, granularity);
+        return Send(query, ct);
     }
 
     [HttpGet("alert-rules")]
     public Task<IActionResult> AlertRules(CancellationToken ct)
     {
-        return Send(new ListAlertRulesQuery(), ct);
+        var query = new ListAlertRulesQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("alert-rules")]
     public Task<IActionResult> ConfigureAlertRule([FromBody] AlertRuleBody body, CancellationToken ct)
     {
-        return Send(new ConfigurePerformanceAlertRuleCommand(body.Id, body.Metric, body.Comparator, body.Threshold, body.WindowMinutes, body.Severity, body.Enabled), ct);
+        var command = new ConfigurePerformanceAlertRuleCommand(body.Id, body.Metric, body.Comparator, body.Threshold, body.WindowMinutes, body.Severity, body.Enabled);
+        return Send(command, ct);
     }
 
     [HttpGet("alerts")]
     public Task<IActionResult> Alerts([FromQuery] int take = 50, CancellationToken ct = default)
     {
-        return Send(new ListAlertsQuery(take), ct);
+        var query = new ListAlertsQuery(take);
+        return Send(query, ct);
     }
 }

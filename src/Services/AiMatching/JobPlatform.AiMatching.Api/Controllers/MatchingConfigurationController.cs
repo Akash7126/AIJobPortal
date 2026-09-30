@@ -18,7 +18,8 @@ public sealed class MatchingConfigurationController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> Get(CancellationToken ct)
     {
-        return Send(new GetMatchingConfigurationQuery(), dto =>
+        var query = new GetMatchingConfigurationQuery();
+        return Send(query, dto =>
         {
             Response.Headers.ETag = dto.ETag;
             return Ok(dto);
@@ -28,12 +29,14 @@ public sealed class MatchingConfigurationController : ApiControllerBase
     [HttpPut("threshold")]
     public Task<IActionResult> Threshold([FromBody] ThresholdRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ConfigureMatchThresholdCommand(body.ThresholdPercent, IfMatch), ct);
+        var command = new ConfigureMatchThresholdCommand(body.ThresholdPercent, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("weights")]
     public Task<IActionResult> Weights([FromBody] WeightsRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ConfigureMatchingParameterCommand(body.SkillOverlap, body.Education, body.Training, body.Location, body.Experience, body.Salary, IfMatch), ct);
+        var command = new ConfigureMatchingParameterCommand(body.SkillOverlap, body.Education, body.Training, body.Location, body.Experience, body.Salary, IfMatch);
+        return SendNoContent(command, ct);
     }
 }

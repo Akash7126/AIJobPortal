@@ -9,12 +9,14 @@ public sealed class RecommendationsController : CandidateSourcingControllerBase
     [HttpGet("jobs/{jobPostingId:guid}/candidate-recommendations")]
     public Task<IActionResult> Recommendations(Guid jobPostingId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetCandidateRecommendationsQuery(jobPostingId, page, pageSize), ct);
+        var query = new GetCandidateRecommendationsQuery(jobPostingId, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("jobs/{jobPostingId:guid}/candidate-ranking")]
     public Task<IActionResult> Ranking(Guid jobPostingId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetCandidateRankingQuery(jobPostingId, page, pageSize), ct);
+        var query = new GetCandidateRankingQuery(jobPostingId, page, pageSize);
+        return Send(query, ct);
     }
 }

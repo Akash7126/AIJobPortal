@@ -13,7 +13,8 @@ public sealed class ConsentsController : ApiControllerBase
     [AllowAnonymous]
     public Task<IActionResult> Record(RecordConsentRequest body, CancellationToken ct)
     {
-        return Send(new RecordPrivacyConsentCommand(body.GuestId, body.PolicyVersion, body.Analytics, body.Preferences, body.Marketing, body.Locale, IdempotencyKey),
+        var command = new RecordPrivacyConsentCommand(body.GuestId, body.PolicyVersion, body.Analytics, body.Preferences, body.Marketing, body.Locale, IdempotencyKey);
+        return Send(command,
             dto => Ok(dto), ct);
     }
 
@@ -21,6 +22,7 @@ public sealed class ConsentsController : ApiControllerBase
     [AllowAnonymous]
     public Task<IActionResult> Current([FromQuery] Guid? guestId, CancellationToken ct)
     {
-        return Send(new GetCurrentConsentQuery(guestId), dto => Ok(dto), ct);
+        var query = new GetCurrentConsentQuery(guestId);
+        return Send(query, dto => Ok(dto), ct);
     }
 }

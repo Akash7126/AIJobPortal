@@ -16,7 +16,8 @@ public sealed class CompanyPageController : ApiControllerBase
     [HttpGet("{employerAccountId:guid}/page")]
     public Task<IActionResult> Get(Guid employerAccountId, CancellationToken ct)
     {
-        return Send(new GetCompanyProfilePageQuery(employerAccountId), ct);
+        var query = new GetCompanyProfilePageQuery(employerAccountId);
+        return Send(query, ct);
     }
 
     public sealed record EditPageRequest(string? BackgroundAr, string? BackgroundEn, IReadOnlyList<string> Highlights);
@@ -26,6 +27,7 @@ public sealed class CompanyPageController : ApiControllerBase
     [ForbiddenCode("E-HCCP-FORBIDDEN")]
     public Task<IActionResult> EditMine([FromBody] EditPageRequest body, CancellationToken ct)
     {
-        return SendNoContent(new EditCompanyPageCommand(body.BackgroundAr, body.BackgroundEn, body.Highlights), ct);
+        var command = new EditCompanyPageCommand(body.BackgroundAr, body.BackgroundEn, body.Highlights);
+        return SendNoContent(command, ct);
     }
 }

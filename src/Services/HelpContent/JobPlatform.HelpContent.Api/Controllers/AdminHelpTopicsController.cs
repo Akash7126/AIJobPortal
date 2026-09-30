@@ -17,19 +17,22 @@ public sealed class AdminHelpTopicsController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListHelpTopicsQuery(), ct);
+        var query = new ListHelpTopicsQuery();
+        return Send(query, ct);
     }
 
     [HttpPost]
     public Task<IActionResult> Create([FromBody] HelpTopicRequest body, CancellationToken ct)
     {
-        return Send(new CreateHelpTopicCommand(body.NameAr, body.NameEn), value => Created($"/api/v1/admin/help-topics/{value.TopicId}", value), ct);
+        var command = new CreateHelpTopicCommand(body.NameAr, body.NameEn);
+        return Send(command, value => Created($"/api/v1/admin/help-topics/{value.TopicId}", value), ct);
     }
 
     /// <summary>Soft removal (handover section 3.4, INV-11): assigned articles fall back to "uncategorized", never a broken reference.</summary>
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Remove(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new RemoveHelpTopicCommand(id), ct);
+        var command = new RemoveHelpTopicCommand(id);
+        return SendNoContent(command, ct);
     }
 }

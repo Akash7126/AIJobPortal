@@ -16,7 +16,8 @@ public sealed class ReportExportsController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> RequestExport([FromBody] ExportRequest body, CancellationToken ct)
     {
-        return Send(new RequestAdministratorReportExportCommand(body.ReportType, body.Format, body.Parameters), result =>
+        var command = new RequestAdministratorReportExportCommand(body.ReportType, body.Format, body.Parameters);
+        return Send(command, result =>
         {
             return result.Reused ? Ok(result.Job) : Accepted($"/api/v1/admin/reports/exports/{result.Job.Id}", result.Job);
         }, ct);
@@ -25,6 +26,7 @@ public sealed class ReportExportsController : ApiControllerBase
     [HttpGet("{id:guid}")]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetExportJobQuery(id), ct);
+        var query = new GetExportJobQuery(id);
+        return Send(query, ct);
     }
 }

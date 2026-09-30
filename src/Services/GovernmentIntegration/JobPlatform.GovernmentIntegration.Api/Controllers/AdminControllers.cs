@@ -21,13 +21,15 @@ public sealed class GovernmentConnectionsController : ApiControllerBase
     [HttpPut("{source}")]
     public Task<IActionResult> Configure(SourceSystem source, [FromBody] ConfigureRequest body, CancellationToken ct)
     {
-        return Send(new ConfigureGovernmentSourceConnectionCommand(source, body.Endpoint, body.AuthMethod, body.CredentialRef, body.Enabled), _ => NoContent(), ct);
+        var command = new ConfigureGovernmentSourceConnectionCommand(source, body.Endpoint, body.AuthMethod, body.CredentialRef, body.Enabled);
+        return Send(command, _ => NoContent(), ct);
     }
 
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListGovernmentSourceConnectionsQuery(), ct);
+        var query = new ListGovernmentSourceConnectionsQuery();
+        return Send(query, ct);
     }
 }
 
@@ -44,19 +46,22 @@ public sealed class MigrationsController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> Start([FromBody] StartRequest body, CancellationToken ct)
     {
-        return Send(new StartDataMigrationCommand(body.Phases, body.DryRun), value => Accepted($"/api/v1/admin/migrations/{value.Id}", value), ct);
+        var command = new StartDataMigrationCommand(body.Phases, body.DryRun);
+        return Send(command, value => Accepted($"/api/v1/admin/migrations/{value.Id}", value), ct);
     }
 
     [HttpPost("{id:guid}/rollback")]
     public Task<IActionResult> Rollback(Guid id, [FromBody] RollbackRequest body, CancellationToken ct)
     {
-        return Send(new RollbackMigrationRunCommand(id, body.Reason), _ => Accepted(), ct);
+        var command = new RollbackMigrationRunCommand(id, body.Reason);
+        return Send(command, _ => Accepted(), ct);
     }
 
     [HttpGet("{id:guid}")]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetMigrationRunQuery(id), ct);
+        var query = new GetMigrationRunQuery(id);
+        return Send(query, ct);
     }
 }
 
@@ -69,6 +74,7 @@ public sealed class DataQualityController : ApiControllerBase
     [HttpGet("{batchId:guid}")]
     public Task<IActionResult> Get(Guid batchId, CancellationToken ct)
     {
-        return Send(new GetDataQualityQuery(batchId), ct);
+        var query = new GetDataQualityQuery(batchId);
+        return Send(query, ct);
     }
 }

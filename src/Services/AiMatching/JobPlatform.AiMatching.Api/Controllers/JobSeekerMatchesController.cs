@@ -14,18 +14,21 @@ public sealed class JobSeekerMatchesController : ApiControllerBase
     [HttpGet("matches/jobs")]
     public Task<IActionResult> Ranking([FromQuery] decimal? minScore, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetJobMatchRankingQuery(minScore, page, pageSize), ct);
+        var query = new GetJobMatchRankingQuery(minScore, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("matches/jobs/{jobPostingId:guid}")]
     public Task<IActionResult> Score(Guid jobPostingId, CancellationToken ct)
     {
-        return Send(new GetMatchScoreQuery(jobPostingId), ct);
+        var query = new GetMatchScoreQuery(jobPostingId);
+        return Send(query, ct);
     }
 
     [HttpGet("recommendations/jobs")]
     public Task<IActionResult> Recommendations(CancellationToken ct)
     {
-        return Send(new GetJobRecommendationsQuery(), ct);
+        var query = new GetJobRecommendationsQuery();
+        return Send(query, ct);
     }
 }

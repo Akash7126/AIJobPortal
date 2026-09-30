@@ -14,14 +14,16 @@ public sealed class HelpController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> Center([FromQuery] HelpRole? role, CancellationToken ct)
     {
-        return Send(new GetHelpCenterQuery(role), ct);
+        var query = new GetHelpCenterQuery(role);
+        return Send(query, ct);
     }
 
     [HttpGet("search")]
     public Task<IActionResult> Search([FromQuery] string q, [FromQuery] HelpRole? role, [FromQuery] int page = 1, [FromQuery] int pageSize = 20,
         CancellationToken ct = default)
     {
-        return Send(new SearchHelpContentQuery(q, role, page, pageSize), ct);
+        var query = new SearchHelpContentQuery(q, role, page, pageSize);
+        return Send(query, ct);
     }
 
     /// <summary>US-3.7.2-04: an unmapped page key returns 204 (ASP.NET Core turns a null Ok() body into 204 automatically) - the client
@@ -29,13 +31,15 @@ public sealed class HelpController : ApiControllerBase
     [HttpGet("context")]
     public Task<IActionResult> Context([FromQuery] string pageKey, CancellationToken ct)
     {
-        return Send(new GetContextHelpQuery(pageKey), Ok, ct);
+        var query = new GetContextHelpQuery(pageKey);
+        return Send(query, Ok, ct);
     }
 
     [HttpGet("{id:guid}")]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetHelpContentQuery(id), value =>
+        var query = new GetHelpContentQuery(id);
+        return Send(query, value =>
         {
             SetETag(value.RowVersion);
             return Ok(value);
@@ -49,6 +53,7 @@ public sealed class HelpController : ApiControllerBase
     [Authorize(Policy = Policies.Authenticated)]
     public Task<IActionResult> SubmitFeedback(Guid id, [FromBody] FeedbackRequest body, CancellationToken ct)
     {
-        return Send(new SubmitHelpFeedbackCommand(id, body.Rating, body.Comment), ct);
+        var command = new SubmitHelpFeedbackCommand(id, body.Rating, body.Comment);
+        return Send(command, ct);
     }
 }

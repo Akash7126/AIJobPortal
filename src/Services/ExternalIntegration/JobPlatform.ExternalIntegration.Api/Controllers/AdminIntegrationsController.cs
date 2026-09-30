@@ -19,18 +19,21 @@ public sealed class AdminIntegrationsController : ApiControllerBase
     [HttpPost("{id:guid}/approve")]
     public Task<IActionResult> Approve(Guid id, [FromBody] ApproveRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ApproveExternalJobSiteCommand(id, body.ApprovalBasis), ct);
+        var command = new ApproveExternalJobSiteCommand(id, body.ApprovalBasis);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("{id:guid}/activate")]
     public Task<IActionResult> Activate(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new ActivateIntegrationCommand(id), ct);
+        var command = new ActivateIntegrationCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("{id:guid}/suspend")]
     public Task<IActionResult> Suspend(Guid id, [FromBody] SuspendRequest body, CancellationToken ct)
     {
-        return SendNoContent(new SuspendIntegrationCommand(id, body.Reason), ct);
+        var command = new SuspendIntegrationCommand(id, body.Reason);
+        return SendNoContent(command, ct);
     }
 }

@@ -16,12 +16,14 @@ public sealed class ParsedDataController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> Get(CancellationToken ct)
     {
-        return Send(new GetParsedProfileDataQuery(), ct);
+        var query = new GetParsedProfileDataQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("{field}")]
     public Task<IActionResult> Correct(string field, [FromBody] CorrectionRequest body, CancellationToken ct)
     {
-        return SendNoContent(new CorrectParsedProfileDataCommand(field, body.Value), ct);
+        var command = new CorrectParsedProfileDataCommand(field, body.Value);
+        return SendNoContent(command, ct);
     }
 }

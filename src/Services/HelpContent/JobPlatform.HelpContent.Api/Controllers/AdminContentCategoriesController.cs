@@ -17,19 +17,22 @@ public sealed class AdminContentCategoriesController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListContentCategoriesQuery(), ct);
+        var query = new ListContentCategoriesQuery();
+        return Send(query, ct);
     }
 
     [HttpPost]
     public Task<IActionResult> Create([FromBody] ContentCategoryRequest body, CancellationToken ct)
     {
-        return Send(new CreateContentCategoryCommand(body.NameAr, body.NameEn), value => Created($"/api/v1/admin/content-categories/{value.CategoryId}", value), ct);
+        var command = new CreateContentCategoryCommand(body.NameAr, body.NameEn);
+        return Send(command, value => Created($"/api/v1/admin/content-categories/{value.CategoryId}", value), ct);
     }
 
     /// <summary>Soft delete (handover section 3.2): the category's articles fall back to "uncategorized", never a broken reference.</summary>
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new DeleteContentCategoryCommand(id), ct);
+        var command = new DeleteContentCategoryCommand(id);
+        return SendNoContent(command, ct);
     }
 }

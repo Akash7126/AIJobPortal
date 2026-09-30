@@ -19,24 +19,28 @@ public sealed class SavedReportsController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListSavedReportsQuery(), ct);
+        var query = new ListSavedReportsQuery();
+        return Send(query, ct);
     }
 
     [HttpPost]
     public Task<IActionResult> Save([FromBody] SaveBody body, CancellationToken ct)
     {
-        return SendCreated(new SaveReportCommand(body.Name, body.Definition), r => $"/api/v1/admin/reports/saved/{r.Id}", ct);
+        var command = new SaveReportCommand(body.Name, body.Definition);
+        return SendCreated(command, r => $"/api/v1/admin/reports/saved/{r.Id}", ct);
     }
 
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new DeleteSavedReportCommand(id), ct);
+        var command = new DeleteSavedReportCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("{id:guid}/run")]
     public Task<IActionResult> Run(Guid id, [FromBody] RunSavedBody? body, CancellationToken ct)
     {
-        return Send(new RunSavedReportCommand(id, body?.Arguments, body?.Target), ct);
+        var command = new RunSavedReportCommand(id, body?.Arguments, body?.Target);
+        return Send(command, ct);
     }
 }

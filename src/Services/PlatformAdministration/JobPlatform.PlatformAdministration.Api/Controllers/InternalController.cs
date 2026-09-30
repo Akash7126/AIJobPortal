@@ -31,7 +31,8 @@ public sealed class InternalController : ApiControllerBase
             requested = parsed;
         }
 
-        return await Send(new GetTaxonomyForConsumersQuery(type, requested), view =>
+        var query = new GetTaxonomyForConsumersQuery(type, requested);
+        return await Send(query, view =>
         {
             Response.Headers.ETag = $"\"{view.Version}\"";
             return Ok(new TaxonomyDto(view.Type, view.Version.ToString(System.Globalization.CultureInfo.InvariantCulture),
@@ -42,12 +43,14 @@ public sealed class InternalController : ApiControllerBase
     [HttpGet("reference-files/{type}")]
     public Task<IActionResult> ReferenceFile(string type, CancellationToken ct)
     {
-        return Send(new GetReferenceFileForConsumersQuery(type), ct);
+        var query = new GetReferenceFileForConsumersQuery(type);
+        return Send(query, ct);
     }
 
     [HttpGet("settings/{key}")]
     public Task<IActionResult> Setting(string key, CancellationToken ct)
     {
-        return Send(new GetSystemSettingQuery(key), ct);
+        var query = new GetSystemSettingQuery(key);
+        return Send(query, ct);
     }
 }

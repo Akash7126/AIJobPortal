@@ -12,18 +12,21 @@ public sealed class TalentPoolController : CandidateSourcingControllerBase
     [HttpPost("talent-pool")]
     public Task<IActionResult> Add([FromBody] AddRequest body, CancellationToken ct)
     {
-        return SendCreated(new AddToTalentPoolCommand(body.CandidateProfileId, body.JobPostingId, body.Note), v => $"/api/v1/employers/me/talent-pool/{v.TalentPoolEntryId}", ct);
+        var command = new AddToTalentPoolCommand(body.CandidateProfileId, body.JobPostingId, body.Note);
+        return SendCreated(command, v => $"/api/v1/employers/me/talent-pool/{v.TalentPoolEntryId}", ct);
     }
 
     [HttpGet("talent-pool")]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListTalentPoolQuery(), ct);
+        var query = new ListTalentPoolQuery();
+        return Send(query, ct);
     }
 
     [HttpDelete("talent-pool/{id:guid}")]
     public Task<IActionResult> Remove(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new RemoveFromTalentPoolCommand(id), ct);
+        var command = new RemoveFromTalentPoolCommand(id);
+        return SendNoContent(command, ct);
     }
 }

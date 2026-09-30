@@ -25,19 +25,22 @@ public sealed class DocumentsController : ApiControllerBase
     {
         await using var stream = file.OpenReadStream();
         var uploaded = new UploadedFile(file.FileName, file.ContentType, file.Length, stream);
-        return await Send(new AttachSupplementaryDocumentCommand(uploaded, documentType), v => Created($"/api/v1/profiles/me/documents/{v.DocumentId}", v), ct);
+        var command = new AttachSupplementaryDocumentCommand(uploaded, documentType);
+        return await Send(command, v => Created($"/api/v1/profiles/me/documents/{v.DocumentId}", v), ct);
     }
 
     [HttpGet("documents")]
     public Task<IActionResult> ListDocuments(CancellationToken ct)
     {
-        return Send(new ListSupplementaryDocumentsQuery(), ct);
+        var query = new ListSupplementaryDocumentsQuery();
+        return Send(query, ct);
     }
 
     [HttpDelete("documents/{id:guid}")]
     public Task<IActionResult> RemoveDocument(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new RemoveSupplementaryDocumentCommand(id), ct);
+        var command = new RemoveSupplementaryDocumentCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("resume")]
@@ -46,13 +49,15 @@ public sealed class DocumentsController : ApiControllerBase
     {
         await using var stream = file.OpenReadStream();
         var uploaded = new UploadedFile(file.FileName, file.ContentType, file.Length, stream);
-        return await Send(new UploadResumeCommand(uploaded), v => Created($"/api/v1/profiles/me/resume", v), ct);
+        var command = new UploadResumeCommand(uploaded);
+        return await Send(command, v => Created($"/api/v1/profiles/me/resume", v), ct);
     }
 
     [HttpGet("resume")]
     public Task<IActionResult> GetResume(CancellationToken ct)
     {
-        return Send(new GetResumeMetadataQuery(), ct);
+        var query = new GetResumeMetadataQuery();
+        return Send(query, ct);
     }
 }
 
@@ -70,7 +75,8 @@ public sealed class CompanyDocumentsController : ApiControllerBase
     {
         await using var stream = file.OpenReadStream();
         var uploaded = new UploadedFile(file.FileName, file.ContentType, file.Length, stream);
-        return await Send(new AttachCompanyDocumentCommand(uploaded, documentType), v => Created($"/api/v1/companies/{companyId}/documents/{v.DocumentId}", v),
+        var command = new AttachCompanyDocumentCommand(uploaded, documentType);
+        return await Send(command, v => Created($"/api/v1/companies/{companyId}/documents/{v.DocumentId}", v),
             ct);
     }
 }

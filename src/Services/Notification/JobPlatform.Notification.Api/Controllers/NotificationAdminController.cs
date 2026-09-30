@@ -20,42 +20,49 @@ public sealed class NotificationAdminController : ApiControllerBase
     [HttpGet("email-templates/{code}")]
     public Task<IActionResult> GetTemplate(string code, [FromQuery] string locale = "en", CancellationToken ct = default)
     {
-        return Send(new GetEmailTemplateQuery(code, locale), ct);
+        var query = new GetEmailTemplateQuery(code, locale);
+        return Send(query, ct);
     }
 
     [HttpPut("email-templates/{code}")]
     public Task<IActionResult> PutTemplate(string code, [FromBody] TemplateBody body, [FromQuery] string locale = "en", CancellationToken ct = default)
     {
-        return Send(new EditEmailTemplateCommand(code, locale, body.Subject, body.Body, body.Placeholders ?? new Dictionary<string, string>()), ct);
+        var command = new EditEmailTemplateCommand(code, locale, body.Subject, body.Body, body.Placeholders ?? new Dictionary<string, string>());
+        return Send(command, ct);
     }
 
     [HttpGet("notification-types")]
     public Task<IActionResult> ListTypes(CancellationToken ct)
     {
-        return Send(new ListNotificationTypesQuery(), ct);
+        var query = new ListNotificationTypesQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("notification-types")]
     public Task<IActionResult> PutType([FromBody] TypeBody body, CancellationToken ct)
     {
-        return Send(new DefineNotificationTypeCommand(body.Code, body.Icon, body.Colour, body.TextAlternative, body.IsMandatory), ct);
+        var command = new DefineNotificationTypeCommand(body.Code, body.Icon, body.Colour, body.TextAlternative, body.IsMandatory);
+        return Send(command, ct);
     }
 
     [HttpGet("sms/essential-categories")]
     public Task<IActionResult> GetEssential(CancellationToken ct)
     {
-        return Send(new GetEssentialSmsCategoriesQuery(), ct);
+        var query = new GetEssentialSmsCategoriesQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("sms/essential-categories")]
     public Task<IActionResult> PutEssential([FromBody] EssentialBody body, CancellationToken ct)
     {
-        return Send(new ConfigureEssentialSmsCategoriesCommand(body.Categories ?? new List<string>()), ct);
+        var command = new ConfigureEssentialSmsCategoriesCommand(body.Categories ?? new List<string>());
+        return Send(command, ct);
     }
 
     [HttpGet("sms/deliveries")]
     public Task<IActionResult> Deliveries([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListSmsDeliveryStatusQuery(status, page, pageSize), ct);
+        var query = new ListSmsDeliveryStatusQuery(status, page, pageSize);
+        return Send(query, ct);
     }
 }

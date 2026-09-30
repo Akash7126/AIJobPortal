@@ -23,25 +23,29 @@ public sealed class CompanyMediaController : EmployerControllerBase
 
         await using var stream = new MemoryStream();
         await file.CopyToAsync(stream, ct);
-        return await Send(new AttachCompanyMediaCommand(kind, file.FileName, file.ContentType, file.Length, stream.ToArray()),
+        var command = new AttachCompanyMediaCommand(kind, file.FileName, file.ContentType, file.Length, stream.ToArray());
+        return await Send(command,
             value => Created($"/api/v1/employers/me/media/{value.CompanyMediaId}", value), ct);
     }
 
     [HttpGet("media")]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListCompanyMediaQuery(), ct);
+        var query = new ListCompanyMediaQuery();
+        return Send(query, ct);
     }
 
     [HttpDelete("media/{id:guid}")]
     public Task<IActionResult> Remove(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new RemoveCompanyMediaCommand(id), ct);
+        var command = new RemoveCompanyMediaCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("media/{id:guid}/primary")]
     public Task<IActionResult> SetPrimary(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new SetPrimaryLogoCommand(id), ct);
+        var command = new SetPrimaryLogoCommand(id);
+        return SendNoContent(command, ct);
     }
 }

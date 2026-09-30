@@ -36,14 +36,16 @@ public sealed class IntegrationController : PartnerControllerBase
     [HttpPost("integrations/register")]
     public Task<IActionResult> Register([FromBody] RegisterRequest body, CancellationToken ct)
     {
-        return Send(new RegisterExternalJobSiteCommand(body.SourcePlatformName, body.BaseUrl, body.RecommendedByMolPef),
+        var command = new RegisterExternalJobSiteCommand(body.SourcePlatformName, body.BaseUrl, body.RecommendedByMolPef);
+        return Send(command,
             value => Created($"/api/v1/partner/integration", value), ct);
     }
 
     [HttpGet("integration")]
     public Task<IActionResult> Get(CancellationToken ct)
     {
-        return Send(new GetIntegrationQuery(), value =>
+        var query = new GetIntegrationQuery();
+        return Send(query, value =>
         {
             SetETag(value.RowVersion);
             return Ok(value);
@@ -53,31 +55,36 @@ public sealed class IntegrationController : PartnerControllerBase
     [HttpPut("integration/models")]
     public Task<IActionResult> Enable([FromBody] EnableRequest body, CancellationToken ct)
     {
-        return SendNoContent(new EnableIntegrationCommand(body.PullEnabled, body.PushEnabled), ct);
+        var command = new EnableIntegrationCommand(body.PullEnabled, body.PushEnabled);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("sync-schedule")]
     public Task<IActionResult> ConfigureSyncSchedule([FromBody] SyncScheduleRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ConfigureSyncScheduleCommand(body.Mode, body.Cron), ct);
+        var command = new ConfigureSyncScheduleCommand(body.Mode, body.Cron);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("sync-runs")]
     public Task<IActionResult> StartSyncRun(CancellationToken ct)
     {
-        return Send(new StartSyncRunCommand(), value => Accepted(value), ct);
+        var command = new StartSyncRunCommand();
+        return Send(command, value => Accepted(value), ct);
     }
 
     [HttpPut("attribution-visibility")]
     public Task<IActionResult> ConfigureAttributionVisibility([FromBody] AttributionVisibilityRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ConfigureAttributionVisibilityCommand(body.Visibility), ct);
+        var command = new ConfigureAttributionVisibilityCommand(body.Visibility);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("sandbox")]
     public Task<IActionResult> ProvisionSandbox(CancellationToken ct)
     {
-        return Send(new ProvisionSandboxCommand(), value => Created("", value), ct);
+        var command = new ProvisionSandboxCommand();
+        return Send(command, value => Created("", value), ct);
     }
 }
 
@@ -93,15 +100,17 @@ public sealed class JobDataController : PartnerControllerBase
     [HttpPost("jobs")]
     public Task<IActionResult> Push([FromBody] PushJobRequest body, CancellationToken ct)
     {
-        return Send(new PushJobDataCommand(body.SourceJobId, body.Title, body.Summary, body.Skills, body.ContractType, body.WorkFormat,
-                body.ApplicationDeadline, body.Location, body.SourceUrl, IdempotencyKey),
+        var command = new PushJobDataCommand(body.SourceJobId, body.Title, body.Summary, body.Skills, body.ContractType, body.WorkFormat,
+                body.ApplicationDeadline, body.Location, body.SourceUrl, IdempotencyKey);
+        return Send(command,
             value => value.Created ? Created($"/api/v1/partner/jobs/{value.PlatformJobId}", value) : Ok(value), ct);
     }
 
     [HttpPatch("jobs/{platformJobId}")]
     public Task<IActionResult> SyncAttribution(string platformJobId, [FromBody] SyncAttributionRequest body, CancellationToken ct)
     {
-        return SendNoContent(new SyncJobPostAttributionCommand(platformJobId, body.Operation, body.Deadline, body.Description), ct);
+        var command = new SyncJobPostAttributionCommand(platformJobId, body.Operation, body.Deadline, body.Description);
+        return SendNoContent(command, ct);
     }
 }
 
@@ -113,19 +122,22 @@ public sealed class MappingController : PartnerControllerBase
     [HttpPut("mapping")]
     public Task<IActionResult> Configure([FromBody] ConfigureMappingRequest body, CancellationToken ct)
     {
-        return Send(new ConfigureJobDataMappingCommand(body.Rules, body.StandardSchemaVersion), ct);
+        var command = new ConfigureJobDataMappingCommand(body.Rules, body.StandardSchemaVersion);
+        return Send(command, ct);
     }
 
     [HttpGet("mapping")]
     public Task<IActionResult> Get(CancellationToken ct)
     {
-        return Send(new GetJobDataMappingQuery(), ct);
+        var query = new GetJobDataMappingQuery();
+        return Send(query, ct);
     }
 
     [HttpGet("standard-schema")]
     public Task<IActionResult> StandardSchema(CancellationToken ct)
     {
-        return Send(new GetStandardSchemaQuery(), ct);
+        var query = new GetStandardSchemaQuery();
+        return Send(query, ct);
     }
 }
 
@@ -135,7 +147,8 @@ public sealed class PartnerDocumentationController : PartnerControllerBase
     [HttpGet("schema-documentation")]
     public Task<IActionResult> SchemaDocumentation([FromQuery] string version, CancellationToken ct)
     {
-        return Send(new ViewApiSchemaDocumentationCommand(version), value =>
+        var command = new ViewApiSchemaDocumentationCommand(version);
+        return Send(command, value =>
         {
             if (value.Deprecated)
             {
@@ -153,6 +166,7 @@ public sealed class PartnerDocumentationController : PartnerControllerBase
     [HttpGet("~/api/v1/docs/{version}/interfaces")]
     public Task<IActionResult> Interfaces(string version, CancellationToken ct)
     {
-        return Send(new GetSoftwareInterfaceDocumentationQuery(version), ct);
+        var query = new GetSoftwareInterfaceDocumentationQuery(version);
+        return Send(query, ct);
     }
 }

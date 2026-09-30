@@ -16,12 +16,14 @@ public sealed class AdminRegistrationsController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListEmployerRegistrationsQuery(status, page, pageSize), ct);
+        var query = new ListEmployerRegistrationsQuery(status, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpPost("{id:guid}/approve")]
     public Task<IActionResult> Approve(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new ApproveEmployerRegistrationCommand(id), ct);
+        var command = new ApproveEmployerRegistrationCommand(id);
+        return SendNoContent(command, ct);
     }
 }

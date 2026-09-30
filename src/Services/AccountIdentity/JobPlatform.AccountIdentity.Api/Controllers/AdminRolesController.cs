@@ -14,18 +14,21 @@ public sealed class AdminRolesController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListRolesQuery(), dto => Ok(dto), ct);
+        var query = new ListRolesQuery();
+        return Send(query, dto => Ok(dto), ct);
     }
 
     [HttpPut("{roleId:guid}/permissions/{permission}")]
     public Task<IActionResult> Grant(Guid roleId, string permission, CancellationToken ct)
     {
-        return SendNoContent(new GrantPermissionCommand(roleId, permission, IfMatch), ct);
+        var command = new GrantPermissionCommand(roleId, permission, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpDelete("{roleId:guid}/permissions/{permission}")]
     public Task<IActionResult> Revoke(Guid roleId, string permission, CancellationToken ct)
     {
-        return SendNoContent(new RevokePermissionCommand(roleId, permission, IfMatch), ct);
+        var command = new RevokePermissionCommand(roleId, permission, IfMatch);
+        return SendNoContent(command, ct);
     }
 }

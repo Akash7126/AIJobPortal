@@ -28,40 +28,46 @@ public sealed class InternalGovernmentIntegrationController : ApiControllerBase
     [HttpPost("gov-verifications")]
     public Task<IActionResult> RequestGovernmentVerification([FromBody] RequestGovernmentVerificationRequest body, CancellationToken ct)
     {
-        return Send(new RequestGovernmentVerificationCommand(body.RequestingComponent, body.SubjectType, body.SubjectId, body.Source, body.Purpose),
+        var command = new RequestGovernmentVerificationCommand(body.RequestingComponent, body.SubjectType, body.SubjectId, body.Source, body.Purpose);
+        return Send(command,
             id => Accepted((string?)null, id), ct);
     }
 
     [HttpPost("educational-verifications")]
     public Task<IActionResult> RequestEducationalVerification([FromBody] RequestEducationalVerificationRequest body, CancellationToken ct)
     {
-        return Send(new RequestEducationalCredentialVerificationCommand(body.RequestingComponent, body.SubjectId, body.Institution, body.CredentialName, body.Year),
+        var command = new RequestEducationalCredentialVerificationCommand(body.RequestingComponent, body.SubjectId, body.Institution, body.CredentialName, body.Year);
+        return Send(command,
             id => Accepted((string?)null, id), ct);
     }
 
     [HttpPost("identity-verifications")]
     public Task<IActionResult> RequestIdentityVerification([FromBody] RequestIdentityVerificationRequest body, CancellationToken ct)
     {
-        return Send(new RequestIdentityVerificationCommand(body.RequestingComponent, body.SubjectType, body.SubjectId, body.NationalIdReference, body.FullName,
-            body.DateOfBirth), id => Accepted((string?)null, id), ct);
+        var command = new RequestIdentityVerificationCommand(body.RequestingComponent, body.SubjectType, body.SubjectId, body.NationalIdReference, body.FullName,
+            body.DateOfBirth);
+        return Send(command, id => Accepted((string?)null, id), ct);
     }
 
     [HttpGet("verification-status")]
     public Task<IActionResult> VerificationStatus([FromQuery] SubjectType subjectType, [FromQuery] Guid subjectId, CancellationToken ct)
     {
-        return Send(new GetSubjectVerificationStatusQuery(subjectType, subjectId), ct);
+        var query = new GetSubjectVerificationStatusQuery(subjectType, subjectId);
+        return Send(query, ct);
     }
 
     [HttpGet("government-systems")]
     public Task<IActionResult> GovernmentSystems(CancellationToken ct)
     {
-        return Send(new GetGovernmentSystemsQuery(), ct);
+        var query = new GetGovernmentSystemsQuery();
+        return Send(query, ct);
     }
 
     [HttpGet("government-exchanges")]
     public Task<IActionResult> GovernmentExchanges([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 50, CancellationToken ct = default)
     {
-        return Send(new ListGovernmentExchangesQuery(from, to, page, pageSize), ct);
+        var query = new ListGovernmentExchangesQuery(from, to, page, pageSize);
+        return Send(query, ct);
     }
 }

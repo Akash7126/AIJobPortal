@@ -13,18 +13,21 @@ public sealed class EmployerViewsController : ApiControllerBase
     [HttpGet("employers/me/dashboard")]
     public Task<IActionResult> Dashboard(CancellationToken ct)
     {
-        return Send(new GetEmployerDashboardQuery(), ct);
+        var query = new GetEmployerDashboardQuery();
+        return Send(query, ct);
     }
 
     [HttpGet("jobs/{jobPostingId:guid}/status-history")]
     public Task<IActionResult> StatusHistory(Guid jobPostingId, CancellationToken ct)
     {
-        return Send(new GetJobStatusHistoryQuery(jobPostingId), ct);
+        var query = new GetJobStatusHistoryQuery(jobPostingId);
+        return Send(query, ct);
     }
 
     [HttpGet("employers/me/candidates/{candidateId:guid}/insight")]
     public Task<IActionResult> Insight(Guid candidateId, [FromQuery] Guid jobPostingId, CancellationToken ct)
     {
-        return Send(new GetCandidateInsightQuery(candidateId, jobPostingId), ct);
+        var query = new GetCandidateInsightQuery(candidateId, jobPostingId);
+        return Send(query, ct);
     }
 }

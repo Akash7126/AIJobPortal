@@ -18,13 +18,15 @@ public sealed class ShareLinkController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> Create(CancellationToken ct)
     {
-        return Send(new CreateProfileShareLinkCommand(), ct);
+        var command = new CreateProfileShareLinkCommand();
+        return Send(command, ct);
     }
 
     [HttpGet]
     public Task<IActionResult> GetMine(CancellationToken ct)
     {
-        return Send(new GetMyShareLinkQuery(), v => v is null ? NotFound() : Ok(v), ct);
+        var query = new GetMyShareLinkQuery();
+        return Send(query, v => v is null ? NotFound() : Ok(v), ct);
     }
 }
 
@@ -36,13 +38,15 @@ public sealed class SharedProfileController : ApiControllerBase
     [HttpGet("{token}")]
     public Task<IActionResult> Get(string token, CancellationToken ct)
     {
-        return Send(new GetSharedProfileQuery(token), ct);
+        var query = new GetSharedProfileQuery(token);
+        return Send(query, ct);
     }
 
     [HttpGet("{token}/qr")]
     public async Task<IActionResult> GetQr(string token, CancellationToken ct)
     {
-        var result = await Sender.Send(new GetSharedProfileQrQuery(token), ct);
+        var query = new GetSharedProfileQrQuery(token);
+        var result = await Sender.Send(query, ct);
         return result.ToActionResult(HttpContext, svg => Content(svg, "image/svg+xml"));
     }
 }

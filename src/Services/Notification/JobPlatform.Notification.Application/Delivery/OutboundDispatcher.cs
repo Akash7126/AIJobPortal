@@ -46,7 +46,8 @@ public sealed class OutboundDispatcher
         var due = await _messages.ListDueAsync(_clock.GetUtcNow().UtcDateTime, take, ct);
         foreach (var due1 in due)
         {
-            var started = await _sender.Send(new StartSendingCommand(due1.Id), ct);
+            var command = new StartSendingCommand(due1.Id);
+            var started = await _sender.Send(command, ct);
             if (started.IsFailure)
             {
                 continue;
@@ -58,17 +59,20 @@ public sealed class OutboundDispatcher
                 var (result, masked, senderIdentity) = await DeliverAsync(spec, ct);
                 if (result.Accepted)
                 {
-                    await _sender.Send(new CompleteSendCommand(spec.MessageId, result.ProviderMessageId!, masked, senderIdentity), ct);
+                    var completeSendCommand = new CompleteSendCommand(spec.MessageId, result.ProviderMessageId!, masked, senderIdentity);
+                    await _sender.Send(completeSendCommand, ct);
                 }
                 else
                 {
-                    await _sender.Send(new FailSendCommand(spec.MessageId, result.TimedOut ? OutboundMessage.TimeoutCode(spec.Channel) : result.Error ?? "E-NOTIF-PROVIDER-REFUSED"), ct);
+                    var failSendCommand = new FailSendCommand(spec.MessageId, result.TimedOut ? OutboundMessage.TimeoutCode(spec.Channel) : result.Error ?? "E-NOTIF-PROVIDER-REFUSED");
+                    await _sender.Send(failSendCommand, ct);
                 }
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
                 _logger.LogError(ex, "Sending message {MessageId} failed", spec.MessageId);
-                await _sender.Send(new FailSendCommand(spec.MessageId, OutboundMessage.TimeoutCode(spec.Channel)), ct);
+                var command2 = new FailSendCommand(spec.MessageId, OutboundMessage.TimeoutCode(spec.Channel));
+                await _sender.Send(command2, ct);
             }
         }
 
@@ -86,7 +90,8 @@ public sealed class OutboundDispatcher
             }
 
             var unsubscribe = Categories.Marketing.Contains(spec.Category) ? $"{_options.PublicBaseUrl.TrimEnd('/')}/unsubscribe/{_tokens.Create(spec.Recipient, spec.Category)}" : null;
-            var result = await _email.SendAsync(new EmailEnvelope(_options.EmailSenderAddress, address, spec.Subject, spec.Body, unsubscribe), ct);
+            var request = new EmailEnvelope(_options.EmailSenderAddress, address, spec.Subject, spec.Body, unsubscribe);
+            var result = await _email.SendAsync(request, ct);
             return (result, Masking.Email(address), _options.EmailSenderAddress);
         }
 
@@ -95,7 +100,8 @@ public sealed class OutboundDispatcher
             return (ProviderResult.Fail(NotificationErrorCodes.ContactUnavailable), "-", null);
         }
 
-        var sms = await _sms.SendAsync(new SmsEnvelope(_options.SmsSenderId, mobile, spec.Body), ct);
+        var smsEnvelope = new SmsEnvelope(_options.SmsSenderId, mobile, spec.Body);
+        var sms = await _sms.SendAsync(smsEnvelope, ct);
         return (sms, Masking.Mobile(mobile), _options.SmsSenderId);
     }
 }

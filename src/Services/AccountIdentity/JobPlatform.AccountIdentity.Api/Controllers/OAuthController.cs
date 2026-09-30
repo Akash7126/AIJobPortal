@@ -18,8 +18,9 @@ public sealed class OAuthController : ApiControllerBase
     public async Task<IActionResult> Token(CancellationToken ct)
     {
         var body = await ReadBodyAsync(ct);
-        var result = await Sender.Send(new AuthenticateApiClientCommand(body.GrantType ?? string.Empty, body.ClientId ?? string.Empty,
-            body.ClientSecret ?? string.Empty), ct);
+        var command = new AuthenticateApiClientCommand(body.GrantType ?? string.Empty, body.ClientId ?? string.Empty,
+            body.ClientSecret ?? string.Empty);
+        var result = await Sender.Send(command, ct);
         Response.Headers.CacheControl = "no-store";
         return result.ToActionResult(HttpContext, t => Ok(new OAuthTokenResponse(t.AccessToken, t.TokenType, t.ExpiresIn, t.Scope)));
     }

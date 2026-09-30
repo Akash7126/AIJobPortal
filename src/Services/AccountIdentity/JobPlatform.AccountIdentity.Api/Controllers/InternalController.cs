@@ -17,32 +17,37 @@ public sealed class InternalController : ApiControllerBase
     [HttpGet("accounts/{id:guid}")]
     public Task<IActionResult> GetAccount(Guid id, CancellationToken ct)
     {
-        return Send(new GetAccountSummaryQuery(id), dto => Ok(dto), ct);
+        var query = new GetAccountSummaryQuery(id);
+        return Send(query, dto => Ok(dto), ct);
     }
 
     [HttpGet("api-credentials/{id:guid}/controls")]
     public Task<IActionResult> GetCredentialControls(Guid id, CancellationToken ct)
     {
-        return Send(new GetApiCredentialControlsQuery(id), dto => Ok(dto), ct);
+        var query = new GetApiCredentialControlsQuery(id);
+        return Send(query, dto => Ok(dto), ct);
     }
 
     [HttpGet("access-log")]
     public Task<IActionResult> ListAccessLog([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] Guid? accountId,
         [FromQuery] int page = 1, [FromQuery] int pageSize = 50, CancellationToken ct = default)
     {
-        return Send(new ListAccessLogQuery(from, to, accountId, page, pageSize), dto => Ok(dto), ct);
+        var query = new ListAccessLogQuery(from, to, accountId, page, pageSize);
+        return Send(query, dto => Ok(dto), ct);
     }
 
     [HttpPost("accounts/{id:guid}/deactivation-requests")]
     public Task<IActionResult> RequestDeactivation(Guid id, DeactivationRequest body, CancellationToken ct)
     {
-        return Send(new RequestAccountDeactivationCommand(id, body.Kind, body.Reason), dto => Accepted(dto), ct);
+        var command = new RequestAccountDeactivationCommand(id, body.Kind, body.Reason);
+        return Send(command, dto => Accepted(dto), ct);
     }
 
     [HttpPost("accounts/{id:guid}/check-permission")]
     public Task<IActionResult> CheckPermission(Guid id, [FromBody] PermissionCheckBody body, CancellationToken ct)
     {
-        return Send(new CheckPermissionQuery(id, body.Permission), dto => Ok(dto), ct);
+        var query = new CheckPermissionQuery(id, body.Permission);
+        return Send(query, dto => Ok(dto), ct);
     }
 
     public sealed record PermissionCheckBody(string Permission);

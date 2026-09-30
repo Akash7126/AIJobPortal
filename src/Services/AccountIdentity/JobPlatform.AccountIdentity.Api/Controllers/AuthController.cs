@@ -17,7 +17,8 @@ public sealed class AuthController : ApiControllerBase
     [ProducesResponseType<AuthenticationResultDto>(StatusCodes.Status200OK)]
     public Task<IActionResult> Login(LoginRequest body, CancellationToken ct)
     {
-        return Send(new AuthenticateUserCommand(body.Username, body.Password, body.Mechanism, body.ActorType, body.MfaCode, body.EmailCode),
+        var command = new AuthenticateUserCommand(body.Username, body.Password, body.Mechanism, body.ActorType, body.MfaCode, body.EmailCode);
+        return Send(command,
             dto => Ok(dto), ct);
     }
 
@@ -25,41 +26,47 @@ public sealed class AuthController : ApiControllerBase
     [AllowAnonymous]
     public Task<IActionResult> EnrollMfa(MfaEnrollRequest body, CancellationToken ct)
     {
-        return Send(new BeginMfaEnrollmentCommand(body.MfaToken), dto => Ok(dto), ct);
+        var command = new BeginMfaEnrollmentCommand(body.MfaToken);
+        return Send(command, dto => Ok(dto), ct);
     }
 
     [HttpPost("mfa/verify")]
     [AllowAnonymous]
     public Task<IActionResult> VerifyMfa(MfaVerifyRequest body, CancellationToken ct)
     {
-        return Send(new VerifyMfaCommand(body.MfaToken, body.Code), dto => Ok(dto), ct);
+        var command = new VerifyMfaCommand(body.MfaToken, body.Code);
+        return Send(command, dto => Ok(dto), ct);
     }
 
     [HttpPost("refresh")]
     [AllowAnonymous]
     public Task<IActionResult> Refresh(RefreshRequest body, CancellationToken ct)
     {
-        return Send(new RefreshSessionCommand(body.RefreshToken), dto => Ok(dto), ct);
+        var command = new RefreshSessionCommand(body.RefreshToken);
+        return Send(command, dto => Ok(dto), ct);
     }
 
     [HttpPost("logout")]
     [Authorize(Policy = Policies.AuthenticatedAllowingPasswordChange)]
     public Task<IActionResult> Logout(CancellationToken ct)
     {
-        return SendNoContent(new LogoutCommand(), ct);
+        var command = new LogoutCommand();
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("email-verification")]
     [AllowAnonymous]
     public Task<IActionResult> VerifyEmail(EmailVerificationRequest body, CancellationToken ct)
     {
-        return SendNoContent(new VerifyEmailCommand(body.AccountId, body.Token), ct);
+        var command = new VerifyEmailCommand(body.AccountId, body.Token);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("password")]
     [Authorize(Policy = Policies.AuthenticatedAllowingPasswordChange)]
     public Task<IActionResult> ChangePassword(ChangePasswordRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ChangePasswordCommand(body.CurrentPassword, body.NewPassword), ct);
+        var command = new ChangePasswordCommand(body.CurrentPassword, body.NewPassword);
+        return SendNoContent(command, ct);
     }
 }

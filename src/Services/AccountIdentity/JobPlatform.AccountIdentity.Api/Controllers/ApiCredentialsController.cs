@@ -17,7 +17,8 @@ public sealed class ApiCredentialsController : ApiControllerBase
     [ProducesResponseType<IssuedApiCredentialDto>(StatusCodes.Status201Created)]
     public async Task<IActionResult> Issue(IssueApiCredentialRequest body, CancellationToken ct)
     {
-        var result = await Sender.Send(new IssueApiCredentialCommand(body.IpWhitelist, body.MaxRequests, body.PeriodSeconds, body.ExpiresAtUtc), ct);
+        var command = new IssueApiCredentialCommand(body.IpWhitelist, body.MaxRequests, body.PeriodSeconds, body.ExpiresAtUtc);
+        var result = await Sender.Send(command, ct);
         Response.Headers.CacheControl = "no-store";
         return result.ToActionResult(HttpContext, dto => Created($"/api/v1/api-credentials/{dto.ApiCredentialId}", dto));
     }
@@ -26,13 +27,15 @@ public sealed class ApiCredentialsController : ApiControllerBase
     [Authorize(Policy = Policies.ExternalJobSite)]
     public Task<IActionResult> Revoke(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new RevokeApiCredentialCommand(id), ct);
+        var command = new RevokeApiCredentialCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpGet("current")]
     [Authorize(Policy = Policies.ExternalJobSite)]
     public Task<IActionResult> Current(CancellationToken ct)
     {
-        return Send(new GetCurrentApiCredentialQuery(), dto => Ok(dto), ct);
+        var query = new GetCurrentApiCredentialQuery();
+        return Send(query, dto => Ok(dto), ct);
     }
 }

@@ -17,25 +17,29 @@ public sealed class EmployerMatchesController : ApiControllerBase
     [HttpGet("candidates")]
     public Task<IActionResult> Candidates(Guid jobPostingId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetReverseMatchesQuery(jobPostingId, page, pageSize), ct);
+        var query = new GetReverseMatchesQuery(jobPostingId, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("candidate-recommendations")]
     public Task<IActionResult> CandidateRecommendations(Guid jobPostingId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetCandidateRecommendationsQuery(jobPostingId, page, pageSize), ct);
+        var query = new GetCandidateRecommendationsQuery(jobPostingId, page, pageSize);
+        return Send(query, ct);
     }
 
     /// <summary>Batch work: 202 with the queued shortlist and a Location to poll.</summary>
     [HttpPost("shortlists")]
     public Task<IActionResult> RequestShortlist(Guid jobPostingId, [FromBody] ShortlistRequest? body, CancellationToken ct)
     {
-        return Send(new ComputeCandidateShortlistCommand(jobPostingId, body?.Size), s => Accepted($"/api/v1/employers/jobs/{jobPostingId}/shortlists/{s.Id}", s), ct);
+        var command = new ComputeCandidateShortlistCommand(jobPostingId, body?.Size);
+        return Send(command, s => Accepted($"/api/v1/employers/jobs/{jobPostingId}/shortlists/{s.Id}", s), ct);
     }
 
     [HttpGet("shortlists/{shortlistId:guid}")]
     public Task<IActionResult> Shortlist(Guid jobPostingId, Guid shortlistId, CancellationToken ct)
     {
-        return Send(new GetCandidateShortlistQuery(jobPostingId, shortlistId), ct);
+        var query = new GetCandidateShortlistQuery(jobPostingId, shortlistId);
+        return Send(query, ct);
     }
 }

@@ -16,6 +16,7 @@ public sealed class InternalIntegrationsController : ApiControllerBase
     [HttpGet("{sourcePlatformId:guid}")]
     public Task<IActionResult> Get(Guid sourcePlatformId, CancellationToken ct)
     {
-        return Send(new GetIntegrationSummaryQuery(sourcePlatformId), ct);
+        var query = new GetIntegrationSummaryQuery(sourcePlatformId);
+        return Send(query, ct);
     }
 }

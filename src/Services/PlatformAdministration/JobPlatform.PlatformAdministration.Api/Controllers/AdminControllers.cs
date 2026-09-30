@@ -40,7 +40,8 @@ public sealed class UsersController : AdminControllerBase
     public Task<IActionResult> List([FromQuery] string? search, [FromQuery] string? type, [FromQuery] string? status, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListPlatformUsersQuery(search, type, status, page, pageSize), ct);
+        var query = new ListPlatformUsersQuery(search, type, status, page, pageSize);
+        return Send(query, ct);
     }
 }
 
@@ -52,13 +53,15 @@ public sealed class EntityRecordsController : AdminControllerBase
     [HttpPost("entity-records")]
     public Task<IActionResult> Create([FromBody] CreateEntityRecordRequest body, CancellationToken ct)
     {
-        return SendCreated(new CreatePlatformEntityRecordCommand(body.EntityType, body.Core, IdempotencyKey), v => $"/api/v1/admin/entity-records/{v.Id}", ct);
+        var command = new CreatePlatformEntityRecordCommand(body.EntityType, body.Core, IdempotencyKey);
+        return SendCreated(command, v => $"/api/v1/admin/entity-records/{v.Id}", ct);
     }
 
     [HttpGet("entity-records/{id:guid}")]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetEntityRecordQuery(id), ct);
+        var query = new GetEntityRecordQuery(id);
+        return Send(query, ct);
     }
 }
 
@@ -70,13 +73,15 @@ public sealed class SettingsController : AdminControllerBase
     [HttpGet("settings")]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListSystemSettingsQuery(), ct);
+        var query = new ListSystemSettingsQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("settings/{key}")]
     public Task<IActionResult> Change(string key, [FromBody] ChangeSettingRequest body, CancellationToken ct)
     {
-        return Send(new ChangeSystemSettingCommand(key, body.Value), VersionNoContent, ct);
+        var command = new ChangeSystemSettingCommand(key, body.Value);
+        return Send(command, VersionNoContent, ct);
     }
 }
 
@@ -88,13 +93,15 @@ public sealed class ReferenceFilesController : AdminControllerBase
     [HttpGet("reference-files/{type}")]
     public Task<IActionResult> Get(string type, CancellationToken ct)
     {
-        return Send(new GetReferenceFileQuery(type), ct);
+        var query = new GetReferenceFileQuery(type);
+        return Send(query, ct);
     }
 
     [HttpPut("reference-files/{type}/entries")]
     public Task<IActionResult> Update(string type, [FromBody] UpdateReferenceFileRequest body, CancellationToken ct)
     {
-        return Send(new UpdateReferenceFileCommand(type, body.ConfirmInUse, body.Changes), VersionNoContent, ct);
+        var command = new UpdateReferenceFileCommand(type, body.ConfirmInUse, body.Changes);
+        return Send(command, VersionNoContent, ct);
     }
 }
 
@@ -106,7 +113,8 @@ public sealed class TaxonomiesController : AdminControllerBase
     [HttpGet("taxonomies/{type}")]
     public Task<IActionResult> Get(string type, [FromQuery] int? version, CancellationToken ct)
     {
-        return Send(new GetPlatformTaxonomyQuery(type, version), view =>
+        var query = new GetPlatformTaxonomyQuery(type, version);
+        return Send(query, view =>
         {
             Response.Headers.ETag = $"\"{view.Version}\"";
             return Ok(view);
@@ -116,7 +124,8 @@ public sealed class TaxonomiesController : AdminControllerBase
     [HttpPut("taxonomies/{type}/nodes")]
     public Task<IActionResult> Update(string type, [FromBody] UpdateTaxonomyRequest body, CancellationToken ct)
     {
-        return Send(new UpdatePlatformTaxonomyCommand(type, body.Changes), VersionNoContent, ct);
+        var command = new UpdatePlatformTaxonomyCommand(type, body.Changes);
+        return Send(command, VersionNoContent, ct);
     }
 }
 
@@ -128,18 +137,21 @@ public sealed class JobOfferingsController : AdminControllerBase
     [HttpGet("job-offerings")]
     public Task<IActionResult> List([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListJobOfferingsQuery(status, page, pageSize), ct);
+        var query = new ListJobOfferingsQuery(status, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpPost("job-offerings/{id:guid}/suspend")]
     public Task<IActionResult> Suspend(Guid id, [FromBody] ModerationRequest body, CancellationToken ct)
     {
-        return Send(new SuspendJobOfferingCommand(id, body.Reason), _ => NoContent(), ct);
+        var command = new SuspendJobOfferingCommand(id, body.Reason);
+        return Send(command, _ => NoContent(), ct);
     }
 
     [HttpPost("job-offerings/{id:guid}/remove")]
     public Task<IActionResult> Remove(Guid id, [FromBody] ModerationRequest body, CancellationToken ct)
     {
-        return Send(new RemoveJobOfferingCommand(id, body.Reason), _ => NoContent(), ct);
+        var command = new RemoveJobOfferingCommand(id, body.Reason);
+        return Send(command, _ => NoContent(), ct);
     }
 }

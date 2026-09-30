@@ -20,30 +20,35 @@ public sealed class CustomReportsController : ApiControllerBase
     [HttpPost("custom")]
     public Task<IActionResult> Run([FromBody] RunBody body, CancellationToken ct)
     {
-        return Send(new RunCustomReportCommand(body.TemplateId, body.Definition, body.Arguments, body.Target), ct);
+        var command = new RunCustomReportCommand(body.TemplateId, body.Definition, body.Arguments, body.Target);
+        return Send(command, ct);
     }
 
     [HttpGet("formats")]
     public Task<IActionResult> Formats(CancellationToken ct)
     {
-        return Send(new GetReportFormatsQuery(), ct);
+        var query = new GetReportFormatsQuery();
+        return Send(query, ct);
     }
 
     [HttpPost("render")]
     public Task<IActionResult> Render([FromBody] RenderBody body, CancellationToken ct)
     {
-        return Send(new RenderReportQuery(body.TemplateId, body.Definition, body.Arguments, body.Format), ct);
+        var query = new RenderReportQuery(body.TemplateId, body.Definition, body.Arguments, body.Format);
+        return Send(query, ct);
     }
 
     [HttpPost("builder/definitions")]
     public Task<IActionResult> Build([FromBody] ReportDefinitionDto body, CancellationToken ct)
     {
-        return Send(new BuildReportDefinitionCommand(body), ct);
+        var command = new BuildReportDefinitionCommand(body);
+        return Send(command, ct);
     }
 
     [HttpGet("builder/fields")]
     public Task<IActionResult> Fields([FromQuery] string dataSource, CancellationToken ct)
     {
-        return Send(new GetReportBuilderFieldsQuery(dataSource), ct);
+        var query = new GetReportBuilderFieldsQuery(dataSource);
+        return Send(query, ct);
     }
 }

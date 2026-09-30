@@ -62,7 +62,8 @@ public sealed class PostingsController : ApiControllerBase
     [ForbiddenCode("E-JCP-FORBIDDEN")]
     public Task<IActionResult> Renew(Guid id, [FromBody] RenewRequest body, CancellationToken ct)
     {
-        return Send(new RenewJobPostingCommand(id, body.NewDeadlineUtc), Ok, ct);
+        var command = new RenewJobPostingCommand(id, body.NewDeadlineUtc);
+        return Send(command, Ok, ct);
     }
 
     /// <summary>US-3.2.4-01: explicit lifecycle transition (publish/pause/resume/expire/archive).</summary>
@@ -71,7 +72,8 @@ public sealed class PostingsController : ApiControllerBase
     [ForbiddenCode("E-JST-FORBIDDEN")]
     public Task<IActionResult> ChangeStatus(Guid id, [FromBody] StatusRequest body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateJobPostingStatusCommand(id, body.Status), ct);
+        var command = new UpdateJobPostingStatusCommand(id, body.Status);
+        return SendNoContent(command, ct);
     }
 
     /// <summary>US-3.2.1-03: the employer's own postings.</summary>
@@ -79,7 +81,8 @@ public sealed class PostingsController : ApiControllerBase
     [Authorize(Policy = Policies.Employer)]
     public Task<IActionResult> Mine([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListMyJobPostingsQuery(status, page, pageSize), ct);
+        var query = new ListMyJobPostingsQuery(status, page, pageSize);
+        return Send(query, ct);
     }
 
     /// <summary>US-4.1-02: anonymous guest browsing; US-3.2.2-01/02: 8-filter search (foundation THR-013 &lt;= 2 s).</summary>
@@ -90,8 +93,9 @@ public sealed class PostingsController : ApiControllerBase
         [FromQuery] DateTime? deadlineBeforeUtc, [FromQuery] string? categoryCode, [FromQuery] string? sort, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new SearchJobPostingsQuery(keyword, governorate, city, salaryMin, salaryMax, contractType, postedAfterUtc, deadlineBeforeUtc, categoryCode,
-            sort, page, pageSize), ct);
+        var query = new SearchJobPostingsQuery(keyword, governorate, city, salaryMin, salaryMax, contractType, postedAfterUtc, deadlineBeforeUtc, categoryCode,
+            sort, page, pageSize);
+        return Send(query, ct);
     }
 
     /// <summary>US-3.2.2-02: personalised recommendations (degrades to plain search when BC-10 is unavailable).</summary>
@@ -99,7 +103,8 @@ public sealed class PostingsController : ApiControllerBase
     [Authorize(Policy = Policies.JobSeeker)]
     public Task<IActionResult> Recommended([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetRecommendedJobsQuery(page, pageSize), ct);
+        var query = new GetRecommendedJobsQuery(page, pageSize);
+        return Send(query, ct);
     }
 
     /// <summary>US-3.2.1-02: the field list and allowed values for the posting form.</summary>
@@ -107,7 +112,8 @@ public sealed class PostingsController : ApiControllerBase
     [Authorize(Policy = Policies.Employer)]
     public Task<IActionResult> Schema(CancellationToken ct)
     {
-        return Send(new GetJobPostingSchemaQuery(), ct);
+        var query = new GetJobPostingSchemaQuery();
+        return Send(query, ct);
     }
 
     /// <summary>US-3.2.1-01/03/04, US-4.1-02: a single posting (guest/anonymous; visibility-filtered). ETag is the committed RowVersion,
@@ -115,7 +121,8 @@ public sealed class PostingsController : ApiControllerBase
     [HttpGet("jobs/{id:guid}")]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetJobPostingQuery(id), view =>
+        var query = new GetJobPostingQuery(id);
+        return Send(query, view =>
         {
             SetETag(view.RowVersion);
             return Ok(view);

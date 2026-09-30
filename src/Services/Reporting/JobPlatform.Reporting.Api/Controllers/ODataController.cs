@@ -19,7 +19,8 @@ public sealed class ODataController : ApiControllerBase
     [HttpGet("{view}")]
     public Task<IActionResult> View(string view, [FromQuery(Name = "$top")] int top = 1000, CancellationToken ct = default)
     {
-        return Send(new GetODataViewQuery(view, top), table => Ok(new Dictionary<string, object?>
+        var query = new GetODataViewQuery(view, top);
+        return Send(query, table => Ok(new Dictionary<string, object?>
         {
             ["@odata.context"] = $"/odata/v1/$metadata#{view}",
             ["value"] = table.Rows.Select(row => table.Columns.Select((c, i) => (c.Name, Value: row[i])).ToDictionary(x => x.Name, x => x.Value)).ToList()

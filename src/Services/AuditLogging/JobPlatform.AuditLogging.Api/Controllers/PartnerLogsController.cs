@@ -14,38 +14,44 @@ public sealed class PartnerLogsController : ApiControllerBase
     public Task<IActionResult> ApiResponses([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new ListApiResponseLogQuery(from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new ListApiResponseLogQuery(from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("submissions")]
     public Task<IActionResult> Submissions([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new ListSubmissionLogQuery(from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new ListSubmissionLogQuery(from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("sync-errors")]
     public Task<IActionResult> SyncErrors([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new ListSyncErrorLogQuery(from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new ListSyncErrorLogQuery(from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("sync-dashboard")]
     public Task<IActionResult> SyncDashboard([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new GetSyncDashboardQuery(page, pageSize), ct);
+        var query = new GetSyncDashboardQuery(page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("integration-status")]
     public Task<IActionResult> IntegrationStatus(CancellationToken ct)
     {
-        return Send(new GetIntegrationStatusDashboardQuery(), ct);
+        var query = new GetIntegrationStatusDashboardQuery();
+        return Send(query, ct);
     }
 
     [HttpGet("usage-statistics")]
     public Task<IActionResult> UsageStatistics([FromQuery] DateOnly from, [FromQuery] DateOnly to, CancellationToken ct)
     {
-        return Send(new GetIntegrationUsageStatisticsQuery(from, to), ct);
+        var query = new GetIntegrationUsageStatisticsQuery(from, to);
+        return Send(query, ct);
     }
 }

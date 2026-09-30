@@ -53,7 +53,8 @@ public sealed class WebhooksController : ApiControllerBase
             return Error.Validation(new Dictionary<string, string[]> { ["body"] = new[] { "VAL.INVALID_FORMAT" } }).ToActionResult(HttpContext);
         }
 
-        return await Send(new RecordDeliveryReportCommand(providerMessageId ?? string.Empty, status ?? string.Empty), _ => NoContent(), ct);
+        var command = new RecordDeliveryReportCommand(providerMessageId ?? string.Empty, status ?? string.Empty);
+        return await Send(command, _ => NoContent(), ct);
     }
 }
 
@@ -67,12 +68,14 @@ public sealed class InternalNotificationsController : ApiControllerBase
     [HttpPost("otp")]
     public async Task<IActionResult> SendOtp([FromBody] OtpBody body, CancellationToken ct)
     {
-        return await Send(new SendTransactionalSmsCommand(body.AccountId, body.Purpose, body.Text, IdempotencyKey), result => Accepted(result), ct);
+        var command = new SendTransactionalSmsCommand(body.AccountId, body.Purpose, body.Text, IdempotencyKey);
+        return await Send(command, result => Accepted(result), ct);
     }
 
     [HttpGet("{id:guid}")]
     public Task<IActionResult> Detail(Guid id, CancellationToken ct)
     {
-        return Send(new GetNotificationDetailQuery(id), ct);
+        var query = new GetNotificationDetailQuery(id);
+        return Send(query, ct);
     }
 }

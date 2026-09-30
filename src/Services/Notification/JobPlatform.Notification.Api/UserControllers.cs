@@ -16,25 +16,29 @@ public sealed class NotificationsController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListInAppNotificationsQuery(status, page, pageSize), ct);
+        var query = new ListInAppNotificationsQuery(status, page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpPost("{id:guid}/read")]
     public Task<IActionResult> Read(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new MarkNotificationReadCommand(id), ct);
+        var command = new MarkNotificationReadCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new DeleteNotificationCommand(id), ct);
+        var command = new DeleteNotificationCommand(id);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("{id:guid}/action")]
     public Task<IActionResult> TakeAction(Guid id, CancellationToken ct)
     {
-        return Send(new TakeNotificationActionCommand(id), ct);
+        var command = new TakeNotificationActionCommand(id);
+        return Send(command, ct);
     }
 }
 
@@ -52,25 +56,29 @@ public sealed class PreferencesController : ApiControllerBase
     [HttpGet("{channel}")]
     public Task<IActionResult> Get(string channel, CancellationToken ct)
     {
-        return Send(new GetNotificationPreferencesQuery(channel), ct);
+        var query = new GetNotificationPreferencesQuery(channel);
+        return Send(query, ct);
     }
 
     [HttpPut("email")]
     public Task<IActionResult> PutEmail([FromBody] EmailBody body, CancellationToken ct)
     {
-        return Send(new SetEmailPreferenceCommand(body.Categories ?? new Dictionary<string, bool>(), body.Mode ?? "Immediate"), ct);
+        var command = new SetEmailPreferenceCommand(body.Categories ?? new Dictionary<string, bool>(), body.Mode ?? "Immediate");
+        return Send(command, ct);
     }
 
     [HttpPut("in-app")]
     public Task<IActionResult> PutInApp([FromBody] InAppBody body, CancellationToken ct)
     {
-        return Send(new SetInAppPreferenceCommand(body.Categories ?? new Dictionary<string, bool>()), ct);
+        var command = new SetInAppPreferenceCommand(body.Categories ?? new Dictionary<string, bool>());
+        return Send(command, ct);
     }
 
     [HttpPut("sms")]
     public Task<IActionResult> PutSms([FromBody] SmsBody body, CancellationToken ct)
     {
-        return Send(new SetSmsOptInCommand(body.Mobile, body.OptIn), ct);
+        var command = new SetSmsOptInCommand(body.Mobile, body.OptIn);
+        return Send(command, ct);
     }
 }
 
@@ -83,12 +91,14 @@ public sealed class UnsubscribeController : ApiControllerBase
     [HttpGet("{token}")]
     public Task<IActionResult> Get(string token, CancellationToken ct)
     {
-        return Send(new UnsubscribeCommand(token), ct);
+        var command = new UnsubscribeCommand(token);
+        return Send(command, ct);
     }
 
     [HttpPost("{token}")]
     public Task<IActionResult> Post(string token, CancellationToken ct)
     {
-        return Send(new UnsubscribeCommand(token), _ => NoContent(), ct);
+        var command = new UnsubscribeCommand(token);
+        return Send(command, _ => NoContent(), ct);
     }
 }

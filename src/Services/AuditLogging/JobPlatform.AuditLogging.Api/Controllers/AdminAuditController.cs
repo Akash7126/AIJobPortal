@@ -14,39 +14,45 @@ public sealed class AdminAuditController : ApiControllerBase
     public Task<IActionResult> JobAuditTrail(string platformJobId, [FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome,
         [FromQuery] int page = 1, [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new GetJobAuditTrailQuery(platformJobId, from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new GetJobAuditTrailQuery(platformJobId, from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("admin-actions")]
     public Task<IActionResult> AdminActions([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new ListAdminAuditLogQuery(from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new ListAdminAuditLogQuery(from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("access")]
     public Task<IActionResult> Access([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new ListAccessLogQuery(from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new ListAccessLogQuery(from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("government-exchanges")]
     public Task<IActionResult> GovernmentExchanges([FromQuery] DateTime? from, [FromQuery] DateTime? to, [FromQuery] string? outcome, [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20, [FromQuery] bool includeArchived = false, CancellationToken ct = default)
     {
-        return Send(new ListGovernmentDataAuditTrailQuery(from, to, outcome, page, pageSize, includeArchived), ct);
+        var query = new ListGovernmentDataAuditTrailQuery(from, to, outcome, page, pageSize, includeArchived);
+        return Send(query, ct);
     }
 
     [HttpGet("emails")]
     public Task<IActionResult> Emails([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListEmailLogQuery(page, pageSize), ct);
+        var query = new ListEmailLogQuery(page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("sms")]
     public Task<IActionResult> Sms([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListSmsMessageLogQuery(page, pageSize), ct);
+        var query = new ListSmsMessageLogQuery(page, pageSize);
+        return Send(query, ct);
     }
 }

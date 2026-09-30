@@ -56,20 +56,26 @@ public sealed class MatchingWorkRunner(IServiceScopeFactory scopes, IOptions<Mat
         switch (kind)
         {
             case WorkItemKind.RefreshProfileEmbedding:
-                return Failure(await sender.Send(new RefreshProfileEmbeddingCommand(entityId), ct));
+                var command = new RefreshProfileEmbeddingCommand(entityId);
+                return Failure(await sender.Send(command, ct));
             case WorkItemKind.MatchesForPosting:
-                return Failure(await sender.Send(new ComputeMatchesForPostingCommand(entityId), ct));
+                var computeMatchesForPostingCommand = new ComputeMatchesForPostingCommand(entityId);
+                return Failure(await sender.Send(computeMatchesForPostingCommand, ct));
             case WorkItemKind.MatchesForProfile:
-                return Failure(await sender.Send(new ComputeMatchesForProfileCommand(entityId), ct));
+                var computeMatchesForProfileCommand = new ComputeMatchesForProfileCommand(entityId);
+                return Failure(await sender.Send(computeMatchesForProfileCommand, ct));
             case WorkItemKind.ComputeShortlist:
-                return Failure(await sender.Send(new RunCandidateShortlistCommand(entityId), ct));
+                var runCandidateShortlistCommand = new RunCandidateShortlistCommand(entityId);
+                return Failure(await sender.Send(runCandidateShortlistCommand, ct));
             case WorkItemKind.ComputeRecommendation:
-                return Failure(await sender.Send(new ComputeJobRecommendationCommand(entityId, Actor.SystemId), ct));
+                var computeJobRecommendationCommand = new ComputeJobRecommendationCommand(entityId, Actor.SystemId);
+                return Failure(await sender.Send(computeJobRecommendationCommand, ct));
             case WorkItemKind.Restandardize:
                 int changed;
                 do
                 {
-                    var result = await sender.Send(new StandardizeSkillsCommand(null, 100), ct);
+                    var standardizeSkillsCommand = new StandardizeSkillsCommand(null, 100);
+                    var result = await sender.Send(standardizeSkillsCommand, ct);
                     if (result.IsFailure)
                     {
                         return result.Error!.Code;

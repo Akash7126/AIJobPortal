@@ -15,25 +15,29 @@ public sealed class SchedulesController : ApiControllerBase
     [HttpGet]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListSchedulesQuery(), ct);
+        var query = new ListSchedulesQuery();
+        return Send(query, ct);
     }
 
     [HttpPost]
     public Task<IActionResult> Create([FromBody] ScheduleBody body, CancellationToken ct)
     {
-        return SendCreated(new ConfigureReportScheduleCommand(null, body.Name, body.TemplateId, body.SavedReportId, body.Interval, body.Cron, body.Recipients, body.Format),
+        var command = new ConfigureReportScheduleCommand(null, body.Name, body.TemplateId, body.SavedReportId, body.Interval, body.Cron, body.Recipients, body.Format);
+        return SendCreated(command,
             s => $"/api/v1/admin/reports/schedules/{s.Id}", ct);
     }
 
     [HttpPut("{id:guid}")]
     public Task<IActionResult> Update(Guid id, [FromBody] ScheduleBody body, CancellationToken ct)
     {
-        return Send(new ConfigureReportScheduleCommand(id, body.Name, body.TemplateId, body.SavedReportId, body.Interval, body.Cron, body.Recipients, body.Format), _ => NoContent(), ct);
+        var command = new ConfigureReportScheduleCommand(id, body.Name, body.TemplateId, body.SavedReportId, body.Interval, body.Cron, body.Recipients, body.Format);
+        return Send(command, _ => NoContent(), ct);
     }
 
     [HttpDelete("{id:guid}")]
     public Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new DeleteReportScheduleCommand(id), ct);
+        var command = new DeleteReportScheduleCommand(id);
+        return SendNoContent(command, ct);
     }
 }

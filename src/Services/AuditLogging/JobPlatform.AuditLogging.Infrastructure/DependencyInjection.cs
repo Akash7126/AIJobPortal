@@ -171,7 +171,8 @@ public sealed class RetentionService : BackgroundService
             do
             {
                 using var scope = _scopes.CreateScope();
-                var result = await scope.ServiceProvider.GetRequiredService<ISender>().Send(new ArchiveExpiredAuditEntriesCommand(_options.Value.BatchSize), ct);
+                var command = new ArchiveExpiredAuditEntriesCommand(_options.Value.BatchSize);
+                var result = await scope.ServiceProvider.GetRequiredService<ISender>().Send(command, ct);
                 batch = result.IsSuccess ? result.Value : 0;
                 total += batch;
             }

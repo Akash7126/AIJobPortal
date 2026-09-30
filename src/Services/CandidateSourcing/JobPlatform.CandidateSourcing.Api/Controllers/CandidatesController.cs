@@ -17,18 +17,21 @@ public sealed class CandidatesController : CandidateSourcingControllerBase
     {
         var criteria = new CandidateSearchCriteria(body.Skills, body.EducationLevel, body.MinExperienceYears, body.MaxExperienceYears, body.LocationCode,
             body.SalaryMin, body.SalaryMax, body.Availability);
-        return Send(new SearchCandidateDatabaseQuery(criteria, body.Page, body.PageSize), ct);
+        var query = new SearchCandidateDatabaseQuery(criteria, body.Page, body.PageSize);
+        return Send(query, ct);
     }
 
     [HttpGet("candidates/{candidateId:guid}")]
     public Task<IActionResult> Get(Guid candidateId, CancellationToken ct)
     {
-        return Send(new GetCandidateViewQuery(candidateId), ct);
+        var query = new GetCandidateViewQuery(candidateId);
+        return Send(query, ct);
     }
 
     [HttpGet("candidates/{candidateId:guid}/insight")]
     public Task<IActionResult> Insight(Guid candidateId, [FromQuery] Guid jobPostingId, CancellationToken ct)
     {
-        return Send(new GetCandidateInsightQuery(candidateId, jobPostingId), ct);
+        var query = new GetCandidateInsightQuery(candidateId, jobPostingId);
+        return Send(query, ct);
     }
 }

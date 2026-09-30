@@ -117,7 +117,8 @@ public sealed class DigestService : BackgroundService
         try
         {
             using var scope = _scopes.CreateScope();
-            var result = await scope.ServiceProvider.GetRequiredService<ISender>().Send(new BuildDailyDigestCommand(_clock.GetUtcNow().UtcDateTime), ct);
+            var command = new BuildDailyDigestCommand(_clock.GetUtcNow().UtcDateTime);
+            var result = await scope.ServiceProvider.GetRequiredService<ISender>().Send(command, ct);
             return result.IsSuccess ? result.Value : 0;
         }
         finally

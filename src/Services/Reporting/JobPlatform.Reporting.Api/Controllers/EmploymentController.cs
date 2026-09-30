@@ -12,42 +12,49 @@ public sealed class EmploymentController : ApiControllerBase
     [HttpGet("statistics")]
     public Task<IActionResult> Statistics([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetEmploymentStatisticsQuery(from, to), ct);
+        var query = new GetEmploymentStatisticsQuery(from, to);
+        return Send(query, ct);
     }
 
     [HttpGet("metrics")]
     public Task<IActionResult> Metrics([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, [FromQuery] string? granularity, CancellationToken ct)
     {
-        return Send(new GetEmploymentMetricsQuery(from, to, granularity), ct);
+        var query = new GetEmploymentMetricsQuery(from, to, granularity);
+        return Send(query, ct);
     }
 
     [HttpGet("industries")]
     public Task<IActionResult> Industries([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetIndustryAnalyticsQuery(from, to), ct);
+        var query = new GetIndustryAnalyticsQuery(from, to);
+        return Send(query, ct);
     }
 
     [HttpGet("skills/trends")]
     public Task<IActionResult> SkillTrends([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, [FromQuery] string? granularity, CancellationToken ct)
     {
-        return Send(new GetSkillDemandTrendsQuery(from, to, granularity), ct);
+        var query = new GetSkillDemandTrendsQuery(from, to, granularity);
+        return Send(query, ct);
     }
 
     [HttpGet("geography")]
     public Task<IActionResult> Geography([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetGeographicDistributionQuery(from, to), ct);
+        var query = new GetGeographicDistributionQuery(from, to);
+        return Send(query, ct);
     }
 
     [HttpGet("salaries")]
     public Task<IActionResult> Salaries([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, [FromQuery] string? by, CancellationToken ct)
     {
-        return Send(new GetSalaryAnalyticsQuery(from, to, by), ct);
+        var query = new GetSalaryAnalyticsQuery(from, to, by);
+        return Send(query, ct);
     }
 
     [HttpGet("outcomes")]
     public Task<IActionResult> Outcomes([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, CancellationToken ct)
     {
-        return Send(new GetEmploymentOutcomesQuery(from, to), ct);
+        var query = new GetEmploymentOutcomesQuery(from, to);
+        return Send(query, ct);
     }
 }

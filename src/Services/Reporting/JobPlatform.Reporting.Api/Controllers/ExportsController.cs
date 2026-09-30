@@ -16,18 +16,21 @@ public sealed class ExportsController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> RequestExport([FromBody] ExportBody body, CancellationToken ct)
     {
-        return Send(new RequestReportExportCommand(body.RefKind, body.RefId, body.Parameters, body.Format), e => Accepted($"/api/v1/admin/reports/exports/{e.Id}", e), ct);
+        var command = new RequestReportExportCommand(body.RefKind, body.RefId, body.Parameters, body.Format);
+        return Send(command, e => Accepted($"/api/v1/admin/reports/exports/{e.Id}", e), ct);
     }
 
     [HttpGet("{id:guid}")]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetReportExportQuery(id), ct);
+        var query = new GetReportExportQuery(id);
+        return Send(query, ct);
     }
 
     [HttpGet("{id:guid}/file")]
     public Task<IActionResult> DownloadFile(Guid id, CancellationToken ct)
     {
-        return Send(new DownloadReportExportQuery(id), f => base.File(f.Content, f.ContentType, f.FileName), ct);
+        var query = new DownloadReportExportQuery(id);
+        return Send(query, f => base.File(f.Content, f.ContentType, f.FileName), ct);
     }
 }

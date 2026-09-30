@@ -44,8 +44,9 @@ public sealed class AccountsController : ApiControllerBase
     [ProducesResponseType<RegisteredAccountDto>(StatusCodes.Status201Created)]
     public Task<IActionResult> RegisterEmployer(RegisterEmployerRequest body, CancellationToken ct)
     {
-        return Send(new RegisterEmployerAccountCommand(body.CompanyName, body.Email, body.Mobile, body.CompanyId, body.RegistrationNumber, body.Password,
-                body.Level, IdempotencyKey),
+        var command = new RegisterEmployerAccountCommand(body.CompanyName, body.Email, body.Mobile, body.CompanyId, body.RegistrationNumber, body.Password,
+                body.Level, IdempotencyKey);
+        return Send(command,
             dto => Created($"/api/v1/admin/accounts/{dto.AccountId}", dto), ct);
     }
 
@@ -54,7 +55,8 @@ public sealed class AccountsController : ApiControllerBase
     [ProducesResponseType<RegisteredAccountDto>(StatusCodes.Status201Created)]
     public Task<IActionResult> RegisterPartner(RegisterPartnerRequest body, CancellationToken ct)
     {
-        return Send(new RegisterPartnerAccountCommand(body.OrganisationName, body.ContactEmail, body.Mobile, body.Identity, body.Password, IdempotencyKey),
+        var command = new RegisterPartnerAccountCommand(body.OrganisationName, body.ContactEmail, body.Mobile, body.Identity, body.Password, IdempotencyKey);
+        return Send(command,
             dto => Created($"/api/v1/admin/accounts/{dto.AccountId}", dto), ct);
     }
 
@@ -62,14 +64,16 @@ public sealed class AccountsController : ApiControllerBase
     [AllowAnonymous]
     public Task<IActionResult> ResendActivationCode(Guid id, CancellationToken ct)
     {
-        return Send(new ResendActivationCodeCommand(id), _ => Accepted(), ct);
+        var command = new ResendActivationCodeCommand(id);
+        return Send(command, _ => Accepted(), ct);
     }
 
     [HttpPost("{id:guid}/activate")]
     [AllowAnonymous]
     public Task<IActionResult> Activate(Guid id, ActivateAccountRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ActivateAccountCommand(id, body.Code), ct);
+        var command = new ActivateAccountCommand(id, body.Code);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("{id:guid}/approve-partner")]
@@ -77,6 +81,7 @@ public sealed class AccountsController : ApiControllerBase
     [ForbiddenCode("E-AUM-FORBIDDEN")]
     public Task<IActionResult> ApprovePartner(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new ApprovePartnerAccountCommand(id), ct);
+        var command = new ApprovePartnerAccountCommand(id);
+        return SendNoContent(command, ct);
     }
 }

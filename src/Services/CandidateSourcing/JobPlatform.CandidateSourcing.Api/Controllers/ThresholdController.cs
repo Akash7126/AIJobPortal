@@ -12,12 +12,14 @@ public sealed class ThresholdController : CandidateSourcingControllerBase
     [HttpGet("jobs/{jobPostingId:guid}/qualification-threshold")]
     public Task<IActionResult> Get(Guid jobPostingId, CancellationToken ct)
     {
-        return Send(new GetQualificationThresholdQuery(jobPostingId), ct);
+        var query = new GetQualificationThresholdQuery(jobPostingId);
+        return Send(query, ct);
     }
 
     [HttpPut("jobs/{jobPostingId:guid}/qualification-threshold")]
     public Task<IActionResult> Set(Guid jobPostingId, [FromBody] SetThresholdRequest body, CancellationToken ct)
     {
-        return Send(new SetQualificationThresholdCommand(jobPostingId, body.Percent), ct);
+        var command = new SetQualificationThresholdCommand(jobPostingId, body.Percent);
+        return Send(command, ct);
     }
 }

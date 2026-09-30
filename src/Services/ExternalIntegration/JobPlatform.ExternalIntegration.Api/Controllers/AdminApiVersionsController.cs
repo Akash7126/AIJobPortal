@@ -21,24 +21,28 @@ public sealed class AdminApiVersionsController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> Release([FromBody] ReleaseRequest body, CancellationToken ct)
     {
-        return Send(new ReleaseApiVersionCommand(body.Version), value => Created($"/api/v1/docs/{value.Version}", value), ct);
+        var command = new ReleaseApiVersionCommand(body.Version);
+        return Send(command, value => Created($"/api/v1/docs/{value.Version}", value), ct);
     }
 
     [HttpPost("{version}/deprecate")]
     public Task<IActionResult> Deprecate(string version, [FromBody] DeprecateRequest body, CancellationToken ct)
     {
-        return SendNoContent(new DeprecateApiVersionCommand(version, body.SunsetAtUtc), ct);
+        var command = new DeprecateApiVersionCommand(version, body.SunsetAtUtc);
+        return SendNoContent(command, ct);
     }
 
     [HttpPost("{version}/retire")]
     public Task<IActionResult> Retire(string version, CancellationToken ct)
     {
-        return SendNoContent(new RetireApiVersionCommand(version), ct);
+        var command = new RetireApiVersionCommand(version);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("{version}/format")]
     public Task<IActionResult> ConfigureFormat(string version, [FromBody] ConfigureFormatRequest body, CancellationToken ct)
     {
-        return SendNoContent(new ConfigureApiDataFormatCommand(version, body.Formats), ct);
+        var command = new ConfigureApiDataFormatCommand(version, body.Formats);
+        return SendNoContent(command, ct);
     }
 }

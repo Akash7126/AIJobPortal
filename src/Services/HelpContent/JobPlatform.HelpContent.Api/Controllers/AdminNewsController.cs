@@ -22,14 +22,16 @@ public sealed class AdminNewsController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> Create([FromBody] NewsRequest body, CancellationToken ct)
     {
-        return Send(new CreateNewsArticleCommand(body.Kind, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn),
+        var command = new CreateNewsArticleCommand(body.Kind, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn);
+        return Send(command,
             result => result.Existing ? Ok(result.Article) : Created($"/api/v1/news/{result.Article.NewsArticleId}", result.Article), ct);
     }
 
     [HttpPut("{id:guid}")]
     public Task<IActionResult> Edit(Guid id, [FromBody] NewsRequest body, CancellationToken ct)
     {
-        return Send(new EditNewsArticleCommand(id, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn), ct);
+        var command = new EditNewsArticleCommand(id, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn);
+        return Send(command, ct);
     }
 
     public sealed record MediaRequest(NewsMediaType Type, string? AltText);
@@ -46,7 +48,8 @@ public sealed class AdminNewsController : ApiControllerBase
 
         await using var stream = new MemoryStream();
         await file.CopyToAsync(stream, ct);
-        return await Send(new AddNewsMediaCommand(id, type, file.FileName, file.ContentType, file.Length, stream.ToArray(), altText),
+        var command = new AddNewsMediaCommand(id, type, file.FileName, file.ContentType, file.Length, stream.ToArray(), altText);
+        return await Send(command,
             value => Created($"/api/v1/news/{id}", value), ct);
     }
 
@@ -54,14 +57,16 @@ public sealed class AdminNewsController : ApiControllerBase
     [HttpPost("{id:guid}/publish")]
     public Task<IActionResult> Publish(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new PublishNewsArticleCommand(id), ct);
+        var command = new PublishNewsArticleCommand(id);
+        return SendNoContent(command, ct);
     }
 
     /// <summary>US-3.7.1-06: 204 also when already archived (idempotent no-op).</summary>
     [HttpPost("{id:guid}/archive")]
     public Task<IActionResult> Archive(Guid id, CancellationToken ct)
     {
-        return SendNoContent(new ArchiveNewsArticleCommand(id), ct);
+        var command = new ArchiveNewsArticleCommand(id);
+        return SendNoContent(command, ct);
     }
 
     public sealed record CategorizationRequest(IReadOnlyList<Guid> CategoryIds, IReadOnlyList<string> Tags);
@@ -70,6 +75,7 @@ public sealed class AdminNewsController : ApiControllerBase
     [HttpPut("{id:guid}/categorization")]
     public Task<IActionResult> UpdateCategorization(Guid id, [FromBody] CategorizationRequest body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateContentCategorizationCommand(id, body.CategoryIds, body.Tags), ct);
+        var command = new UpdateContentCategorizationCommand(id, body.CategoryIds, body.Tags);
+        return SendNoContent(command, ct);
     }
 }

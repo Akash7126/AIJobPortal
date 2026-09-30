@@ -14,12 +14,14 @@ public sealed class InternalController : ApiControllerBase
     [HttpGet("employers/{employerId:guid}/standing")]
     public Task<IActionResult> Standing(Guid employerId, CancellationToken ct)
     {
-        return Send(new GetEmployerStandingQuery(employerId), ct);
+        var query = new GetEmployerStandingQuery(employerId);
+        return Send(query, ct);
     }
 
     [HttpGet("employers/{employerId:guid}/company")]
     public Task<IActionResult> Company(Guid employerId, CancellationToken ct)
     {
-        return Send(new GetCompanyPublicInfoQuery(employerId), ct);
+        var query = new GetCompanyPublicInfoQuery(employerId);
+        return Send(query, ct);
     }
 }

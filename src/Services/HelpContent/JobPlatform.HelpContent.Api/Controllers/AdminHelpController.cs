@@ -23,7 +23,8 @@ public sealed class AdminHelpController : ApiControllerBase
     [HttpPost]
     public Task<IActionResult> Create([FromBody] HelpContentRequest body, CancellationToken ct)
     {
-        return Send(new CreateHelpContentCommand(body.Kind, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn),
+        var command = new CreateHelpContentCommand(body.Kind, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn);
+        return Send(command,
             value => Created($"/api/v1/help/{value.HelpContentId}", value), ct);
     }
 
@@ -32,7 +33,8 @@ public sealed class AdminHelpController : ApiControllerBase
     [HttpPut("{id:guid}")]
     public Task<IActionResult> Update(Guid id, [FromBody] HelpContentRequest body, CancellationToken ct)
     {
-        return Send(new UpdateHelpContentCommand(id, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn), ct);
+        var command = new UpdateHelpContentCommand(id, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn);
+        return Send(command, ct);
     }
 
     public sealed record OrganizationRequest(Guid? TopicId, IReadOnlyList<HelpRole> Roles);
@@ -41,7 +43,8 @@ public sealed class AdminHelpController : ApiControllerBase
     [HttpPut("{id:guid}/organization")]
     public Task<IActionResult> UpdateOrganization(Guid id, [FromBody] OrganizationRequest body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateHelpContentOrganizationCommand(id, body.TopicId, body.Roles), ct);
+        var command = new UpdateHelpContentOrganizationCommand(id, body.TopicId, body.Roles);
+        return SendNoContent(command, ct);
     }
 
     public sealed record MediaRequest(HelpMediaType Type, string? CaptionsRef, string? TextAlternative);
@@ -58,7 +61,8 @@ public sealed class AdminHelpController : ApiControllerBase
 
         await using var stream = new MemoryStream();
         await file.CopyToAsync(stream, ct);
-        return await Send(new AttachHelpMediaCommand(id, type, file.FileName, file.ContentType, file.Length, stream.ToArray(), captionsRef, textAlternative),
+        var command = new AttachHelpMediaCommand(id, type, file.FileName, file.ContentType, file.Length, stream.ToArray(), captionsRef, textAlternative);
+        return await Send(command,
             value => Created($"/api/v1/help/{id}", value), ct);
     }
 
@@ -66,7 +70,8 @@ public sealed class AdminHelpController : ApiControllerBase
     [HttpGet("feedback/summary")]
     public Task<IActionResult> FeedbackSummary([FromQuery] Guid helpContentId, CancellationToken ct)
     {
-        return Send(new GetHelpFeedbackSummaryQuery(helpContentId), ct);
+        var query = new GetHelpFeedbackSummaryQuery(helpContentId);
+        return Send(query, ct);
     }
 
     /// <summary>US-3.7.2-04. The page key is a catch-all route segment: keys look like "employer/dashboard" (handover section 3.8),
@@ -74,6 +79,7 @@ public sealed class AdminHelpController : ApiControllerBase
     [HttpPut("context-mappings/{*pageKey}")]
     public Task<IActionResult> SetContextMapping(string pageKey, [FromBody] Guid helpContentId, CancellationToken ct)
     {
-        return SendNoContent(new SetContextHelpMappingCommand(pageKey, helpContentId), ct);
+        var command = new SetContextHelpMappingCommand(pageKey, helpContentId);
+        return SendNoContent(command, ct);
     }
 }

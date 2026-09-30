@@ -16,24 +16,28 @@ public sealed class ActivityController : ApiControllerBase
     [HttpGet("activity")]
     public Task<IActionResult> Activity([FromQuery] DateOnly? from, [FromQuery] DateOnly? to, [FromQuery] string? type, CancellationToken ct)
     {
-        return Send(new GetUserActivityQuery(from, to, type), ct);
+        var query = new GetUserActivityQuery(from, to, type);
+        return Send(query, ct);
     }
 
     [HttpGet("activity/retention-policy")]
     public Task<IActionResult> GetRetention(CancellationToken ct)
     {
-        return Send(new GetRetentionPolicyQuery(), ct);
+        var query = new GetRetentionPolicyQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("activity/retention-policy")]
     public Task<IActionResult> SetRetention([FromBody] RetentionBody body, CancellationToken ct)
     {
-        return Send(new SetActivityRetentionPolicyCommand(body.Months), _ => NoContent(), ct);
+        var command = new SetActivityRetentionPolicyCommand(body.Months);
+        return Send(command, _ => NoContent(), ct);
     }
 
     [HttpGet("logins/current")]
     public Task<IActionResult> Logins(CancellationToken ct)
     {
-        return Send(new GetLoginDashboardQuery(), ct);
+        var query = new GetLoginDashboardQuery();
+        return Send(query, ct);
     }
 }

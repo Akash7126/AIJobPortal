@@ -28,7 +28,8 @@ public sealed class ProfileController : ApiControllerBase
     [HttpGet("profiles/me")]
     public Task<IActionResult> GetMine(CancellationToken ct)
     {
-        return Send(new GetMyProfileQuery(), v =>
+        var query = new GetMyProfileQuery();
+        return Send(query, v =>
         {
             SetETag(v.RowVersion);
             return Ok(v);
@@ -38,49 +39,57 @@ public sealed class ProfileController : ApiControllerBase
     [HttpGet("profiles/me/completion")]
     public Task<IActionResult> GetCompletion(CancellationToken ct)
     {
-        return Send(new GetProfileCompletionRecommendationQuery(), ct);
+        var query = new GetProfileCompletionRecommendationQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("profiles/me/level1")]
     public Task<IActionResult> UpdateLevel1([FromBody] Level1Request body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateLevel1Command(body.FullName, body.Email, body.MobileNumber, body.Gender, IfMatch), ct);
+        var command = new UpdateLevel1Command(body.FullName, body.Email, body.MobileNumber, body.Gender, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/education")]
     public Task<IActionResult> UpdateEducation([FromBody] IReadOnlyList<EducationInput> body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateEducationCommand(body, IfMatch), ct);
+        var command = new UpdateEducationCommand(body, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/experience")]
     public Task<IActionResult> UpdateExperience([FromBody] ExperienceRequest body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateExperienceCommand(body.Entries, body.YearsOfExperience, IfMatch), ct);
+        var command = new UpdateExperienceCommand(body.Entries, body.YearsOfExperience, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/skills")]
     public Task<IActionResult> UpdateSkills([FromBody] IReadOnlyList<SkillInput> body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateSkillsCommand(body, IfMatch), ct);
+        var command = new UpdateSkillsCommand(body, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/training")]
     public Task<IActionResult> UpdateTraining([FromBody] IReadOnlyList<TrainingInput> body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateTrainingCommand(body, IfMatch), ct);
+        var command = new UpdateTrainingCommand(body, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/certificates")]
     public Task<IActionResult> UpdateCertificates([FromBody] IReadOnlyList<CertificateInput> body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateCertificatesCommand(body, IfMatch), ct);
+        var command = new UpdateCertificatesCommand(body, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/level3")]
     public Task<IActionResult> UpdateLevel3([FromBody] Level3Request body, CancellationToken ct)
     {
-        return SendNoContent(new UpdateLevel3Command(body.SocialLinks, body.Statement, body.Bio, IfMatch), ct);
+        var command = new UpdateLevel3Command(body.SocialLinks, body.Statement, body.Bio, IfMatch);
+        return SendNoContent(command, ct);
     }
 
     [HttpPut("profiles/me/job-preference")]
@@ -92,7 +101,8 @@ public sealed class ProfileController : ApiControllerBase
     [HttpGet("profiles/me/job-preference")]
     public Task<IActionResult> GetJobPreference(CancellationToken ct)
     {
-        return Send(new GetJobPreferenceQuery(), ct);
+        var query = new GetJobPreferenceQuery();
+        return Send(query, ct);
     }
 
     [HttpPut("profiles/me/privacy/visibility")]
@@ -104,7 +114,8 @@ public sealed class ProfileController : ApiControllerBase
     [HttpGet("profiles/me/privacy")]
     public Task<IActionResult> GetPrivacy(CancellationToken ct)
     {
-        return Send(new GetPrivacySettingQuery(), ct);
+        var query = new GetPrivacySettingQuery();
+        return Send(query, ct);
     }
 
     [HttpPost("profiles/me/privacy/deactivation")]

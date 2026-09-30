@@ -14,7 +14,8 @@ public sealed class PublicDocumentationController : ApiControllerBase
     [HttpGet("docs/{version}")]
     public Task<IActionResult> Get(string version, CancellationToken ct)
     {
-        return Send(new GetApiDocumentationQuery(version), value =>
+        var query = new GetApiDocumentationQuery(version);
+        return Send(query, value =>
         {
             if (value.Deprecated)
             {
@@ -33,6 +34,7 @@ public sealed class PublicDocumentationController : ApiControllerBase
     [HttpGet("api-versions")]
     public Task<IActionResult> List(CancellationToken ct)
     {
-        return Send(new ListApiVersionsQuery(), ct);
+        var query = new ListApiVersionsQuery();
+        return Send(query, ct);
     }
 }

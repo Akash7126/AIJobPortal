@@ -78,7 +78,8 @@ public sealed class ExpireDuePostingsJob : BackgroundService
         {
             using var scope = _scopes.CreateScope();
             var sender = scope.ServiceProvider.GetRequiredService<ISender>();
-            var result = await sender.Send(new ExpireDuePostingsCommand(_options.Value.BatchSize), ct);
+            var command = new ExpireDuePostingsCommand(_options.Value.BatchSize);
+            var result = await sender.Send(command, ct);
             return result.IsSuccess ? result.Value : 0;
         }
         finally

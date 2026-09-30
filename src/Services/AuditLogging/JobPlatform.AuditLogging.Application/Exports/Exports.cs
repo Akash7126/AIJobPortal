@@ -39,7 +39,8 @@ public sealed class ExportGenerationRunner
         var queued = await _jobs.ListQueuedAsync(take, ct);
         foreach (var queuedJob in queued)
         {
-            var started = await _sender.Send(new StartExportGenerationCommand(queuedJob.Id), ct);
+            var command = new StartExportGenerationCommand(queuedJob.Id);
+            var started = await _sender.Send(command, ct);
             if (started.IsFailure)
             {
                 continue;
@@ -50,17 +51,20 @@ public sealed class ExportGenerationRunner
                 var report = await _generator.GenerateAsync(started.Value.ReportType, started.Value.Format, started.Value.Parameters, ct);
                 if (report.IsSuccess)
                 {
-                    await _sender.Send(new CompleteExportJobCommand(queuedJob.Id, report.Value), ct);
+                    var completeExportJobCommand = new CompleteExportJobCommand(queuedJob.Id, report.Value);
+                    await _sender.Send(completeExportJobCommand, ct);
                 }
                 else
                 {
-                    await _sender.Send(new FailExportJobCommand(queuedJob.Id, report.Error!.Code), ct);
+                    var failExportJobCommand = new FailExportJobCommand(queuedJob.Id, report.Error!.Code);
+                    await _sender.Send(failExportJobCommand, ct);
                 }
             }
             catch (Exception ex) when (ex is not OperationCanceledException)
             {
                 _logger.LogError(ex, "Export job {JobId} failed", queuedJob.Id);
-                await _sender.Send(new FailExportJobCommand(queuedJob.Id, "E-AUDIT-REPORT-SOURCE-UNAVAILABLE"), ct);
+                var command2 = new FailExportJobCommand(queuedJob.Id, "E-AUDIT-REPORT-SOURCE-UNAVAILABLE");
+                await _sender.Send(command2, ct);
             }
         }
 

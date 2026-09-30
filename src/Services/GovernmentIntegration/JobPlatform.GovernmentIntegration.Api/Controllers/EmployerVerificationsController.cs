@@ -21,7 +21,8 @@ public sealed class EmployerVerificationsController : ApiControllerBase
     [Authorize(Policy = Policies.Employer)]
     public Task<IActionResult> Submit([FromBody] RequestEmployerVerificationRequest body, CancellationToken ct)
     {
-        return Send(new RequestEmployerVerificationCommand(body.RegistrationNumber, body.VatNumber, body.MobileNumber, IdempotencyKey),
+        var command = new RequestEmployerVerificationCommand(body.RegistrationNumber, body.VatNumber, body.MobileNumber, IdempotencyKey);
+        return Send(command,
             value => Accepted($"/api/v1/employer-verifications/{value.EmployerVerificationId}", value), ct);
     }
 
@@ -29,20 +30,23 @@ public sealed class EmployerVerificationsController : ApiControllerBase
     [Authorize(Policy = Policies.Authenticated)]
     public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        return Send(new GetEmployerVerificationQuery(id), ct);
+        var query = new GetEmployerVerificationQuery(id);
+        return Send(query, ct);
     }
 
     [HttpGet("pending-review")]
     [Authorize(Policy = Policies.Administrator)]
     public Task<IActionResult> ListPendingReview([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        return Send(new ListPendingManualReviewQuery(page, pageSize), ct);
+        var query = new ListPendingManualReviewQuery(page, pageSize);
+        return Send(query, ct);
     }
 
     [HttpPost("{id:guid}/manual-decision")]
     [Authorize(Policy = Policies.Administrator)]
     public Task<IActionResult> DecideManually(Guid id, [FromBody] DecideRequest body, CancellationToken ct)
     {
-        return SendNoContent(new DecideEmployerVerificationManuallyCommand(id, body.Decision, body.Reason), ct);
+        var command = new DecideEmployerVerificationManuallyCommand(id, body.Decision, body.Reason);
+        return SendNoContent(command, ct);
     }
 }

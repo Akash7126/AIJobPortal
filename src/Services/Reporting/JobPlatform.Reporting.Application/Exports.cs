@@ -22,7 +22,8 @@ public sealed class ExportGenerationRunner
         var queued = await _exports.ListQueuedAsync(batch, ct);
         foreach (var export in queued)
         {
-            await _sender.Send(new GenerateReportExportCommand(export.Id), ct);
+            var command = new GenerateReportExportCommand(export.Id);
+            await _sender.Send(command, ct);
         }
 
         return queued.Count;
@@ -48,7 +49,8 @@ public sealed class ScheduleRunner
         var ran = 0;
         foreach (var schedule in await _schedules.ListDueAsync(_clock.GetUtcNow().UtcDateTime, batch, ct))
         {
-            var result = await _sender.Send(new RunScheduledReportCommand(schedule.Id), ct);
+            var command = new RunScheduledReportCommand(schedule.Id);
+            var result = await _sender.Send(command, ct);
             ran += result.IsSuccess && result.Value ? 1 : 0;
         }
 
