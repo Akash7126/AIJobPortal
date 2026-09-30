@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using JobPlatform.PlatformAdministration.Application.DTOs.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Domain.Common;
 using JobPlatform.PlatformAdministration.Domain.Taxonomy;
 using JobPlatform.SharedKernel.Application.Results;

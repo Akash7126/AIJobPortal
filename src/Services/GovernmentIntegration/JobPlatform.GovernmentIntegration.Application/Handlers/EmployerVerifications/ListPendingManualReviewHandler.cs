@@ -1,6 +1,7 @@
 using JobPlatform.GovernmentIntegration.Application.DTOs.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.Interfaces;
 using JobPlatform.GovernmentIntegration.Application.Queries.EmployerVerifications;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

@@ -1,7 +1,8 @@
 using JobPlatform.EmployerOnboarding.Domain;
+using JobPlatform.EmployerOnboarding.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.EmployerOnboarding.Application;
 

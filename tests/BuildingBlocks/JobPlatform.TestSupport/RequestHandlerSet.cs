@@ -1,5 +1,5 @@
 using System.Reflection;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;

@@ -36,6 +36,14 @@ public class ArchitectureTests
         ArchitectureRules.ReferencedOtherBoundedContexts(Bc, Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
+    public void Repositories_LiveInThePersistenceRepositoriesFolder() =>
+        ArchitectureRules.RepositoriesOutsideRepositoriesFolder(Infrastructure).Should().BeEmpty();
+
+    [Fact]
+    public void Interfaces_LiveInTheInterfacesFolderOfTheirLayer() =>
+        ArchitectureRules.InterfacesOutsideInterfacesFolders(Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
     public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
         ArchitectureRules.CqrsLayoutViolations(Application).Should().BeEmpty();
 
@@ -71,6 +79,6 @@ public class ArchitectureTests
     public void ThisServicePublishesNoIntegrationEvents()
     {
         // BC-07 is a read-model context (handover 5.1): no mapper, no outbox processor, only consumers.
-        Infrastructure.GetTypes().Concat(Application.GetTypes()).Should().NotContain(t => typeof(JobPlatform.SharedKernel.Messaging.IDomainEventMapper).IsAssignableFrom(t));
+        Infrastructure.GetTypes().Concat(Application.GetTypes()).Should().NotContain(t => typeof(JobPlatform.SharedKernel.Messaging.Interfaces.IDomainEventMapper).IsAssignableFrom(t));
     }
 }

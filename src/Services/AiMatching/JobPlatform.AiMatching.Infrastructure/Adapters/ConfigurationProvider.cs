@@ -1,6 +1,8 @@
-using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.AiMatching.Infrastructure.Adapters;

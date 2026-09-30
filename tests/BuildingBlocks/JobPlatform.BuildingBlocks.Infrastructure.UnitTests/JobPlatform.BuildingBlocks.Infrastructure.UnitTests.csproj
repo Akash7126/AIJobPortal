@@ -8,5 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.SharedKernel/JobPlatform.SharedKernel.csproj" />
     <ProjectReference Include="../../../src/BuildingBlocks/JobPlatform.BuildingBlocks.Infrastructure/JobPlatform.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="../JobPlatform.TestSupport/JobPlatform.TestSupport.csproj" />
   </ItemGroup>
 </Project>

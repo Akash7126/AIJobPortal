@@ -3,8 +3,10 @@ using JobPlatform.EmployerOnboarding.Application;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.EmployerOnboarding.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.EmployerOnboarding;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 
 namespace JobPlatform.EmployerOnboarding.ArchitectureTests;
@@ -40,6 +42,14 @@ public class ArchitectureTests
     [Fact]
     public void Api_NeverReferencesAnotherBoundedContext() =>
         ArchitectureRules.ReferencedOtherBoundedContexts("EmployerOnboarding", Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
+    public void Repositories_LiveInThePersistenceRepositoriesFolder() =>
+        ArchitectureRules.RepositoriesOutsideRepositoriesFolder(Infrastructure).Should().BeEmpty();
+
+    [Fact]
+    public void Interfaces_LiveInTheInterfacesFolderOfTheirLayer() =>
+        ArchitectureRules.InterfacesOutsideInterfacesFolders(Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
     public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>

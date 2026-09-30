@@ -1,6 +1,6 @@
 using System.Text.Json;
-using System.Diagnostics;
 using JobPlatform.BuildingBlocks.Infrastructure.Diagnostics;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.SharedKernel.Messaging;
 using Microsoft.EntityFrameworkCore;
@@ -77,12 +77,6 @@ public sealed class InboxHandlerRegistry
         _registrations.GetValueOrDefault(Key(consumerName, eventType));
 
     private static string Key(string consumer, string type) => $"{consumer}|{type}";
-}
-
-public interface IInboxWriter
-{
-    /// <summary>Stores the message. Returns false when (MessageId, ConsumerName) already exists (duplicate delivery - ack and skip).</summary>
-    Task<bool> TryAddAsync(InboxMessage message, CancellationToken ct = default);
 }
 
 public sealed class EfInboxWriter<TContext> : IInboxWriter where TContext : DbContext

@@ -3,8 +3,10 @@ using JobPlatform.Reporting.Application;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.Reporting.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.Reporting;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 
 namespace JobPlatform.Reporting.ArchitectureTests;
@@ -52,6 +54,14 @@ public class ArchitectureTests
     [Fact]
     public void Api_NeverReferencesAnotherBoundedContext() =>
         ArchitectureRules.ReferencedOtherBoundedContexts("Reporting", Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
+    public void Repositories_LiveInThePersistenceRepositoriesFolder() =>
+        ArchitectureRules.RepositoriesOutsideRepositoriesFolder(Infrastructure).Should().BeEmpty();
+
+    [Fact]
+    public void Interfaces_LiveInTheInterfacesFolderOfTheirLayer() =>
+        ArchitectureRules.InterfacesOutsideInterfacesFolders(Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
     public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>

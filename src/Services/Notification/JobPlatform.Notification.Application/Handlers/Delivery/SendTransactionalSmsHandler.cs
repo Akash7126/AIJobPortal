@@ -2,7 +2,7 @@ using JobPlatform.Notification.Application.Commands.Delivery;
 using JobPlatform.Notification.Application.Composition;
 using JobPlatform.Notification.Application.DTOs.Delivery;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 

@@ -1,4 +1,5 @@
 using FluentValidation;
+using JobPlatform.AuditLogging.Application.Interfaces;
 
 namespace JobPlatform.AuditLogging.Application.Validators.Common;
 

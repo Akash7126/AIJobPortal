@@ -1,7 +1,8 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.Authentication;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.AccountIdentity.Application.Interfaces;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AccountIdentity.Application.Handlers.Authentication;

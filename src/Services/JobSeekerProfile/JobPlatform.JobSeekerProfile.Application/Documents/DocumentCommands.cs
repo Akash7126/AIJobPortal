@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using JobPlatform.JobSeekerProfile.Application.DTOs.Documents;
+using JobPlatform.JobSeekerProfile.Application.Interfaces;
 using JobPlatform.JobSeekerProfile.Domain;
 
 namespace JobPlatform.JobSeekerProfile.Application.Documents;

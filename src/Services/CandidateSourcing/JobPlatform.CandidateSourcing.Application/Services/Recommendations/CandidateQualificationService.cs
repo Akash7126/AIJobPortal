@@ -1,8 +1,10 @@
-using JobPlatform.CandidateSourcing.Domain;
+using JobPlatform.CandidateSourcing.Application.Interfaces;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
 using JobPlatform.CandidateSourcing.Domain.Privacy;
 using JobPlatform.CandidateSourcing.Domain.Ranking;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
-using JobPlatform.SharedKernel.ApiContracts.JobPosting;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.AiMatching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobPosting;
 
 namespace JobPlatform.CandidateSourcing.Application.Services.Recommendations;
 

@@ -1,8 +1,9 @@
 using JobPlatform.Notification.Application.DTOs.InApp;
+using JobPlatform.Notification.Application.Interfaces;
 using JobPlatform.Notification.Application.Queries.InApp;
 using JobPlatform.Notification.Application.Services.InApp;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

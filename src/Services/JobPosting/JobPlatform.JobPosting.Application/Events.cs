@@ -1,9 +1,12 @@
+using JobPlatform.JobPosting.Application.Interfaces;
 using JobPlatform.JobPosting.Domain;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.JobPosting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.ExternalIntegration;
 using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.JobPosting.Application.Events;
 

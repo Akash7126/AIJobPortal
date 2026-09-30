@@ -1,7 +1,9 @@
-using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.PlatformAdministration;
 using JobPlatform.SharedKernel.ApiContracts.PlatformAdministration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

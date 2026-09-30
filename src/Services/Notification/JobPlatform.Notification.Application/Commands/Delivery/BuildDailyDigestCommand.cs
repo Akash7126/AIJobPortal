@@ -1,4 +1,4 @@
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.Notification.Application.Commands.Delivery;
 

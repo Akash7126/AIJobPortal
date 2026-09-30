@@ -1,9 +1,9 @@
 using JobPlatform.JobSeekerProfile.Application.DTOs.Profile;
 using JobPlatform.JobSeekerProfile.Application.Queries.Profile;
-using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.JobSeekerProfile.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.JobSeekerProfile.Application.Handlers.Profile;

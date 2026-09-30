@@ -1,5 +1,6 @@
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Application.DTOs.ReportRuns;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 using Microsoft.Extensions.Logging;
 

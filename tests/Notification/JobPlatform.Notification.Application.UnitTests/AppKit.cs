@@ -1,7 +1,8 @@
-using JobPlatform.Notification.Application;
 using JobPlatform.Notification.Application.Composition;
+using JobPlatform.Notification.Application.Interfaces;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.Notification.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Time.Testing;

@@ -1,10 +1,11 @@
 using JobPlatform.Notification.Domain;
+using JobPlatform.Notification.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.IntegrationEvents.AiMatching;
 using JobPlatform.SharedKernel.IntegrationEvents.ExternalIntegration;
 using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.Notification.Application.Composition;
 

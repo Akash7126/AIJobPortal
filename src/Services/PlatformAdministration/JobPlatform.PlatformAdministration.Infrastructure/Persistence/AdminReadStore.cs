@@ -1,10 +1,10 @@
-using JobPlatform.PlatformAdministration.Application;
 using JobPlatform.PlatformAdministration.Application.DTOs.Common;
 using JobPlatform.PlatformAdministration.Application.DTOs.Entities;
 using JobPlatform.PlatformAdministration.Application.DTOs.Offerings;
 using JobPlatform.PlatformAdministration.Application.DTOs.Reference;
 using JobPlatform.PlatformAdministration.Application.DTOs.Settings;
 using JobPlatform.PlatformAdministration.Application.DTOs.Taxonomy;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Domain.Offerings;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;

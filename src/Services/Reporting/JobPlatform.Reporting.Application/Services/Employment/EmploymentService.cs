@@ -1,3 +1,4 @@
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.Application.Results;
 

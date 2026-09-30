@@ -1,6 +1,7 @@
 using JobPlatform.AuditLogging.Application.Commands.Exports;
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.AuditLogging.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using Unit = JobPlatform.SharedKernel.Application.Results.Unit;
 

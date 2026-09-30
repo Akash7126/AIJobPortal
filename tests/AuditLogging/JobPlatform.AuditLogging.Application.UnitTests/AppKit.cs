@@ -1,6 +1,7 @@
 using JobPlatform.AuditLogging.Application.Ingestion;
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.AuditLogging.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;

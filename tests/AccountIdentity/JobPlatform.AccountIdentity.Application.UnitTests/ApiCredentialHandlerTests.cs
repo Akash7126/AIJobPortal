@@ -2,12 +2,15 @@ using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.ApiCredentials;
 using JobPlatform.AccountIdentity.Application.DTOs.ApiCredentials;
 using JobPlatform.AccountIdentity.Application.Handlers.ApiCredentials;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Application.Queries.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.ApiContracts.AccountIdentity;
-using JobPlatform.SharedKernel.Application.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
@@ -185,7 +188,7 @@ public class ApiCredentialHandlerTests
         var blocked = AppKit.ErrorOf(await OAuth().Handle(new AuthenticateApiClientCommand("client_credentials", "jp_key", secret), default));
         blocked.Code.Should().Be(ErrorCodes.ApiRateLimited);
         blocked.Type.Should().Be(ErrorType.TooManyRequests);
-        new AuthenticateApiClientCommand("client_credentials", "a", "b").Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Abstractions.IPersistOnFailure>();
+        new AuthenticateApiClientCommand("client_credentials", "a", "b").Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IPersistOnFailure>();
     }
 
     [Fact]

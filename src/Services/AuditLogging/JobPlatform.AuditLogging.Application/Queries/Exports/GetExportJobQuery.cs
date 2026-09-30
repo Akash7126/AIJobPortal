@@ -1,6 +1,6 @@
 using JobPlatform.AuditLogging.Application.DTOs.Exports;
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.AuditLogging.Application.Queries.Exports;
 

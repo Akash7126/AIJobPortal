@@ -1,8 +1,9 @@
 using JobPlatform.EmployerOnboarding.Application.Commands.Registration;
 using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
 using JobPlatform.EmployerOnboarding.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.EmployerOnboarding.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.EmployerOnboarding.Application.Handlers.Registration;

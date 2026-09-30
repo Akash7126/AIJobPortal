@@ -1,4 +1,5 @@
 using JobPlatform.EmployerOnboarding.Application;
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 namespace JobPlatform.EmployerOnboarding.Infrastructure.Adapters;

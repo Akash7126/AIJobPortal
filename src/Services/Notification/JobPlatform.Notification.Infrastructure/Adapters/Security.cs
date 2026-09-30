@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
-using JobPlatform.Notification.Application;
+using JobPlatform.Notification.Application.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace JobPlatform.Notification.Infrastructure.Adapters;

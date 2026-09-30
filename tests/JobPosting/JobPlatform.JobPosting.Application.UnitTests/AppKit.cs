@@ -1,8 +1,11 @@
 using JobPlatform.JobPosting.Application.DTOs.Common;
 using JobPlatform.JobPosting.Application.DTOs.Postings;
+using JobPlatform.JobPosting.Application.Interfaces;
 using JobPlatform.JobPosting.Domain;
+using JobPlatform.JobPosting.Domain.Interfaces.Repositories;
+using JobPlatform.JobPosting.Domain.Interfaces.Services;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

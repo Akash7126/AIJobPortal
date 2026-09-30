@@ -1,6 +1,8 @@
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Application.DTOs.ReportRuns;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Services.ReportRuns;

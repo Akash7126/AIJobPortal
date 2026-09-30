@@ -1,8 +1,8 @@
-using JobPlatform.BuildingBlocks.Infrastructure.Caching;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
 using JobPlatform.Notification.Application;
 using JobPlatform.Notification.Application.Commands.Delivery;
 using JobPlatform.Notification.Application.Delivery;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

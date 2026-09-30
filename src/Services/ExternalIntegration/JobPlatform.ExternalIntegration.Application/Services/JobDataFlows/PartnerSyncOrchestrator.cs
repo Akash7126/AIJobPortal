@@ -1,6 +1,8 @@
 using System.Text.Json;
 using JobPlatform.ExternalIntegration.Application.Commands.JobDataFlows;
+using JobPlatform.ExternalIntegration.Application.Interfaces;
 using JobPlatform.ExternalIntegration.Domain;
+using JobPlatform.ExternalIntegration.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Domain;
 
 namespace JobPlatform.ExternalIntegration.Application.Services.JobDataFlows;

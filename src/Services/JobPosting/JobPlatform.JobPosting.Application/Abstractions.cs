@@ -1,13 +1,10 @@
 using System.Reflection;
-using JobPlatform.JobPosting.Application.DTOs.Common;
-using JobPlatform.JobPosting.Application.DTOs.Postings;
 using JobPlatform.JobPosting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobPlatform.JobPosting.Application;
@@ -100,69 +97,15 @@ public static class SchemaValidationGuard
     }
 }
 
-// ---------------------------------------------------------------------- ports
-
-/// <summary>Read/search side (foundation section 3.5): dedicated projections over EF, never the aggregate. Backed by SQL Server full-text search
-/// in production; a LIKE-based fallback on SQLite (dev/tests) — see the Infrastructure implementation and the BC-09 status doc.</summary>
-public interface IJobPostingSearchReadModel
-{
-    Task<PagedResult<JobPostingSummaryView>> SearchAsync(SearchCriteriaInput criteria, string? sort, PageRequest page, CancellationToken ct = default);
-
-    Task<JobPostingView?> GetAsync(Guid id, CancellationToken ct = default);
-
-    Task<PagedResult<JobPostingSummaryView>> ListByEmployerAsync(Guid employerAccountId, string? status, PageRequest page, CancellationToken ct = default);
-
-    Task<PagedResult<JobPostingSummaryView>> ListOpenByEmployerAsync(Guid employerAccountId, PageRequest page, CancellationToken ct = default);
-
-    /// <summary>Which of the given codes of this reference type still appear on a non-archived posting (US-3.1.4-07, /internal/v1/reference-usage/check).</summary>
-    Task<IReadOnlyList<string>> CheckReferenceUsageAsync(string type, IReadOnlyCollection<string> codes, CancellationToken ct = default);
-
-    Task<JobPostingSchemaView> GetSchemaAsync(CancellationToken ct = default);
-}
-
 public sealed record MatchRankingItemView(Guid JobPostingId, string TitleEn, decimal Score);
 
-/// <summary>Port to BC-08's taxonomy (skills/jobs/trainings), cached in Redis (handover section 9). Adapter chosen by Taxonomy:Provider.</summary>
-public interface ITaxonomyProvider
-{
-    /// <summary>The current version and valid codes for a taxonomy type ("skills", "jobs" categories, "trainings"). Throws
-    /// <see cref="TaxonomyUnavailableException"/> after its retry budget (30 s / 3 retries, handover section 3.5).</summary>
-    Task<TaxonomySnapshot> GetAsync(string type, CancellationToken ct = default);
-}
-
 public sealed record TaxonomySnapshot(string Type, int Version, IReadOnlyCollection<string> ValidCodes);
-
-/// <summary>Port to BC-05: is this employer approved/verified to post (handover section 6.2, Q-02)? Adapter chosen by EmployerStanding:Provider.</summary>
-public interface IEmployerStandingProvider
-{
-    /// <summary>Null when BC-05 could not be reached; the caller applies the fail-open policy of <see cref="EmployerEligibilityPolicy"/>.</summary>
-    Task<bool?> IsApprovedAsync(Guid employerAccountId, CancellationToken ct = default);
-}
 
 /// <summary>Q-02 (proposed, decided here): posting is fail-open — an unreachable BC-05 does not block publishing, since BC-05 is not yet built
 /// and this BC must remain usable standalone. Only an explicit "not approved" answer blocks. See the BC-09 status doc.</summary>
 public static class EmployerEligibilityPolicy
 {
     public static bool MayPost(bool? approved) => approved != false;
-}
-
-/// <summary>Port to BC-10: recommended jobs for a logged-in job seeker (handover section 6.2). Adapter chosen by MatchRanking:Provider.</summary>
-public interface IMatchRankingProvider
-{
-    /// <summary>Empty when BC-10 is unavailable - the caller degrades to plain search results (handover section 6.2).</summary>
-    Task<IReadOnlyList<MatchRankingItemView>> GetRankingAsync(Guid profileId, int page, int pageSize, CancellationToken ct = default);
-}
-
-/// <summary>Cache-aside store for reference data (foundation section 10). Failures degrade to the database, never to an error.</summary>
-public interface IJobPostingCache
-{
-    Task<T?> GetAsync<T>(string key, CancellationToken ct = default);
-
-    Task SetAsync<T>(string key, T value, TimeSpan ttl, CancellationToken ct = default);
-
-    Task RemoveAsync(string key, CancellationToken ct = default);
-
-    Task RemoveByPrefixAsync(string prefix, CancellationToken ct = default);
 }
 
 /// <summary>Key names and TTLs of handover section 9 (the store adds the "&lt;env&gt;:job-posting" prefix).</summary>

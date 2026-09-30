@@ -5,6 +5,7 @@ using System.Text.Json;
 using JobPlatform.Reporting.Application;
 using JobPlatform.Reporting.Application.DTOs.Activity;
 using JobPlatform.Reporting.Application.DTOs.Common;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

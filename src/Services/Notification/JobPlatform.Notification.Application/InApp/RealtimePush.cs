@@ -1,6 +1,8 @@
 using JobPlatform.Notification.Application.DTOs.InApp;
+using JobPlatform.Notification.Application.Interfaces;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.Notification.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.Notification.Application.InApp;
 

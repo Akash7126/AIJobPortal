@@ -1,6 +1,9 @@
 using System.Collections.Concurrent;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.AiMatching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobPosting;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;
 using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
 

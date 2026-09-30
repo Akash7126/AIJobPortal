@@ -1,4 +1,4 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
 using JobPlatform.AccountIdentity.Domain.Rbac;
@@ -6,7 +6,6 @@ using JobPlatform.AccountIdentity.Domain.Sessions;
 using JobPlatform.AccountIdentity.Infrastructure.Security;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

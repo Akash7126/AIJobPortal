@@ -1,9 +1,9 @@
 using JobPlatform.ExternalIntegration.Application.Events;
 using JobPlatform.ExternalIntegration.Domain;
 using JobPlatform.ExternalIntegration.Infrastructure.Persistence;
+using JobPlatform.ExternalIntegration.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.TestSupport;
-using Microsoft.EntityFrameworkCore;
 
 namespace JobPlatform.ExternalIntegration.Infrastructure.IntegrationTests;
 

@@ -1,7 +1,8 @@
 using JobPlatform.GovernmentIntegration.Domain;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.GovernmentIntegration.Application.Events;
 

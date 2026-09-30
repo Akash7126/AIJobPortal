@@ -1,6 +1,6 @@
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Application.DTOs.ReportRuns;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.Reporting.Application.Queries.ReportRuns;
 

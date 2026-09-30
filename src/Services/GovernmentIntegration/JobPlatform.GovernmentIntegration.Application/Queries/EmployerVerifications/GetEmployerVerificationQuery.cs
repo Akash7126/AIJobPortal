@@ -1,5 +1,5 @@
 using JobPlatform.GovernmentIntegration.Application.DTOs.EmployerVerifications;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Common.Enums;
 
 namespace JobPlatform.GovernmentIntegration.Application.Queries.EmployerVerifications;

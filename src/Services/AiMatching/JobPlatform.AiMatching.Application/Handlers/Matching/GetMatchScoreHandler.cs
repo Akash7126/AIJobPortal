@@ -1,10 +1,12 @@
 using JobPlatform.AiMatching.Application.DTOs.Matching;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Application.Queries.Matching;
 using JobPlatform.AiMatching.Application.Services.Matching;
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Domain;
 

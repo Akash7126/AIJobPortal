@@ -1,7 +1,7 @@
 using JobPlatform.GovernmentIntegration.Application.Commands.EmployerVerifications;
-using JobPlatform.GovernmentIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.GovernmentIntegration.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.GovernmentIntegration.Application.Handlers.EmployerVerifications;

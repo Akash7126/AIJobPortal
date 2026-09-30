@@ -1,10 +1,13 @@
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Domain;
+using JobPlatform.PlatformAdministration.Domain.Interfaces.Repositories;
 using JobPlatform.PlatformAdministration.Domain.Offerings;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.PlatformAdministration.Application.Events;
 

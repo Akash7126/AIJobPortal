@@ -1,8 +1,9 @@
 using JobPlatform.JobSeekerProfile.Application.DTOs.ShareLink;
+using JobPlatform.JobSeekerProfile.Application.Interfaces;
 using JobPlatform.JobSeekerProfile.Application.Queries.ShareLink;
-using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.JobSeekerProfile.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.JobSeekerProfile.Application.Handlers.ShareLink;

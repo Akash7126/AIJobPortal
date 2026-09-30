@@ -1,11 +1,13 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.Accounts;
 using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
 using JobPlatform.AccountIdentity.Application.Handlers.Accounts;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Application.Services.Accounts;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Services;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
@@ -159,8 +161,8 @@ public class RegistrationHandlerTests
     {
         SeekerCommand().RateLimitedErrorCode.Should().Be(ErrorCodes.JobSeekerRateLimited);
         SeekerCommand().UniqueViolationErrorCode.Should().Be(ErrorCodes.JobSeekerDuplicate);
-        ((JobPlatform.SharedKernel.Application.Abstractions.IRateLimitedRequest)SeekerCommand()).RateLimitPermits.Should().Be(5);
-        ((JobPlatform.SharedKernel.Application.Abstractions.IRateLimitedRequest)SeekerCommand()).RateLimitWindow.Should().Be(TimeSpan.FromMinutes(15));
+        ((JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IRateLimitedRequest)SeekerCommand()).RateLimitPermits.Should().Be(5);
+        ((JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IRateLimitedRequest)SeekerCommand()).RateLimitWindow.Should().Be(TimeSpan.FromMinutes(15));
         new RegisterEmployerAccountCommand("a", "b", "c", "d", "e", "f", 1, null).RateLimitedErrorCode.Should().Be(ErrorCodes.EmployerRateLimited);
         new RegisterPartnerAccountCommand("a", "b", "c", "d", "e", null).UniqueViolationErrorCode.Should().Be(ErrorCodes.PartnerDuplicate);
         new RegisterEmployerAccountCommand("a", "b", "c", "d", "e", "f", 1, null).RateLimitScope.Should().NotBe(SeekerCommand().RateLimitScope);
@@ -217,7 +219,7 @@ public class ActivationHandlerTests
         error.RuleCode.Should().Be(AccountRuleCodes.CodeInvalidOrExpired);
         account.ActivationChallenge!.Attempts.Should().Be(1, "the command is IPersistOnFailure");
         _log.Entries.Should().ContainSingle(e => e.Decision == "Deny" && e.Reason == AccountRuleCodes.CodeInvalidOrExpired);
-        new ActivateAccountCommand(Guid.NewGuid(), "1").Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Abstractions.IPersistOnFailure>();
+        new ActivateAccountCommand(Guid.NewGuid(), "1").Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IPersistOnFailure>();
     }
 
     [Theory]

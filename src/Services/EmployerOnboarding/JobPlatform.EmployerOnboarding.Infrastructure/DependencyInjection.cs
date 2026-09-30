@@ -1,9 +1,11 @@
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
+using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.EmployerOnboarding.Application;
-using JobPlatform.EmployerOnboarding.Domain;
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
+using JobPlatform.EmployerOnboarding.Domain.Interfaces.Repositories;
 using JobPlatform.EmployerOnboarding.Infrastructure.Adapters;
 using JobPlatform.EmployerOnboarding.Infrastructure.Persistence;
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
+using JobPlatform.EmployerOnboarding.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
 using JobPlatform.SharedKernel.Messaging;

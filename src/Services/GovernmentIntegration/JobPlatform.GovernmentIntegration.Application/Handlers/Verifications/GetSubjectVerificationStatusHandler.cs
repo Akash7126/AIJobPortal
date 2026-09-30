@@ -1,6 +1,7 @@
 using JobPlatform.GovernmentIntegration.Application.DTOs.Verifications;
+using JobPlatform.GovernmentIntegration.Application.Interfaces;
 using JobPlatform.GovernmentIntegration.Application.Queries.Verifications;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.GovernmentIntegration.Application.Handlers.Verifications;

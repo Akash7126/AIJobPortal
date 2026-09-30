@@ -1,8 +1,8 @@
 using JobPlatform.Reporting.Application.DTOs.ReportLibrary;
 using JobPlatform.Reporting.Application.Queries.ReportLibrary;
 using JobPlatform.Reporting.Application.Services.ReportLibrary;
-using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.ReportLibrary;

@@ -40,8 +40,14 @@ public sealed class InternalController : ApiControllerBase
     }
 
     [HttpGet("reference-files/{type}")]
-    public Task<IActionResult> ReferenceFile(string type, CancellationToken ct) => Send(new GetReferenceFileForConsumersQuery(type), ct);
+    public Task<IActionResult> ReferenceFile(string type, CancellationToken ct)
+    {
+        return Send(new GetReferenceFileForConsumersQuery(type), ct);
+    }
 
     [HttpGet("settings/{key}")]
-    public Task<IActionResult> Setting(string key, CancellationToken ct) => Send(new GetSystemSettingQuery(key), ct);
+    public Task<IActionResult> Setting(string key, CancellationToken ct)
+    {
+        return Send(new GetSystemSettingQuery(key), ct);
+    }
 }

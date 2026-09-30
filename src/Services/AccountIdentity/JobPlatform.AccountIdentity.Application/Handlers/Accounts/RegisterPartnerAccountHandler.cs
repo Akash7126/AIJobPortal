@@ -2,7 +2,7 @@ using JobPlatform.AccountIdentity.Application.Commands.Accounts;
 using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
 using JobPlatform.AccountIdentity.Application.Services.Accounts;
 using JobPlatform.AccountIdentity.Domain.Accounts;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 

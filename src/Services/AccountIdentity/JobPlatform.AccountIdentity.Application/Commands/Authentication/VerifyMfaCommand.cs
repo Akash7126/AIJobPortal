@@ -1,5 +1,5 @@
 using JobPlatform.AccountIdentity.Application.DTOs.Authentication;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.AccountIdentity.Application.Commands.Authentication;
 

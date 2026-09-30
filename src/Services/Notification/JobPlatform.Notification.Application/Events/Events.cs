@@ -1,7 +1,8 @@
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.Notification;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.Notification.Application.Events;
 

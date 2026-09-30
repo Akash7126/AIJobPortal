@@ -1,6 +1,7 @@
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Application.Queries.Matching;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

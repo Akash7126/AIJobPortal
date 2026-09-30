@@ -1,9 +1,10 @@
 using System.Security.Cryptography;
 using System.Text;
 using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
-using Microsoft.EntityFrameworkCore;
 using JobPlatform.AiMatching.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobPlatform.AiMatching.Infrastructure.Ai;
 

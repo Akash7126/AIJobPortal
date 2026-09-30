@@ -19,17 +19,26 @@ public sealed class AdminApiVersionsController : ApiControllerBase
     public sealed record ConfigureFormatRequest(IReadOnlyList<string> Formats);
 
     [HttpPost]
-    public Task<IActionResult> Release([FromBody] ReleaseRequest body, CancellationToken ct) =>
-        Send(new ReleaseApiVersionCommand(body.Version), value => Created($"/api/v1/docs/{value.Version}", value), ct);
+    public Task<IActionResult> Release([FromBody] ReleaseRequest body, CancellationToken ct)
+    {
+        return Send(new ReleaseApiVersionCommand(body.Version), value => Created($"/api/v1/docs/{value.Version}", value), ct);
+    }
 
     [HttpPost("{version}/deprecate")]
-    public Task<IActionResult> Deprecate(string version, [FromBody] DeprecateRequest body, CancellationToken ct) =>
-        SendNoContent(new DeprecateApiVersionCommand(version, body.SunsetAtUtc), ct);
+    public Task<IActionResult> Deprecate(string version, [FromBody] DeprecateRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new DeprecateApiVersionCommand(version, body.SunsetAtUtc), ct);
+    }
 
     [HttpPost("{version}/retire")]
-    public Task<IActionResult> Retire(string version, CancellationToken ct) => SendNoContent(new RetireApiVersionCommand(version), ct);
+    public Task<IActionResult> Retire(string version, CancellationToken ct)
+    {
+        return SendNoContent(new RetireApiVersionCommand(version), ct);
+    }
 
     [HttpPut("{version}/format")]
-    public Task<IActionResult> ConfigureFormat(string version, [FromBody] ConfigureFormatRequest body, CancellationToken ct) =>
-        SendNoContent(new ConfigureApiDataFormatCommand(version, body.Formats), ct);
+    public Task<IActionResult> ConfigureFormat(string version, [FromBody] ConfigureFormatRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new ConfigureApiDataFormatCommand(version, body.Formats), ct);
+    }
 }

@@ -11,6 +11,8 @@ public sealed class SharedReportsController : ApiControllerBase
 {
     [HttpGet("{id:guid}")]
     [AllowAnonymous]
-    public Task<IActionResult> Download(Guid id, [FromQuery] long expires, [FromQuery] string sig, CancellationToken ct) =>
-        Send(new DownloadSharedReportQuery(id, expires, sig ?? string.Empty), f => base.File(f.Content, f.ContentType, f.FileName), ct);
+    public Task<IActionResult> Download(Guid id, [FromQuery] long expires, [FromQuery] string sig, CancellationToken ct)
+    {
+        return Send(new DownloadSharedReportQuery(id, expires, sig ?? string.Empty), f => base.File(f.Content, f.ContentType, f.FileName), ct);
+    }
 }

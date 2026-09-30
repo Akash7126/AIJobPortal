@@ -1,6 +1,6 @@
 using JobPlatform.AccountIdentity.Application.DTOs.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Security;

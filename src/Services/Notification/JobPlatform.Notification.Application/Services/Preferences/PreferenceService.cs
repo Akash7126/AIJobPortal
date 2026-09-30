@@ -1,7 +1,8 @@
 using FluentValidation;
 using JobPlatform.Notification.Application.DTOs.Preferences;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.Notification.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 
 namespace JobPlatform.Notification.Application.Services.Preferences;
 

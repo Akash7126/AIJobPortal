@@ -5,22 +5,20 @@ using JobPlatform.BuildingBlocks.Api.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
 using JobPlatform.BuildingBlocks.Infrastructure.Diagnostics;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
-using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Application.Concurrency;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
+using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OpenApi;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -240,21 +238,49 @@ public static class ServiceHost
 [ApiController]
 public abstract class ApiControllerBase : ControllerBase
 {
-    protected ISender Sender => HttpContext.RequestServices.GetRequiredService<ISender>();
+    protected ISender Sender
+    {
+        get
+        {
+            return HttpContext.RequestServices.GetRequiredService<ISender>();
+        }
+    }
 
-    protected string? IdempotencyKey => Request.Headers["Idempotency-Key"].FirstOrDefault();
+    protected string? IdempotencyKey
+    {
+        get
+        {
+            return Request.Headers["Idempotency-Key"].FirstOrDefault();
+        }
+    }
 
-    protected string? IfMatch => Request.Headers.IfMatch.FirstOrDefault();
+    protected string? IfMatch
+    {
+        get
+        {
+            return Request.Headers.IfMatch.FirstOrDefault();
+        }
+    }
 
-    protected async Task<IActionResult> Send<T>(IRequest<T> request, Func<T, IActionResult> onSuccess, CancellationToken ct) =>
-        (await Sender.Send(request, ct)).ToActionResult(HttpContext, onSuccess);
+    protected async Task<IActionResult> Send<T>(IRequest<T> request, Func<T, IActionResult> onSuccess, CancellationToken ct)
+    {
+        return (await Sender.Send(request, ct)).ToActionResult(HttpContext, onSuccess);
+    }
 
-    protected Task<IActionResult> Send<T>(IRequest<T> request, CancellationToken ct) => Send(request, value => Ok(value), ct);
+    protected Task<IActionResult> Send<T>(IRequest<T> request, CancellationToken ct)
+    {
+        return Send(request, value => Ok(value), ct);
+    }
 
-    protected Task<IActionResult> SendNoContent(IRequest<Unit> request, CancellationToken ct) => Send(request, _ => NoContent(), ct);
+    protected Task<IActionResult> SendNoContent(IRequest<Unit> request, CancellationToken ct)
+    {
+        return Send(request, _ => NoContent(), ct);
+    }
 
-    protected Task<IActionResult> SendCreated<T>(IRequest<T> request, Func<T, string> location, CancellationToken ct) =>
-        Send(request, value => Created(location(value), value), ct);
+    protected Task<IActionResult> SendCreated<T>(IRequest<T> request, Func<T, string> location, CancellationToken ct)
+    {
+        return Send(request, value => Created(location(value), value), ct);
+    }
 
     /// <summary>Adds the RowVersion-derived ETag header (foundation section 11) to the response.</summary>
     protected void SetETag(byte[]? rowVersion)

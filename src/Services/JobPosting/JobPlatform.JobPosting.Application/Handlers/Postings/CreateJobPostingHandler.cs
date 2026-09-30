@@ -1,8 +1,10 @@
 using JobPlatform.JobPosting.Application.Commands.Postings;
 using JobPlatform.JobPosting.Application.DTOs.Postings;
 using JobPlatform.JobPosting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.JobPosting.Domain.Interfaces.Repositories;
+using JobPlatform.JobPosting.Domain.Interfaces.Services;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Domain;
 
@@ -15,7 +17,7 @@ internal sealed class CreateJobPostingHandler : ICommandHandler<CreateJobPosting
     private readonly ICurrentUser _user;
     private readonly TimeProvider _clock;
 
-    public CreateJobPostingHandler(IJobPostingRepository postings, Domain.IJobPostingSchemaValidator schema, ICurrentUser user, TimeProvider clock)
+    public CreateJobPostingHandler(IJobPostingRepository postings, Domain.Interfaces.Services.IJobPostingSchemaValidator schema, ICurrentUser user, TimeProvider clock)
     {
         _postings = postings;
         _schema = schema;

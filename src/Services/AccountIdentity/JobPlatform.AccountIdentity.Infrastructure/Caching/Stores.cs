@@ -1,11 +1,14 @@
 using System.Security.Cryptography;
 using System.Text;
 using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Services;
 using JobPlatform.AccountIdentity.Domain.Rbac;
 using JobPlatform.AccountIdentity.Domain.Sessions;
 using JobPlatform.AccountIdentity.Infrastructure.Persistence;
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

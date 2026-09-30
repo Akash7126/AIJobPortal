@@ -1,5 +1,5 @@
 using JobPlatform.GovernmentIntegration.Domain;
-using JobPlatform.GovernmentIntegration.Infrastructure.Persistence;
+using JobPlatform.GovernmentIntegration.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.EntityFrameworkCore;

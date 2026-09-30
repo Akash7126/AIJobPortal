@@ -1,19 +1,11 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
+using JobPlatform.AiMatching.Infrastructure.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JobPlatform.AiMatching.Infrastructure.Persistence;
-
-/// <summary>Application-level encryption of parsed resume content (handover section 8: PII encrypted).</summary>
-public interface IPiiProtector
-{
-    string Protect(string plain);
-
-    string Unprotect(string stored);
-}
 
 public sealed class NullPiiProtector : IPiiProtector
 {

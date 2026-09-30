@@ -1,9 +1,10 @@
 using JobPlatform.HelpContent.Application.DTOs.Common;
 using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
+using JobPlatform.HelpContent.Application.Interfaces;
 using JobPlatform.HelpContent.Application.Queries.CompanyPage;
-using JobPlatform.HelpContent.Domain;
 using JobPlatform.HelpContent.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.HelpContent.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.HelpContent.Application.Handlers.CompanyPage;

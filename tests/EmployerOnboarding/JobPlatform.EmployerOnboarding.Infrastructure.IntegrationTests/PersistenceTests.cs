@@ -2,6 +2,7 @@ using JobPlatform.EmployerOnboarding.Application.Events;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.EmployerOnboarding.Domain.Common;
 using JobPlatform.EmployerOnboarding.Infrastructure.Persistence;
+using JobPlatform.EmployerOnboarding.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.TestSupport;
 using Microsoft.EntityFrameworkCore;

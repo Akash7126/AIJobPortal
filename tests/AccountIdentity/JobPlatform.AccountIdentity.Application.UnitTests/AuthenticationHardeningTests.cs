@@ -1,7 +1,7 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Authentication;
 using JobPlatform.AccountIdentity.Application.Commands.Authentication;
 using JobPlatform.AccountIdentity.Application.Handlers.Authentication;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Application.Security;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;

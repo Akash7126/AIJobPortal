@@ -1,6 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Time.Testing;

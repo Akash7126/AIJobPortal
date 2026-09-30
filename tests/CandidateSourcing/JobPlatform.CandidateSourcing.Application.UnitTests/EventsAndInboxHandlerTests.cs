@@ -3,6 +3,7 @@ using JobPlatform.CandidateSourcing.Domain.Insight;
 using JobPlatform.CandidateSourcing.Domain.Privacy;
 using JobPlatform.CandidateSourcing.Domain.Projection;
 using JobPlatform.CandidateSourcing.Domain.TalentPool;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
 using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
@@ -10,7 +11,6 @@ using JobPlatform.SharedKernel.IntegrationEvents.CandidateSourcing;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
 using JobPlatform.SharedKernel.IntegrationEvents.JobSeekerProfile;
 using JobPlatform.SharedKernel.Messaging;
-using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
 
 namespace JobPlatform.CandidateSourcing.Application.UnitTests;

@@ -2,10 +2,11 @@ using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Authentication;
 using JobPlatform.AccountIdentity.Application.Commands.Authentication;
 using JobPlatform.AccountIdentity.Application.Handlers.Authentication;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Application.Security;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -406,7 +407,7 @@ public class AuthenticationHandlerTests
         var fifth = AppKit.ErrorOf(await handler.Handle(new ChangePasswordCommand("bad", "NewPassw0rd"), default));
 
         fifth.Code.Should().Be(ErrorCodes.AuthRateLimited);
-        new ChangePasswordCommand("a", "b").Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Abstractions.IPersistOnFailure>();
+        new ChangePasswordCommand("a", "b").Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IPersistOnFailure>();
     }
 
     [Fact]

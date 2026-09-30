@@ -1,5 +1,5 @@
 using JobPlatform.JobSeekerProfile.Application.DTOs.ShareLink;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.JobSeekerProfile.Application.Queries.ShareLink;
 

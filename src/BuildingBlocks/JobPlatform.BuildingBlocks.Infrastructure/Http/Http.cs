@@ -1,5 +1,5 @@
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Persistence;
-using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;

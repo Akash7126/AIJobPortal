@@ -21,12 +21,6 @@ public readonly record struct RoleId(Guid Value)
     public override string ToString() => Value.ToString();
 }
 
-/// <summary>Verifies a plaintext secret (password, OTP, API secret) against its stored hash. Implemented in Infrastructure; keeps crypto out of the domain.</summary>
-public interface ISecretVerifier
-{
-    bool Verify(string secret, string hash);
-}
-
 /// <summary>The caller performing an action, as the domain needs to know it. Built by the application layer from the authenticated user.</summary>
 public sealed record Actor(Guid Id, bool IsAdministrator, bool IsAuthorisedStaff)
 {

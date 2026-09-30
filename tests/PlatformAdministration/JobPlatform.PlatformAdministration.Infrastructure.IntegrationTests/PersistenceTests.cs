@@ -6,6 +6,7 @@ using JobPlatform.PlatformAdministration.Domain.Reference;
 using JobPlatform.PlatformAdministration.Domain.Settings;
 using JobPlatform.PlatformAdministration.Domain.Taxonomy;
 using JobPlatform.PlatformAdministration.Infrastructure.Persistence;
+using JobPlatform.PlatformAdministration.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.TestSupport;

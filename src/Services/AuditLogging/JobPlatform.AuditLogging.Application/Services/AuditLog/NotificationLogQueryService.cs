@@ -1,5 +1,5 @@
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 
 namespace JobPlatform.AuditLogging.Application.Services.AuditLog;
 

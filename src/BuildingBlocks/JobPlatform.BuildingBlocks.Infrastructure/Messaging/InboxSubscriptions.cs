@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

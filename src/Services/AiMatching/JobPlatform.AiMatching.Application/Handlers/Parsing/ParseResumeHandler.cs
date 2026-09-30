@@ -1,6 +1,6 @@
 using JobPlatform.AiMatching.Application.Commands.Parsing;
 using JobPlatform.AiMatching.Application.Services.Parsing;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AiMatching.Application.Handlers.Parsing;

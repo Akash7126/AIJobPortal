@@ -1,10 +1,11 @@
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.HelpContent.Application;
-using JobPlatform.HelpContent.Domain;
+using JobPlatform.HelpContent.Application.Interfaces;
+using JobPlatform.HelpContent.Domain.Interfaces.Repositories;
 using JobPlatform.HelpContent.Infrastructure.Adapters;
 using JobPlatform.HelpContent.Infrastructure.Persistence;
+using JobPlatform.HelpContent.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Messaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

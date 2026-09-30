@@ -1,10 +1,6 @@
-namespace JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 
-public interface IDomainEvent
-{
-    Guid Id { get; }
-    DateTime OccurredOnUtc { get; }
-}
+namespace JobPlatform.SharedKernel.Domain;
 
 public abstract record DomainEvent(DateTime OccurredOnUtc) : IDomainEvent
 {
@@ -26,17 +22,6 @@ public enum BusinessRuleKind
     RateLimited,
     /// <summary>400 - a value violates a domain policy (e.g. password policy).</summary>
     InvalidInput
-}
-
-public interface IBusinessRule
-{
-    /// <summary>Stable internal code, format BC.Aggregate.RULE (e.g. AI.Account.DUPLICATE).</summary>
-    string Code { get; }
-    string Message { get; }
-    /// <summary>Externally published error code (e.g. E-JSRPM-DUPLICATE); null when the rule has none.</summary>
-    string? ExternalCode { get; }
-    BusinessRuleKind Kind { get; }
-    bool IsBroken();
 }
 
 public sealed class BusinessRule : IBusinessRule
@@ -101,15 +86,6 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
     public override bool Equals(object? obj) => Equals(obj as Entity<TId>);
 
     public override int GetHashCode() => HashCode.Combine(GetType(), Id);
-}
-
-/// <summary>Non-generic view of an aggregate root used by infrastructure (outbox interceptor).</summary>
-public interface IAggregateRoot
-{
-    string AggregateId { get; }
-    long Version { get; }
-    IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
-    void ClearDomainEvents();
 }
 
 public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId : notnull

@@ -10,7 +10,7 @@ using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
 using JobPlatform.SharedKernel.IntegrationEvents.JobSeekerProfile;
 using JobPlatform.SharedKernel.IntegrationEvents.Notification;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.Reporting.Application.Ingestion;
 

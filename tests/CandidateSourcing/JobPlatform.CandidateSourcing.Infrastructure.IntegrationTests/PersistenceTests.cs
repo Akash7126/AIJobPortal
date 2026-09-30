@@ -6,6 +6,7 @@ using JobPlatform.CandidateSourcing.Domain.Projection;
 using JobPlatform.CandidateSourcing.Domain.TalentPool;
 using JobPlatform.CandidateSourcing.Domain.Threshold;
 using JobPlatform.CandidateSourcing.Infrastructure.Persistence;
+using JobPlatform.CandidateSourcing.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.TestSupport;

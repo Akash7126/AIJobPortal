@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Infrastructure.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;

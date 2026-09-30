@@ -1,7 +1,8 @@
 using JobPlatform.CandidateSourcing.Application.DTOs.TalentPool;
+using JobPlatform.CandidateSourcing.Application.Interfaces;
 using JobPlatform.CandidateSourcing.Application.Queries.TalentPool;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.CandidateSourcing.Application.Handlers.TalentPool;

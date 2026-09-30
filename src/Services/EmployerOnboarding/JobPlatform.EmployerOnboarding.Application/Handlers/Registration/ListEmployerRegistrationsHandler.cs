@@ -1,6 +1,7 @@
 using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
 using JobPlatform.EmployerOnboarding.Application.Queries.Registration;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

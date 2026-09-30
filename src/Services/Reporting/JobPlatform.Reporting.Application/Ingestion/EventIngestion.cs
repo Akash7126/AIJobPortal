@@ -1,13 +1,8 @@
+using JobPlatform.Reporting.Application.Interfaces.Ingestion;
 using JobPlatform.Reporting.Application.Services.Ingestion;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.Reporting.Application.Ingestion;
-
-/// <summary>Turns one event into a fact projection (handover 5.2: "per-event IFactProjector"). Projectors are idempotent and never call another BC.</summary>
-public interface IFactProjector<in TEvent> where TEvent : IIntegrationEvent
-{
-    Task ProjectAsync(TEvent integrationEvent, CancellationToken ct);
-}
 
 /// <summary>The single inbox handler registered for every consumed event: ingest, then run the projectors of that event.</summary>
 public sealed class IngestionHandler<TEvent> : IIntegrationEventHandler<TEvent> where TEvent : IIntegrationEvent

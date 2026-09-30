@@ -1,4 +1,4 @@
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
 using JobPlatform.PlatformAdministration.Domain.Common;
 using JobPlatform.PlatformAdministration.Domain.Reference;
 using JobPlatform.PlatformAdministration.Domain.Settings;

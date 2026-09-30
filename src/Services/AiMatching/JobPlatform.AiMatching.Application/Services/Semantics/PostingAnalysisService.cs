@@ -1,5 +1,7 @@
 using JobPlatform.AiMatching.Application.DTOs.Semantics;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
 
 namespace JobPlatform.AiMatching.Application.Services.Semantics;
 

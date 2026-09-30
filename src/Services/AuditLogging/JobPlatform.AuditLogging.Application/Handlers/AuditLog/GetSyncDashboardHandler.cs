@@ -1,7 +1,8 @@
 using JobPlatform.AuditLogging.Application.DTOs.AuditLog;
+using JobPlatform.AuditLogging.Application.Interfaces;
 using JobPlatform.AuditLogging.Application.Queries.AuditLog;
 using JobPlatform.AuditLogging.Application.Services.AuditLog;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

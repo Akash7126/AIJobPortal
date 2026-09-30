@@ -1,6 +1,7 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
-using JobPlatform.HelpContent.Application;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
 using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
+using JobPlatform.HelpContent.Application.Interfaces;
 
 namespace JobPlatform.HelpContent.Infrastructure.Adapters;
 

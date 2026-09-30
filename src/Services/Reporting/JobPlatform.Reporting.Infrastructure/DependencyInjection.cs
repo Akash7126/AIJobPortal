@@ -4,10 +4,13 @@ using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.Reporting.Application;
 using JobPlatform.Reporting.Application.DTOs.Activity;
 using JobPlatform.Reporting.Application.Ingestion;
-using JobPlatform.Reporting.Domain;
+using JobPlatform.Reporting.Application.Interfaces;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
 using JobPlatform.Reporting.Infrastructure.Adapters;
 using JobPlatform.Reporting.Infrastructure.Persistence;
+using JobPlatform.Reporting.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

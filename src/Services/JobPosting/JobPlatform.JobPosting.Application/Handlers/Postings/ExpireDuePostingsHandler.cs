@@ -1,6 +1,7 @@
 using JobPlatform.JobPosting.Application.Commands.Postings;
 using JobPlatform.JobPosting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.JobPosting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.JobPosting.Application.Handlers.Postings;

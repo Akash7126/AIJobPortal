@@ -1,8 +1,8 @@
-using JobPlatform.HelpContent.Application;
 using JobPlatform.HelpContent.Application.DTOs.Common;
 using JobPlatform.HelpContent.Application.DTOs.Feedback;
 using JobPlatform.HelpContent.Application.DTOs.Help;
 using JobPlatform.HelpContent.Application.DTOs.News;
+using JobPlatform.HelpContent.Application.Interfaces;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;

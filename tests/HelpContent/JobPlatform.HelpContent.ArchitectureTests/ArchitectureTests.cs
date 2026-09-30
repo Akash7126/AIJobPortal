@@ -3,8 +3,10 @@ using JobPlatform.HelpContent.Application;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.HelpContent.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.HelpContent;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 
 namespace JobPlatform.HelpContent.ArchitectureTests;
@@ -39,6 +41,14 @@ public class ArchitectureTests
     [Fact]
     public void Api_NeverReferencesAnotherBoundedContext() =>
         ArchitectureRules.ReferencedOtherBoundedContexts("HelpContent", Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
+    public void Repositories_LiveInThePersistenceRepositoriesFolder() =>
+        ArchitectureRules.RepositoriesOutsideRepositoriesFolder(Infrastructure).Should().BeEmpty();
+
+    [Fact]
+    public void Interfaces_LiveInTheInterfacesFolderOfTheirLayer() =>
+        ArchitectureRules.InterfacesOutsideInterfacesFolders(Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
     public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>

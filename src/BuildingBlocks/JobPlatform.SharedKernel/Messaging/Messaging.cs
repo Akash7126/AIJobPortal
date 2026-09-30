@@ -1,28 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.SharedKernel.Messaging;
-
-public interface IIntegrationEvent
-{
-    Guid MessageId { get; }
-    DateTime OccurredOnUtc { get; }
-    Guid CorrelationId { get; }
-    Guid? CausationId { get; }
-    int Version { get; }
-
-    /// <summary>Catalogue event name, e.g. AccountCreated.</summary>
-    string EventType { get; }
-
-    string Exchange { get; }
-
-    string RoutingKey { get; }
-
-    /// <summary>Slug of the publishing BC (message header "producer").</summary>
-    string Producer { get; }
-}
 
 public abstract record IntegrationEvent(Guid MessageId, DateTime OccurredOnUtc, Guid CorrelationId, Guid? CausationId, int Version = 1) : IIntegrationEvent
 {
@@ -32,19 +13,8 @@ public abstract record IntegrationEvent(Guid MessageId, DateTime OccurredOnUtc, 
     public abstract string Producer { get; }
 }
 
-public interface IIntegrationEventHandler<in TEvent> where TEvent : IIntegrationEvent
-{
-    Task Handle(TEvent integrationEvent, CancellationToken ct);
-}
-
 /// <summary>Context a domain-event mapper needs to build an integration event.</summary>
 public sealed record DomainEventContext(string AggregateId, long AggregateVersion, Guid CorrelationId, Guid? CausationId);
-
-/// <summary>Maps a domain event to the integration event other BCs consume (null = not published outside the BC).</summary>
-public interface IDomainEventMapper
-{
-    IIntegrationEvent? Map(IDomainEvent domainEvent, DomainEventContext context);
-}
 
 /// <summary>Wire form of a message: headers + JSON body, exchange and routing key already resolved.</summary>
 public sealed record MessageEnvelope(

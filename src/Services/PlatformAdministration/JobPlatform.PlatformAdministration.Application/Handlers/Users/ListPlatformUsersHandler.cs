@@ -1,6 +1,7 @@
 using JobPlatform.PlatformAdministration.Application.DTOs.Users;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Application.Queries.Users;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

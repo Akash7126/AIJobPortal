@@ -1,5 +1,6 @@
 using System.Reflection;
-using JobPlatform.Reporting.Application.Ingestion;
+using JobPlatform.Reporting.Application.Interfaces;
+using JobPlatform.Reporting.Application.Interfaces.Ingestion;
 using JobPlatform.Reporting.Application.Services.Activity;
 using JobPlatform.Reporting.Application.Services.Employment;
 using JobPlatform.Reporting.Application.Services.Exports;
@@ -10,7 +11,7 @@ using JobPlatform.Reporting.Application.Services.ReportLibrary;
 using JobPlatform.Reporting.Application.Services.ReportRuns;
 using JobPlatform.Reporting.Application.Services.Schedules;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -39,7 +40,7 @@ public static class ApplicationAssembly
         services.AddSingleton<IReportLinkSigner, HmacReportLinkSigner>();
         services.AddScoped<ReportingOptionsAccessor>();
         services.AddScoped<ExportContentBuilder>();
-        services.AddSingleton<JobPlatform.SharedKernel.Messaging.IDomainEventMapper, ReportingEventMapper>();
+        services.AddSingleton<JobPlatform.SharedKernel.Messaging.Interfaces.IDomainEventMapper, ReportingEventMapper>();
         services.AddScoped<PerformanceReader>();
 
         foreach (var type in Assembly.GetTypes().Where(t => t is { IsAbstract: false, IsInterface: false }))

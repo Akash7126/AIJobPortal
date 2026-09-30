@@ -1,10 +1,14 @@
-using System.Text.Json;
 using System.Diagnostics;
+using System.Text.Json;
 using JobPlatform.BuildingBlocks.Infrastructure.Diagnostics;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Messaging;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Messaging;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -12,7 +16,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using JobPlatform.BuildingBlocks.Infrastructure.Messaging;
 
 namespace JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 
@@ -78,11 +81,6 @@ public sealed class DomainEventBuffer
         _events.Clear();
         return snapshot;
     }
-}
-
-public interface IDomainEventDispatcher
-{
-    Task DispatchAsync(IReadOnlyCollection<IDomainEvent> events, CancellationToken ct = default);
 }
 
 /// <summary>Invokes IDomainEventHandler&lt;T&gt; registrations. Handler failures are logged and do not undo the committed command.</summary>

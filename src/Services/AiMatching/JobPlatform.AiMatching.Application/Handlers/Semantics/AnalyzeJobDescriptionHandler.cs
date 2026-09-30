@@ -1,7 +1,8 @@
 using JobPlatform.AiMatching.Application.Commands.Semantics;
 using JobPlatform.AiMatching.Application.DTOs.Semantics;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Application.Services.Semantics;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Logging;
 

@@ -1,7 +1,8 @@
 using JobPlatform.HelpContent.Application.Commands.Tutorials;
 using JobPlatform.HelpContent.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.HelpContent.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.HelpContent.Application.Handlers.Tutorials;

@@ -1,3 +1,5 @@
+using JobPlatform.Reporting.Application.Interfaces;
+using JobPlatform.Reporting.Application.Interfaces.Ingestion;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.IntegrationEvents.AiMatching;
 using JobPlatform.SharedKernel.IntegrationEvents.ExternalIntegration;

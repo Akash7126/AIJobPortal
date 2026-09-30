@@ -7,6 +7,7 @@ using JobPlatform.PlatformAdministration.Application.Handlers.Reference;
 using JobPlatform.PlatformAdministration.Application.Handlers.Settings;
 using JobPlatform.PlatformAdministration.Application.Handlers.Taxonomy;
 using JobPlatform.PlatformAdministration.Application.Handlers.Users;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Application.Queries.Reference;
 using JobPlatform.PlatformAdministration.Application.Queries.Settings;
 using JobPlatform.PlatformAdministration.Application.Queries.Taxonomy;
@@ -158,7 +159,7 @@ public class QueryAndEventTests
     }
 
     [Fact]
-    public void Mapper_IgnoresUnknownEvents() => new PlatformAdministrationEventMapper().Map(Substitute.For<JobPlatform.SharedKernel.Domain.IDomainEvent>(), Ctx).Should().BeNull();
+    public void Mapper_IgnoresUnknownEvents() => new PlatformAdministrationEventMapper().Map(Substitute.For<JobPlatform.SharedKernel.Domain.Interfaces.IDomainEvent>(), Ctx).Should().BeNull();
 
     [Fact]
     public async Task DomainEventHandlers_EvictTheMatchingCacheKeys()

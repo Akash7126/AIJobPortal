@@ -1,4 +1,5 @@
 using JobPlatform.Reporting.Application.DTOs.Schedules;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.Application.Results;
 

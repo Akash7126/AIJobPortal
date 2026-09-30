@@ -1,5 +1,5 @@
-using JobPlatform.Notification.Application;
 using JobPlatform.Notification.Application.DTOs.InApp;
+using JobPlatform.Notification.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 

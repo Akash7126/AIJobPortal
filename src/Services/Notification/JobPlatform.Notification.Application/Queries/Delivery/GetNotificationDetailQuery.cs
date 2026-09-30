@@ -1,5 +1,5 @@
 using JobPlatform.Notification.Application.DTOs.Delivery;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.Notification.Application.Queries.Delivery;
 

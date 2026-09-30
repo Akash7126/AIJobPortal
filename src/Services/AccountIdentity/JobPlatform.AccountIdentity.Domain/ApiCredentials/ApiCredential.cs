@@ -1,6 +1,7 @@
 using System.Net;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Services;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Domain;
 

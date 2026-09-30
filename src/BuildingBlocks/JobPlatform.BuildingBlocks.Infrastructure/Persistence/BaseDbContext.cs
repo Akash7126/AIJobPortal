@@ -1,9 +1,9 @@
 using System.Reflection;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
 using JobPlatform.SharedKernel.Application.Persistence;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JobPlatform.BuildingBlocks.Infrastructure.Persistence;

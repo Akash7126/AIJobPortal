@@ -1,12 +1,13 @@
 using JobPlatform.PlatformAdministration.Application.Commands.Reference;
 using JobPlatform.PlatformAdministration.Application.DTOs.Common;
 using JobPlatform.PlatformAdministration.Application.DTOs.Reference;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Application.Reference;
-using JobPlatform.PlatformAdministration.Domain;
 using JobPlatform.PlatformAdministration.Domain.Common;
+using JobPlatform.PlatformAdministration.Domain.Interfaces.Repositories;
 using JobPlatform.PlatformAdministration.Domain.Reference;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 

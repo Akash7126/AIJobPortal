@@ -1,6 +1,7 @@
 using JobPlatform.GovernmentIntegration.Domain;
+using JobPlatform.GovernmentIntegration.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.GovernmentIntegration.Application;
 

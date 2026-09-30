@@ -1,6 +1,7 @@
 using JobPlatform.Reporting.Application.Ingestion;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 

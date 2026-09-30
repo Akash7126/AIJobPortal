@@ -1,4 +1,5 @@
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Infrastructure.Interfaces.Persistence;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

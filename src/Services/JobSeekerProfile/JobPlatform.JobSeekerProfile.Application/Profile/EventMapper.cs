@@ -1,7 +1,8 @@
 using JobPlatform.JobSeekerProfile.Domain;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.JobSeekerProfile;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.JobSeekerProfile.Application.Events;
 

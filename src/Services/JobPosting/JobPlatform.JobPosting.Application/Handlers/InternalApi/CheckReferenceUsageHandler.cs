@@ -1,5 +1,6 @@
+using JobPlatform.JobPosting.Application.Interfaces;
 using JobPlatform.JobPosting.Application.Queries.InternalApi;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.JobPosting.Application.Handlers.InternalApi;

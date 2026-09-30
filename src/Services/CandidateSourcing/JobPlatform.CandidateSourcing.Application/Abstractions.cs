@@ -1,12 +1,9 @@
 using System.Reflection;
-using JobPlatform.CandidateSourcing.Application.DTOs.Search;
-using JobPlatform.CandidateSourcing.Application.DTOs.TalentPool;
 using JobPlatform.CandidateSourcing.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JobPlatform.CandidateSourcing.Application;
@@ -49,26 +46,6 @@ public static class ActorFactory
 // ---------------------------------------------------------------------- read models
 
 public sealed record FitCriterionView(string Criterion, decimal Score, bool IsStrength, bool IsGap);
-
-// ---------------------------------------------------------------------- ports
-
-/// <summary>Read side (foundation section 3.5): the candidate database search and the talent pool listing, over the local projection and entries.</summary>
-public interface ICandidateSourcingReadStore
-{
-    Task<IReadOnlyList<TalentPoolEntryView>> ListTalentPoolAsync(Guid employerAccountId, CancellationToken ct = default);
-
-    Task<PagedResult<CandidateSearchResultItemView>> SearchCandidatesAsync(CandidateSearchCriteria criteria, PageRequest page, CancellationToken ct = default);
-}
-
-/// <summary>Cache-aside store for the derived data this BC recomputes often (foundation section 10). Failures degrade to a fresh computation, never an error.</summary>
-public interface ICandidateSourcingCache
-{
-    Task<T?> GetAsync<T>(string key, CancellationToken ct = default);
-
-    Task SetAsync<T>(string key, T value, TimeSpan ttl, CancellationToken ct = default);
-
-    Task RemoveAsync(string key, CancellationToken ct = default);
-}
 
 public static class CacheKeys
 {

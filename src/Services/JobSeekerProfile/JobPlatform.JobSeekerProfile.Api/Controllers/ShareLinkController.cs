@@ -16,10 +16,16 @@ namespace JobPlatform.JobSeekerProfile.Api.Controllers;
 public sealed class ShareLinkController : ApiControllerBase
 {
     [HttpPost]
-    public Task<IActionResult> Create(CancellationToken ct) => Send(new CreateProfileShareLinkCommand(), ct);
+    public Task<IActionResult> Create(CancellationToken ct)
+    {
+        return Send(new CreateProfileShareLinkCommand(), ct);
+    }
 
     [HttpGet]
-    public Task<IActionResult> GetMine(CancellationToken ct) => Send(new GetMyShareLinkQuery(), v => v is null ? NotFound() : Ok(v), ct);
+    public Task<IActionResult> GetMine(CancellationToken ct)
+    {
+        return Send(new GetMyShareLinkQuery(), v => v is null ? NotFound() : Ok(v), ct);
+    }
 }
 
 /// <summary>US-3.1.1-08 AC-04: anonymous read of a shared profile by token - not behind any role policy.</summary>
@@ -28,7 +34,10 @@ public sealed class ShareLinkController : ApiControllerBase
 public sealed class SharedProfileController : ApiControllerBase
 {
     [HttpGet("{token}")]
-    public Task<IActionResult> Get(string token, CancellationToken ct) => Send(new GetSharedProfileQuery(token), ct);
+    public Task<IActionResult> Get(string token, CancellationToken ct)
+    {
+        return Send(new GetSharedProfileQuery(token), ct);
+    }
 
     [HttpGet("{token}/qr")]
     public async Task<IActionResult> GetQr(string token, CancellationToken ct)

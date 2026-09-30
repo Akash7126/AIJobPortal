@@ -1,7 +1,8 @@
 using JobPlatform.PlatformAdministration.Application.DTOs.Entities;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Application.Queries.Entities;
 using JobPlatform.PlatformAdministration.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.PlatformAdministration.Application.Handlers.Entities;

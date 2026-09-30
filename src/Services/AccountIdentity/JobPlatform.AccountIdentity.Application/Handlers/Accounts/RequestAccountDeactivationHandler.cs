@@ -1,9 +1,10 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.Accounts;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.ApiContracts.AccountIdentity;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AccountIdentity.Application.Handlers.Accounts;

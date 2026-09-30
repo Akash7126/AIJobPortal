@@ -1,5 +1,5 @@
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.AiMatching.Application.Queries.Matching;
 

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using JobPlatform.Reporting.Application.DTOs.LaborMarket;
 using JobPlatform.Reporting.Domain;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Services.LaborMarket;

@@ -2,6 +2,8 @@ using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JobPlatform.BuildingBlocks.Infrastructure.Diagnostics;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Ports;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
@@ -17,32 +19,6 @@ public sealed class CacheOptions
 
     /// <summary>Key prefix, convention "&lt;env&gt;:&lt;bc-slug&gt;" (foundation section 10).</summary>
     public string KeyPrefix { get; set; } = "dev:service";
-}
-
-/// <summary>Low-level key/value + counter + set operations. Redis in production, in-memory fallback for local runs and tests. Never the source of truth.</summary>
-public interface ICacheStore
-{
-    Task<string?> GetAsync(string key, CancellationToken ct = default);
-
-    Task SetAsync(string key, string value, TimeSpan ttl, CancellationToken ct = default);
-
-    /// <summary>SET NX with expiry. True when the key was created.</summary>
-    Task<bool> SetIfNotExistsAsync(string key, string value, TimeSpan ttl, CancellationToken ct = default);
-
-    Task<bool> RemoveAsync(string key, CancellationToken ct = default);
-
-    /// <summary>Atomically increments a counter; the TTL is applied when the counter is created.</summary>
-    Task<long> IncrementAsync(string key, TimeSpan ttlOnCreate, CancellationToken ct = default);
-
-    Task<bool> RefreshTtlAsync(string key, TimeSpan ttl, CancellationToken ct = default);
-
-    Task<TimeSpan?> GetTimeToLiveAsync(string key, CancellationToken ct = default);
-
-    Task SetAddAsync(string setKey, string member, TimeSpan ttl, CancellationToken ct = default);
-
-    Task<IReadOnlyCollection<string>> SetMembersAsync(string setKey, CancellationToken ct = default);
-
-    Task SetRemoveAsync(string setKey, string member, CancellationToken ct = default);
 }
 
 public static class CacheStoreExtensions

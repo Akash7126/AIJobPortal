@@ -1,9 +1,10 @@
-using System.Security.Claims;
 using System.Net.Http.Json;
+using System.Security.Claims;
 using System.Text.Json;
+using JobPlatform.BuildingBlocks.Api.Interfaces.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Security;
@@ -259,11 +260,6 @@ public sealed class ClaimsAccessAuthorizer : IAccessAuthorizer
 
         return Result.Success();
     }
-}
-
-public interface IRemotePermissionChecker
-{
-    Task<bool> IsAllowedAsync(Guid accountId, string permission, CancellationToken ct);
 }
 
 public static class AuthenticationSetup

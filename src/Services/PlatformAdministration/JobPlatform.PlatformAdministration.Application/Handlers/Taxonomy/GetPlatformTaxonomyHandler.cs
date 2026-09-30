@@ -1,7 +1,7 @@
 using JobPlatform.PlatformAdministration.Application.DTOs.Taxonomy;
 using JobPlatform.PlatformAdministration.Application.Queries.Taxonomy;
 using JobPlatform.PlatformAdministration.Application.Taxonomy;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.PlatformAdministration.Application.Handlers.Taxonomy;

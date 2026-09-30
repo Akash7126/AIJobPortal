@@ -1,6 +1,7 @@
 using FluentValidation;
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Application.DTOs.Performance;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.SharedKernel.Application.Results;
 

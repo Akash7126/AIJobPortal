@@ -1,8 +1,9 @@
 using JobPlatform.ExternalIntegration.Application.Commands.JobDataFlows;
 using JobPlatform.ExternalIntegration.Application.DTOs.JobDataFlows;
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.ExternalIntegration.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.ExternalIntegration.Application.Handlers.JobDataFlows;

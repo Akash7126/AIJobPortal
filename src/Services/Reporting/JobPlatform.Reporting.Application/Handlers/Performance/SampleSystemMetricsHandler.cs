@@ -1,5 +1,5 @@
 using JobPlatform.Reporting.Application.Commands.Performance;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.Performance;

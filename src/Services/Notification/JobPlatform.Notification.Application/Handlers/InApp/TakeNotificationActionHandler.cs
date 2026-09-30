@@ -1,7 +1,7 @@
 using JobPlatform.Notification.Application.Commands.InApp;
 using JobPlatform.Notification.Application.DTOs.InApp;
 using JobPlatform.Notification.Application.Services.InApp;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Notification.Application.Handlers.InApp;

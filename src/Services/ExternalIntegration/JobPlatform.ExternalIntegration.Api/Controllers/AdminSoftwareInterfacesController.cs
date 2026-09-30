@@ -15,6 +15,8 @@ public sealed class AdminSoftwareInterfacesController : ApiControllerBase
     public sealed record RegisterRequest(string Category, string Name, string Endpoint);
 
     [HttpPut]
-    public Task<IActionResult> Register([FromBody] RegisterRequest body, CancellationToken ct) =>
-        Send(new RegisterSoftwareInterfaceCommand(body.Category, body.Name, body.Endpoint), ct);
+    public Task<IActionResult> Register([FromBody] RegisterRequest body, CancellationToken ct)
+    {
+        return Send(new RegisterSoftwareInterfaceCommand(body.Category, body.Name, body.Endpoint), ct);
+    }
 }

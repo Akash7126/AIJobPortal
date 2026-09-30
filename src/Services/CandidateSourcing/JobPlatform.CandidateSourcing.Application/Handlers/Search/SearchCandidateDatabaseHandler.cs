@@ -1,10 +1,11 @@
 using JobPlatform.CandidateSourcing.Application.DTOs.Search;
+using JobPlatform.CandidateSourcing.Application.Interfaces;
 using JobPlatform.CandidateSourcing.Application.Queries.Search;
-using JobPlatform.CandidateSourcing.Domain;
 using JobPlatform.CandidateSourcing.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.CandidateSourcing.Application.Handlers.Search;

@@ -1,7 +1,9 @@
 using JobPlatform.Reporting.Application.Commands.Activity;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Application.Services.Activity;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.Activity;

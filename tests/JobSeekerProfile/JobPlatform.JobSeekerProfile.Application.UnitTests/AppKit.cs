@@ -1,6 +1,8 @@
+using JobPlatform.JobSeekerProfile.Application.Interfaces;
 using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.JobSeekerProfile.Domain.Common;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

@@ -14,5 +14,8 @@ namespace JobPlatform.ExternalIntegration.Api.Controllers;
 public sealed class InternalIntegrationsController : ApiControllerBase
 {
     [HttpGet("{sourcePlatformId:guid}")]
-    public Task<IActionResult> Get(Guid sourcePlatformId, CancellationToken ct) => Send(new GetIntegrationSummaryQuery(sourcePlatformId), ct);
+    public Task<IActionResult> Get(Guid sourcePlatformId, CancellationToken ct)
+    {
+        return Send(new GetIntegrationSummaryQuery(sourcePlatformId), ct);
+    }
 }

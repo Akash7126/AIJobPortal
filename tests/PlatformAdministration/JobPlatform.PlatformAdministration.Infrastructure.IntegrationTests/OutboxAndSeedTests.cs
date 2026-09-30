@@ -1,11 +1,11 @@
 using System.Text.Json.Nodes;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.PlatformAdministration.Application;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Domain.Offerings;
 using JobPlatform.PlatformAdministration.Domain.Settings;
 using JobPlatform.PlatformAdministration.Domain.Taxonomy;
 using JobPlatform.PlatformAdministration.Infrastructure.Persistence;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

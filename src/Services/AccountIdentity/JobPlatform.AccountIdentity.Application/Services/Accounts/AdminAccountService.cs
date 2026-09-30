@@ -1,8 +1,9 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Application.Concurrency;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AccountIdentity.Application.Services.Accounts;

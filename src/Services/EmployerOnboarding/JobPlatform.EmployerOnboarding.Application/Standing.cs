@@ -1,6 +1,8 @@
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
 using JobPlatform.EmployerOnboarding.Domain;
+using JobPlatform.EmployerOnboarding.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.EmployerOnboarding.Application;
 

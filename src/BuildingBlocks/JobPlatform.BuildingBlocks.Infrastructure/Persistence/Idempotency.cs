@@ -1,6 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.SharedKernel.Application.Ports;
 using Microsoft.EntityFrameworkCore;

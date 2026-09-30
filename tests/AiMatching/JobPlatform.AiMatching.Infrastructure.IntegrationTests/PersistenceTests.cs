@@ -1,6 +1,7 @@
 using JobPlatform.AiMatching.Application;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.AiMatching.Infrastructure.Persistence;
+using JobPlatform.AiMatching.Infrastructure.Persistence.Repositories;
 using JobPlatform.TestSupport;
 using Microsoft.EntityFrameworkCore;
 

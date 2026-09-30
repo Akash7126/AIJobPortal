@@ -1,9 +1,11 @@
 using System.Security.Cryptography;
 using System.Text;
 using FluentValidation;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Persistence;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Options;
 using Unit = JobPlatform.SharedKernel.Application.Results.Unit;

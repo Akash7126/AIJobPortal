@@ -1,7 +1,7 @@
 using JobPlatform.AccountIdentity.Application.Commands.Accounts;
 using JobPlatform.AccountIdentity.Application.Services.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AccountIdentity.Application.Handlers.Accounts;

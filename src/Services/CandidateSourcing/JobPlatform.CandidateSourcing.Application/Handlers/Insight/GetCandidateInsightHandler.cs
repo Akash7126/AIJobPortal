@@ -1,13 +1,14 @@
 using JobPlatform.CandidateSourcing.Application.DTOs.Insight;
 using JobPlatform.CandidateSourcing.Application.Queries.Insight;
-using JobPlatform.CandidateSourcing.Domain;
 using JobPlatform.CandidateSourcing.Domain.Common;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
-using JobPlatform.SharedKernel.ApiContracts.JobPosting;
-using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Persistence;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.AiMatching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobPosting;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.CandidateSourcing.Application.Handlers.Insight;

@@ -1,4 +1,6 @@
+using JobPlatform.Notification.Application.Interfaces;
 using JobPlatform.Notification.Domain;
+using JobPlatform.Notification.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.SharedKernel.Domain;
 using Microsoft.Extensions.Options;

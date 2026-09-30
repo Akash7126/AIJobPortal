@@ -1,10 +1,11 @@
 using FluentValidation;
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Application.DTOs.Employment;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Application.Queries.Employment;
 using JobPlatform.Reporting.Application.Services.Employment;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.Employment;

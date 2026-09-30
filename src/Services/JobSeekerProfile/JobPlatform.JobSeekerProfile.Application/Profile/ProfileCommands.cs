@@ -1,7 +1,8 @@
 using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.JobSeekerProfile.Domain.Common;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Application.Concurrency;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using ProfileAggregate = JobPlatform.JobSeekerProfile.Domain.Profile;
 

@@ -1,4 +1,5 @@
 using System.Text;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Messaging;
 using JobPlatform.SharedKernel.Messaging;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -14,12 +15,6 @@ public sealed record OutboundMessage(Guid MessageId, string Exchange, string Rou
         new(envelope.MessageId, envelope.Exchange, envelope.RoutingKey, envelope.ToHeaders(), envelope.Payload);
 
     public string Type => Headers.GetValueOrDefault(MessagingHeaders.Type, string.Empty);
-}
-
-public interface IIntegrationEventBus
-{
-    /// <summary>Publishes and returns only after the broker confirmed the message (throws otherwise so the outbox retries).</summary>
-    Task PublishAsync(OutboundMessage message, CancellationToken ct = default);
 }
 
 /// <summary>Test/local bus: records what would have been published.</summary>
@@ -172,7 +167,6 @@ public static class RabbitMqTopology
     }
 }
 
-
 /// <summary>RabbitMQ publisher: persistent messages, publisher confirms on, topology declared on first use.</summary>
 public sealed class RabbitMqEventBus : IIntegrationEventBus, IAsyncDisposable
 {
@@ -291,13 +285,13 @@ public sealed class RabbitMqEventBus : IIntegrationEventBus, IAsyncDisposable
 public sealed class RabbitMqInboxConsumer : IAsyncDisposable
 {
     private readonly RabbitMqOptions _options;
-    private readonly Persistence.IInboxWriter _inbox;
+    private readonly Interfaces.Persistence.IInboxWriter _inbox;
     private readonly TimeProvider _clock;
     private readonly ILogger<RabbitMqInboxConsumer> _logger;
     private IConnection? _connection;
     private IChannel? _channel;
 
-    public RabbitMqInboxConsumer(IOptions<RabbitMqOptions> options, Persistence.IInboxWriter inbox, TimeProvider clock, ILogger<RabbitMqInboxConsumer> logger)
+    public RabbitMqInboxConsumer(IOptions<RabbitMqOptions> options, Interfaces.Persistence.IInboxWriter inbox, TimeProvider clock, ILogger<RabbitMqInboxConsumer> logger)
     {
         _options = options.Value;
         _inbox = inbox;

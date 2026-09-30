@@ -12,21 +12,27 @@ namespace JobPlatform.ExternalIntegration.Api.Controllers;
 public sealed class PublicDocumentationController : ApiControllerBase
 {
     [HttpGet("docs/{version}")]
-    public Task<IActionResult> Get(string version, CancellationToken ct) => Send(new GetApiDocumentationQuery(version), value =>
+    public Task<IActionResult> Get(string version, CancellationToken ct)
     {
-        if (value.Deprecated)
+        return Send(new GetApiDocumentationQuery(version), value =>
         {
-            Response.Headers["Deprecation"] = "true";
-            if (value.SunsetAtUtc is { } sunset)
+            if (value.Deprecated)
             {
-                Response.Headers["Sunset"] = sunset.ToString("R");
+                Response.Headers["Deprecation"] = "true";
+                if (value.SunsetAtUtc is { } sunset)
+                {
+                    Response.Headers["Sunset"] = sunset.ToString("R");
+                }
             }
-        }
 
-        return Ok(value);
-    }, ct);
+            return Ok(value);
+        }, ct);
+    }
 
     /// <summary>Not in the handover's route table but needed to verify AC-03 "two versions are served concurrently" end to end.</summary>
     [HttpGet("api-versions")]
-    public Task<IActionResult> List(CancellationToken ct) => Send(new ListApiVersionsQuery(), ct);
+    public Task<IActionResult> List(CancellationToken ct)
+    {
+        return Send(new ListApiVersionsQuery(), ct);
+    }
 }

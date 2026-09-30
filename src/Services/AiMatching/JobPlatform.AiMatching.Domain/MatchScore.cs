@@ -1,3 +1,4 @@
+using JobPlatform.AiMatching.Domain.Interfaces.Services;
 using JobPlatform.SharedKernel.Domain;
 
 namespace JobPlatform.AiMatching.Domain;

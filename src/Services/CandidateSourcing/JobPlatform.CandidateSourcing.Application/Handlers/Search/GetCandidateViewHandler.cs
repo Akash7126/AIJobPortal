@@ -1,7 +1,8 @@
 using JobPlatform.CandidateSourcing.Application.Queries.Search;
 using JobPlatform.CandidateSourcing.Domain.Common;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
 using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.CandidateSourcing.Application.Handlers.Search;

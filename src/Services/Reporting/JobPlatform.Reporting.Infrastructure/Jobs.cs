@@ -1,10 +1,10 @@
-using JobPlatform.BuildingBlocks.Infrastructure.Caching;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
 using JobPlatform.Reporting.Application;
 using JobPlatform.Reporting.Application.Commands.Activity;
 using JobPlatform.Reporting.Application.Commands.LaborMarket;
 using JobPlatform.Reporting.Application.Commands.Performance;
 using JobPlatform.Reporting.Application.Commands.ReportLibrary;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

@@ -1,8 +1,9 @@
 using JobPlatform.AiMatching.Application;
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
 using JobPlatform.AiMatching.Infrastructure.Persistence;
-using JobPlatform.BuildingBlocks.Infrastructure.Caching;
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

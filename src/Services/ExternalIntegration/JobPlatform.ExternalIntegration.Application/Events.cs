@@ -1,9 +1,11 @@
 using JobPlatform.ExternalIntegration.Domain;
+using JobPlatform.ExternalIntegration.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Common.Enums;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.IntegrationEvents.ExternalIntegration;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.ExternalIntegration.Application.Events;
 

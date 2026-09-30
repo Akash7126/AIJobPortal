@@ -20,13 +20,17 @@ public sealed class AdminNewsController : ApiControllerBase
 
     /// <summary>US-3.7.1-02: 201 for a genuinely new draft, 200 when an identical draft already existed (INV-02).</summary>
     [HttpPost]
-    public Task<IActionResult> Create([FromBody] NewsRequest body, CancellationToken ct) =>
-        Send(new CreateNewsArticleCommand(body.Kind, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn),
+    public Task<IActionResult> Create([FromBody] NewsRequest body, CancellationToken ct)
+    {
+        return Send(new CreateNewsArticleCommand(body.Kind, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn),
             result => result.Existing ? Ok(result.Article) : Created($"/api/v1/news/{result.Article.NewsArticleId}", result.Article), ct);
+    }
 
     [HttpPut("{id:guid}")]
-    public Task<IActionResult> Edit(Guid id, [FromBody] NewsRequest body, CancellationToken ct) =>
-        Send(new EditNewsArticleCommand(id, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn), ct);
+    public Task<IActionResult> Edit(Guid id, [FromBody] NewsRequest body, CancellationToken ct)
+    {
+        return Send(new EditNewsArticleCommand(id, body.TitleAr, body.TitleEn, body.BodyAr, body.BodyEn), ct);
+    }
 
     public sealed record MediaRequest(NewsMediaType Type, string? AltText);
 
@@ -48,16 +52,24 @@ public sealed class AdminNewsController : ApiControllerBase
 
     /// <summary>US-3.7.1-01: 204 also when already published (idempotent no-op).</summary>
     [HttpPost("{id:guid}/publish")]
-    public Task<IActionResult> Publish(Guid id, CancellationToken ct) => SendNoContent(new PublishNewsArticleCommand(id), ct);
+    public Task<IActionResult> Publish(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new PublishNewsArticleCommand(id), ct);
+    }
 
     /// <summary>US-3.7.1-06: 204 also when already archived (idempotent no-op).</summary>
     [HttpPost("{id:guid}/archive")]
-    public Task<IActionResult> Archive(Guid id, CancellationToken ct) => SendNoContent(new ArchiveNewsArticleCommand(id), ct);
+    public Task<IActionResult> Archive(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new ArchiveNewsArticleCommand(id), ct);
+    }
 
     public sealed record CategorizationRequest(IReadOnlyList<Guid> CategoryIds, IReadOnlyList<string> Tags);
 
     /// <summary>US-3.7.1-04.</summary>
     [HttpPut("{id:guid}/categorization")]
-    public Task<IActionResult> UpdateCategorization(Guid id, [FromBody] CategorizationRequest body, CancellationToken ct) =>
-        SendNoContent(new UpdateContentCategorizationCommand(id, body.CategoryIds, body.Tags), ct);
+    public Task<IActionResult> UpdateCategorization(Guid id, [FromBody] CategorizationRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new UpdateContentCategorizationCommand(id, body.CategoryIds, body.Tags), ct);
+    }
 }

@@ -1,9 +1,11 @@
 using JobPlatform.EmployerOnboarding.Application.DTOs.Media;
 using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
 using JobPlatform.EmployerOnboarding.Application.DTOs.Standing;
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
 using JobPlatform.EmployerOnboarding.Domain;
+using JobPlatform.EmployerOnboarding.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

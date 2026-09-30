@@ -1,4 +1,5 @@
-using JobPlatform.SharedKernel.Application.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -36,12 +37,6 @@ public sealed class BcSqliteKeepAlive : IDisposable
 public sealed class ProviderAwareModelCacheKeyFactory : IModelCacheKeyFactory
 {
     public object Create(DbContext context, bool designTime) => (context.GetType(), context.Database.ProviderName, designTime);
-}
-
-/// <summary>Seeds reference data after the schema exists. Must be idempotent.</summary>
-public interface IDbSeeder<in TContext> where TContext : DbContext
-{
-    Task SeedAsync(TContext db, CancellationToken ct);
 }
 
 public static class BcPersistenceExtensions

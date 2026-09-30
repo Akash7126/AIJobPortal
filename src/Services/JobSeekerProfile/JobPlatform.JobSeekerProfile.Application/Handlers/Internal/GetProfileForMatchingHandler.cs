@@ -1,7 +1,7 @@
 using JobPlatform.JobSeekerProfile.Application.Queries.Internal;
-using JobPlatform.JobSeekerProfile.Domain;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.JobSeekerProfile.Application.Handlers.Internal;

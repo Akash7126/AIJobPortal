@@ -1,7 +1,7 @@
 using JobPlatform.Reporting.Application.Queries.ReportRuns;
 using JobPlatform.Reporting.Application.Services.ReportRuns;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.ReportRuns;

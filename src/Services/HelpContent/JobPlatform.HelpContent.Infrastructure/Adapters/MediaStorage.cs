@@ -1,4 +1,4 @@
-using JobPlatform.HelpContent.Application;
+using JobPlatform.HelpContent.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 namespace JobPlatform.HelpContent.Infrastructure.Adapters;

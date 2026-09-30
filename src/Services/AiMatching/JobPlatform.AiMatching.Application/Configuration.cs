@@ -1,5 +1,6 @@
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.AiMatching.Application;
 

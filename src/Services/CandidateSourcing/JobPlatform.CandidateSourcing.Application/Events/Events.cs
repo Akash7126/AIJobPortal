@@ -1,17 +1,19 @@
-using JobPlatform.CandidateSourcing.Domain;
+using JobPlatform.CandidateSourcing.Application.Interfaces;
 using JobPlatform.CandidateSourcing.Domain.Insight;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
 using JobPlatform.CandidateSourcing.Domain.Privacy;
 using JobPlatform.CandidateSourcing.Domain.Projection;
 using JobPlatform.CandidateSourcing.Domain.TalentPool;
-using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
 using JobPlatform.SharedKernel.Common.Enums;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.IntegrationEvents.AiMatching;
 using JobPlatform.SharedKernel.IntegrationEvents.CandidateSourcing;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
 using JobPlatform.SharedKernel.IntegrationEvents.JobSeekerProfile;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.CandidateSourcing.Application.Events;
 

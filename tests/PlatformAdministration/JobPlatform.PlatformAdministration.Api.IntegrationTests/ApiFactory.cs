@@ -1,8 +1,10 @@
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.PlatformAdministration.Infrastructure;
 using JobPlatform.PlatformAdministration.Infrastructure.Persistence;
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
 

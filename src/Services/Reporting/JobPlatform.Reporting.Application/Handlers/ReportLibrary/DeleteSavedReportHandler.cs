@@ -1,8 +1,9 @@
 using JobPlatform.Reporting.Application.Commands.ReportLibrary;
 using JobPlatform.Reporting.Application.Services.ReportLibrary;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using Unit = JobPlatform.SharedKernel.Application.Results.Unit;
 

@@ -4,8 +4,7 @@ using JobPlatform.AuditLogging.Application.Exports;
 using JobPlatform.AuditLogging.Application.Ingestion;
 using JobPlatform.AuditLogging.Application.Services.AuditLog;
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Paging;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -73,31 +72,3 @@ public sealed record CandidateInsightRaw(Guid EmployerId, string? Availability, 
     DateTime ComputedAtUtc);
 
 public sealed record JobHistoryOwnerView(Guid? EmployerId, IReadOnlyList<JobStatusHistoryDto> Rows);
-
-/// <summary>Read side (foundation section 3.5): dedicated projections, never aggregates.</summary>
-public interface IAuditReadStore
-{
-    Task<PagedResult<AuditEntryDto>> ListEntriesAsync(EntryFilter filter, PageRequest page, CancellationToken ct = default);
-
-    Task<SyncDashboardDto> GetSyncDashboardAsync(Guid partnerId, PageRequest page, CancellationToken ct = default);
-
-    Task<IntegrationStatusDto> GetIntegrationStatusAsync(Guid partnerId, DateOnly today, CancellationToken ct = default);
-
-    Task<UsageStatisticsDto> GetUsageAsync(Guid partnerId, UsageWindow window, CancellationToken ct = default);
-
-    Task<JobHistoryOwnerView> GetJobStatusHistoryAsync(Guid jobPostingId, CancellationToken ct = default);
-
-    Task<PagedResult<NotificationLogDto>> ListNotificationLogAsync(string[] channels, Guid? recipientId, PageRequest page, CancellationToken ct = default);
-
-    Task<EmployerDashboardDto?> GetEmployerDashboardAsync(Guid employerId, CancellationToken ct = default);
-
-    Task<CandidateInsightRaw?> GetCandidateInsightAsync(Guid candidateProfileId, Guid jobPostingId, CancellationToken ct = default);
-}
-
-/// <summary>Anti-corruption port to the report source (BC-12, 3.1.4-10). The adapter is chosen by configuration (Reports:Provider = Simulated | Http).</summary>
-public interface IReportGenerator
-{
-    /// <summary>Generates the report and returns a reference to the result (a signed link), or a failure.</summary>
-    Task<JobPlatform.SharedKernel.Application.Results.Result<string>> GenerateAsync(ReportType type, ExportFormat format,
-        IReadOnlyDictionary<string, string> parameters, CancellationToken ct = default);
-}

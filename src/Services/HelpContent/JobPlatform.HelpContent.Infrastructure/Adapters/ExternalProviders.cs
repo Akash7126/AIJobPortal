@@ -1,6 +1,7 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.HelpContent.Application;
 using JobPlatform.HelpContent.Application.DTOs.CompanyPage;
+using JobPlatform.HelpContent.Application.Interfaces;
 using JobPlatform.SharedKernel.ApiContracts.EmployerOnboarding;
 using JobPlatform.SharedKernel.Application.Paging;
 

@@ -1,5 +1,7 @@
 using JobPlatform.Reporting.Application.DTOs.Exports;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Services.Exports;

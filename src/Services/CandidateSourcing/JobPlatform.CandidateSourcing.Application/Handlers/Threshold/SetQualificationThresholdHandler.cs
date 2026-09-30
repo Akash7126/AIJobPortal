@@ -1,8 +1,8 @@
 using JobPlatform.CandidateSourcing.Application.Commands.Threshold;
 using JobPlatform.CandidateSourcing.Application.DTOs.Threshold;
-using JobPlatform.CandidateSourcing.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.CandidateSourcing.Application.Handlers.Threshold;

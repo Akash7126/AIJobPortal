@@ -1,7 +1,7 @@
-using JobPlatform.EmployerOnboarding.Application;
 using JobPlatform.EmployerOnboarding.Application.DTOs.Media;
 using JobPlatform.EmployerOnboarding.Application.DTOs.Registration;
 using JobPlatform.EmployerOnboarding.Application.DTOs.Standing;
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
 using JobPlatform.EmployerOnboarding.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;

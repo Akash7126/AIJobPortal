@@ -21,9 +21,14 @@ public sealed class CandidatesController : CandidateSourcingControllerBase
     }
 
     [HttpGet("candidates/{candidateId:guid}")]
-    public Task<IActionResult> Get(Guid candidateId, CancellationToken ct) => Send(new GetCandidateViewQuery(candidateId), ct);
+    public Task<IActionResult> Get(Guid candidateId, CancellationToken ct)
+    {
+        return Send(new GetCandidateViewQuery(candidateId), ct);
+    }
 
     [HttpGet("candidates/{candidateId:guid}/insight")]
-    public Task<IActionResult> Insight(Guid candidateId, [FromQuery] Guid jobPostingId, CancellationToken ct) =>
-        Send(new GetCandidateInsightQuery(candidateId, jobPostingId), ct);
+    public Task<IActionResult> Insight(Guid candidateId, [FromQuery] Guid jobPostingId, CancellationToken ct)
+    {
+        return Send(new GetCandidateInsightQuery(candidateId, jobPostingId), ct);
+    }
 }

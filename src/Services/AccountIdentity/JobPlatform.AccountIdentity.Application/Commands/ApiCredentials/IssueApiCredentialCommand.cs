@@ -1,5 +1,5 @@
 using JobPlatform.AccountIdentity.Application.DTOs.ApiCredentials;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Security;
 

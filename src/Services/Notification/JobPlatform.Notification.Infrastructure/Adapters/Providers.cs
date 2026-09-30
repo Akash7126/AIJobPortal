@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using JobPlatform.Notification.Application;
+using JobPlatform.Notification.Application.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.Notification.Infrastructure.Adapters;

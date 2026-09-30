@@ -1,3 +1,4 @@
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 
 namespace JobPlatform.Reporting.Application.UnitTests;

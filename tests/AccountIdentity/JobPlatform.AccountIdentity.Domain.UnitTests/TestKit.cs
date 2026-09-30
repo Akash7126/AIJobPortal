@@ -1,5 +1,6 @@
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Services;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Common.ValueObjects;

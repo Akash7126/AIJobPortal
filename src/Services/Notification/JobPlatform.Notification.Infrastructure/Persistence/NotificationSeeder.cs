@@ -1,4 +1,4 @@
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
 using JobPlatform.Notification.Domain;
 using Microsoft.EntityFrameworkCore;
 

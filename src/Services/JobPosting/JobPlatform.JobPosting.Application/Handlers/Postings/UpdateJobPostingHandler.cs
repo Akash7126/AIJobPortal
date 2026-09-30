@@ -1,9 +1,11 @@
 using JobPlatform.JobPosting.Application.Commands.Postings;
 using JobPlatform.JobPosting.Application.DTOs.Postings;
 using JobPlatform.JobPosting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.JobPosting.Domain.Interfaces.Repositories;
+using JobPlatform.JobPosting.Domain.Interfaces.Services;
 using JobPlatform.SharedKernel.Application.Concurrency;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.JobPosting.Application.Handlers.Postings;

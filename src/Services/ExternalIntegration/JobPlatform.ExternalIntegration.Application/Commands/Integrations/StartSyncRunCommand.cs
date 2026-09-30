@@ -1,5 +1,5 @@
 using JobPlatform.ExternalIntegration.Application.DTOs.Integrations;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.ExternalIntegration.Application.Commands.Integrations;
 

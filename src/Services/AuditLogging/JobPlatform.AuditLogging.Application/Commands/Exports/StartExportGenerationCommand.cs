@@ -1,5 +1,5 @@
 using JobPlatform.AuditLogging.Application.DTOs.Exports;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.AuditLogging.Application.Commands.Exports;
 

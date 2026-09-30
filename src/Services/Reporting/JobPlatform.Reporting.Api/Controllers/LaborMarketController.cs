@@ -13,8 +13,14 @@ public sealed class LaborMarketController : ApiControllerBase
     public sealed record GenerateBody(string? Period);
 
     [HttpGet]
-    public Task<IActionResult> Get([FromQuery] string? period, CancellationToken ct) => Send(new GetLaborMarketReportQuery(period), ct);
+    public Task<IActionResult> Get([FromQuery] string? period, CancellationToken ct)
+    {
+        return Send(new GetLaborMarketReportQuery(period), ct);
+    }
 
     [HttpPost("generate")]
-    public Task<IActionResult> Generate([FromBody] GenerateBody? body, CancellationToken ct) => Send(new GenerateLaborMarketReportCommand(body?.Period), ct);
+    public Task<IActionResult> Generate([FromBody] GenerateBody? body, CancellationToken ct)
+    {
+        return Send(new GenerateLaborMarketReportCommand(body?.Period), ct);
+    }
 }

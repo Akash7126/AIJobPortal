@@ -1,7 +1,7 @@
 using JobPlatform.Reporting.Application.Commands.LaborMarket;
 using JobPlatform.Reporting.Application.DTOs.LaborMarket;
 using JobPlatform.Reporting.Application.Services.LaborMarket;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.LaborMarket;

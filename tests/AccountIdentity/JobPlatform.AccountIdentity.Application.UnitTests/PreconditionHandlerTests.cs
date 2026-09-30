@@ -1,8 +1,9 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.Accounts;
 using JobPlatform.AccountIdentity.Application.Commands.Administration;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
 using JobPlatform.AccountIdentity.Domain.Rbac;
 using JobPlatform.AccountIdentity.Domain.Sessions;
@@ -24,7 +25,7 @@ public class PreconditionHandlerTests
     private readonly FakeTimeProvider _clock = AppKit.Clock();
     private readonly Guid _adminId = Guid.NewGuid();
 
-    private JobPlatform.SharedKernel.Application.Ports.ICurrentUser Admin() => AppKit.User(_adminId, ActorType.Administrator, mfa: true);
+    private JobPlatform.SharedKernel.Application.Interfaces.Ports.ICurrentUser Admin() => AppKit.User(_adminId, ActorType.Administrator, mfa: true);
 
     private static void ShouldBePreconditionFailed<T>(Result<T> result)
     {

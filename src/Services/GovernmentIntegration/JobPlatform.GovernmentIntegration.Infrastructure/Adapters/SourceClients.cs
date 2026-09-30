@@ -1,5 +1,6 @@
 using JobPlatform.GovernmentIntegration.Application;
 using JobPlatform.GovernmentIntegration.Application.Commands.Migration;
+using JobPlatform.GovernmentIntegration.Application.Interfaces;
 using JobPlatform.GovernmentIntegration.Domain;
 
 namespace JobPlatform.GovernmentIntegration.Infrastructure.Adapters;

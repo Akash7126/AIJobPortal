@@ -1,6 +1,6 @@
 using JobPlatform.ExternalIntegration.Application.DTOs.Mapping;
 using JobPlatform.ExternalIntegration.Application.Queries.Mapping;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.ExternalIntegration.Application.Handlers.Mapping;

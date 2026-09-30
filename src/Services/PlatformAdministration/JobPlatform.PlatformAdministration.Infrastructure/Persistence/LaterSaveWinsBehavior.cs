@@ -1,8 +1,8 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.PlatformAdministration.Application;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.PlatformAdministration.Infrastructure.Persistence;

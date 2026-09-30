@@ -1,9 +1,12 @@
 using JobPlatform.CandidateSourcing.Application.Handlers.Insight;
 using JobPlatform.CandidateSourcing.Application.Queries.Insight;
 using JobPlatform.SharedKernel.ApiContracts.AiMatching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.AiMatching;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobPosting;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;
 using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
-using JobPlatform.SharedKernel.Application.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

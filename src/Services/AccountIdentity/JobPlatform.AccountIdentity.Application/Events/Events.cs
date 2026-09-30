@@ -1,12 +1,13 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
 using JobPlatform.AccountIdentity.Domain.Rbac;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.AccountIdentity.Application.Events;
 

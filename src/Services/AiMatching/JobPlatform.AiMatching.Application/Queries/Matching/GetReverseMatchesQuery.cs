@@ -1,5 +1,5 @@
 using JobPlatform.AiMatching.Application.DTOs.Matching;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 
 namespace JobPlatform.AiMatching.Application.Queries.Matching;

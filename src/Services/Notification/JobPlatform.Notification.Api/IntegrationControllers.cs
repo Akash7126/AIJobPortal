@@ -2,8 +2,8 @@ using System.Text.Json;
 using JobPlatform.BuildingBlocks.Api.Hosting;
 using JobPlatform.BuildingBlocks.Api.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.Notification.Application;
 using JobPlatform.Notification.Application.Commands.Delivery;
+using JobPlatform.Notification.Application.Interfaces;
 using JobPlatform.Notification.Application.Queries.Delivery;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -19,10 +19,16 @@ public sealed class WebhooksController : ApiControllerBase
     public const string SignatureHeader = "X-Signature";
 
     [HttpPost("sms-delivery")]
-    public Task<IActionResult> SmsDelivery(CancellationToken ct) => Report(ct);
+    public Task<IActionResult> SmsDelivery(CancellationToken ct)
+    {
+        return Report(ct);
+    }
 
     [HttpPost("email-events")]
-    public Task<IActionResult> EmailEvents(CancellationToken ct) => Report(ct);
+    public Task<IActionResult> EmailEvents(CancellationToken ct)
+    {
+        return Report(ct);
+    }
 
     private async Task<IActionResult> Report(CancellationToken ct)
     {
@@ -59,9 +65,14 @@ public sealed class InternalNotificationsController : ApiControllerBase
     public sealed record OtpBody(Guid AccountId, string Purpose, string Text);
 
     [HttpPost("otp")]
-    public async Task<IActionResult> SendOtp([FromBody] OtpBody body, CancellationToken ct) =>
-        await Send(new SendTransactionalSmsCommand(body.AccountId, body.Purpose, body.Text, IdempotencyKey), result => Accepted(result), ct);
+    public async Task<IActionResult> SendOtp([FromBody] OtpBody body, CancellationToken ct)
+    {
+        return await Send(new SendTransactionalSmsCommand(body.AccountId, body.Purpose, body.Text, IdempotencyKey), result => Accepted(result), ct);
+    }
 
     [HttpGet("{id:guid}")]
-    public Task<IActionResult> Detail(Guid id, CancellationToken ct) => Send(new GetNotificationDetailQuery(id), ct);
+    public Task<IActionResult> Detail(Guid id, CancellationToken ct)
+    {
+        return Send(new GetNotificationDetailQuery(id), ct);
+    }
 }

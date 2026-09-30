@@ -1,7 +1,10 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
 using JobPlatform.JobPosting.Application;
+using JobPlatform.JobPosting.Application.Interfaces;
 using JobPlatform.JobPosting.Domain;
+using JobPlatform.JobPosting.Domain.Interfaces.Services;
 using JobPlatform.SharedKernel.ApiContracts.EmployerOnboarding;
 using JobPlatform.SharedKernel.ApiContracts.PlatformAdministration;
 

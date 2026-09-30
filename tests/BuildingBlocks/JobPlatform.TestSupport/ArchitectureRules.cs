@@ -1,5 +1,5 @@
 using System.Reflection;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Domain;
 using NetArchTest.Rules;
 
@@ -49,6 +49,31 @@ public static class ArchitectureRules
         return application.GetTypes()
             .Where(t => t.IsClass && IsFluentValidator(t))
             .Where(t => t.Namespace is null || !(t.Namespace == validatorsNs || t.Namespace.StartsWith(validatorsNs + ".", StringComparison.Ordinal)))
+            .Select(t => t.FullName!).ToArray();
+    }
+
+    /// <summary>
+    /// Contracts are segregated from implementations: every top-level interface of the given assemblies lives in an <c>Interfaces</c> folder of its
+    /// layer (namespace segment <c>.Interfaces</c>), e.g. <c>&lt;Domain&gt;.Interfaces.Repositories</c> or <c>&lt;Application&gt;.Interfaces</c>.
+    /// </summary>
+    public static IReadOnlyList<string> InterfacesOutsideInterfacesFolders(params Assembly[] assemblies) =>
+        assemblies.SelectMany(a => a.GetTypes())
+            .Where(t => t.IsInterface && !t.IsNested && !t.Name.StartsWith('<'))
+            .Where(t => t.Namespace is null || !(t.Namespace.EndsWith(".Interfaces", StringComparison.Ordinal) || t.Namespace.Contains(".Interfaces.", StringComparison.Ordinal)))
+            .Select(t => t.FullName!).ToArray();
+
+    /// <summary>
+    /// Repository implementations (classes implementing an <c>I…Repository</c> contract, or named <c>…Repository</c>) live in the
+    /// <c>Persistence/Repositories</c> folder of their Infrastructure project, one class per file.
+    /// </summary>
+    public static IReadOnlyList<string> RepositoriesOutsideRepositoriesFolder(Assembly infrastructure)
+    {
+        var expected = infrastructure.GetName().Name + ".Persistence.Repositories";
+        return infrastructure.GetTypes()
+            .Where(t => t is { IsClass: true, IsAbstract: false, IsNested: false } && !t.Name.StartsWith('<'))
+            .Where(t => t.Name.EndsWith("Repository", StringComparison.Ordinal) ||
+                        t.GetInterfaces().Any(i => i.Name.StartsWith('I') && i.Name.EndsWith("Repository", StringComparison.Ordinal) && i.Assembly != infrastructure))
+            .Where(t => t.Namespace != expected)
             .Select(t => t.FullName!).ToArray();
     }
 

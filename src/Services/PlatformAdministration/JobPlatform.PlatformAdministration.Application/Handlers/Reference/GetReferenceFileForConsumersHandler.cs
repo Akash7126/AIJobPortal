@@ -1,7 +1,7 @@
 using JobPlatform.PlatformAdministration.Application.DTOs.Reference;
 using JobPlatform.PlatformAdministration.Application.Queries.Reference;
 using JobPlatform.PlatformAdministration.Application.Reference;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.PlatformAdministration.Application.Handlers.Reference;

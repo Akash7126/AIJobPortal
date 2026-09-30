@@ -1,4 +1,5 @@
 using JobPlatform.Reporting.Application;
+using JobPlatform.Reporting.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace JobPlatform.Reporting.Infrastructure.Persistence;

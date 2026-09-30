@@ -1,5 +1,6 @@
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.Notification.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Notification.Application.Services.InApp;

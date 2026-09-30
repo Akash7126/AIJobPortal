@@ -17,8 +17,14 @@ namespace JobPlatform.HelpContent.Api.Controllers;
 public sealed class TutorialsController : ApiControllerBase
 {
     [HttpGet("{id:guid}")]
-    public Task<IActionResult> Get(Guid id, CancellationToken ct) => Send(new GetOnboardingTutorialQuery(id), ct);
+    public Task<IActionResult> Get(Guid id, CancellationToken ct)
+    {
+        return Send(new GetOnboardingTutorialQuery(id), ct);
+    }
 
     [HttpPost("{id:guid}/complete")]
-    public Task<IActionResult> Complete(Guid id, CancellationToken ct) => SendNoContent(new CompleteTutorialCommand(id), ct);
+    public Task<IActionResult> Complete(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new CompleteTutorialCommand(id), ct);
+    }
 }

@@ -1,6 +1,6 @@
-using System.Net.Http.Json;
 using System.Text.Json;
 using JobPlatform.Notification.Application;
+using JobPlatform.Notification.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 

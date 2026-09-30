@@ -1,5 +1,6 @@
 using JobPlatform.HelpContent.Domain.Common;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 
 namespace JobPlatform.HelpContent.Domain;
 

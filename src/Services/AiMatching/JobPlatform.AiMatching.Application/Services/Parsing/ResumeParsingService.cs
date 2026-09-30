@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.AiMatching.Application.Services.Parsing;

@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
-using JobPlatform.PlatformAdministration.Application;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.PlatformAdministration.Infrastructure.Adapters;

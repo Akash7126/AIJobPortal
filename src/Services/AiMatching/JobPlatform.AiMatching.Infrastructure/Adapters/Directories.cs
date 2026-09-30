@@ -1,10 +1,11 @@
 using System.Security.Cryptography;
 using JobPlatform.AiMatching.Application;
 using JobPlatform.AiMatching.Application.DTOs.Semantics;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.SharedKernel.ApiContracts.JobPosting;
-using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobPosting;
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobSeekerProfile;
 
 namespace JobPlatform.AiMatching.Infrastructure.Adapters;
 

@@ -1,4 +1,4 @@
-using JobPlatform.AuditLogging.Application;
+using JobPlatform.AuditLogging.Application.Interfaces;
 using JobPlatform.AuditLogging.Domain;
 using JobPlatform.SharedKernel.Application.Results;
 

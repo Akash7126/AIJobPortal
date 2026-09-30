@@ -1,7 +1,9 @@
 using JobPlatform.ExternalIntegration.Application.DTOs.ApiFramework;
 using JobPlatform.ExternalIntegration.Application.DTOs.Integrations;
+using JobPlatform.ExternalIntegration.Application.Interfaces;
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.ExternalIntegration.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

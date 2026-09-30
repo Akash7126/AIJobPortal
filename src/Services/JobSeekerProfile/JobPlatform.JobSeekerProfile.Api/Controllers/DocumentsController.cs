@@ -29,10 +29,16 @@ public sealed class DocumentsController : ApiControllerBase
     }
 
     [HttpGet("documents")]
-    public Task<IActionResult> ListDocuments(CancellationToken ct) => Send(new ListSupplementaryDocumentsQuery(), ct);
+    public Task<IActionResult> ListDocuments(CancellationToken ct)
+    {
+        return Send(new ListSupplementaryDocumentsQuery(), ct);
+    }
 
     [HttpDelete("documents/{id:guid}")]
-    public Task<IActionResult> RemoveDocument(Guid id, CancellationToken ct) => SendNoContent(new RemoveSupplementaryDocumentCommand(id), ct);
+    public Task<IActionResult> RemoveDocument(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new RemoveSupplementaryDocumentCommand(id), ct);
+    }
 
     [HttpPost("resume")]
     [RequestSizeLimit(MaxUploadBytes + 1024)]
@@ -44,7 +50,10 @@ public sealed class DocumentsController : ApiControllerBase
     }
 
     [HttpGet("resume")]
-    public Task<IActionResult> GetResume(CancellationToken ct) => Send(new GetResumeMetadataQuery(), ct);
+    public Task<IActionResult> GetResume(CancellationToken ct)
+    {
+        return Send(new GetResumeMetadataQuery(), ct);
+    }
 }
 
 /// <summary>US-3.1.2-08: employer supplementary documents. Implemented here per the pipeline's BC assignment (handover Q-02 recommends moving to BC-05).</summary>

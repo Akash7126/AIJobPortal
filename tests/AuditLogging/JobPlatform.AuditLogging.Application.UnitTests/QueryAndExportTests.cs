@@ -3,12 +3,13 @@ using JobPlatform.AuditLogging.Application.Commands.Exports;
 using JobPlatform.AuditLogging.Application.DTOs.AuditLog;
 using JobPlatform.AuditLogging.Application.DTOs.Exports;
 using JobPlatform.AuditLogging.Application.Exports;
+using JobPlatform.AuditLogging.Application.Interfaces;
 using JobPlatform.AuditLogging.Application.Queries.AuditLog;
 using JobPlatform.AuditLogging.Application.Queries.Exports;
 using JobPlatform.AuditLogging.Application.Validators.AuditLog;
 using JobPlatform.AuditLogging.Application.Validators.Exports;
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
@@ -32,7 +33,7 @@ public class QueryHandlerTests
         return new AuditLogQueryHarness(store, Users.Of(actor, id));
     }
 
-    private sealed record AuditLogQueryHarness(IAuditReadStore Store, JobPlatform.SharedKernel.Application.Ports.ICurrentUser User);
+    private sealed record AuditLogQueryHarness(IAuditReadStore Store, JobPlatform.SharedKernel.Application.Interfaces.Ports.ICurrentUser User);
 
     private static IRequestHandler<TQuery, TResult> Handler<TQuery, TResult>(object harness) where TQuery : IQuery<TResult>
     {

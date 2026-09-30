@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Common.ValueObjects;

@@ -1,7 +1,8 @@
 using JobPlatform.Reporting.Application.DTOs.Activity;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Application.Queries.Activity;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.Reporting.Application.Handlers.Activity;

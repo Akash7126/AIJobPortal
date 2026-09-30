@@ -1,11 +1,14 @@
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
+using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.GovernmentIntegration.Application;
+using JobPlatform.GovernmentIntegration.Application.Interfaces;
 using JobPlatform.GovernmentIntegration.Domain;
 using JobPlatform.GovernmentIntegration.Infrastructure;
 using JobPlatform.GovernmentIntegration.Infrastructure.Persistence;
-using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

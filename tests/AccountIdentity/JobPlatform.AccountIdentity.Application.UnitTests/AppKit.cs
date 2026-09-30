@@ -1,13 +1,15 @@
 using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Services;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
 using JobPlatform.AccountIdentity.Domain.Sessions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using JobPlatform.SharedKernel.Common.ValueObjects;
-using JobPlatform.SharedKernel.Domain;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;
 

@@ -18,17 +18,32 @@ public sealed class CustomReportsController : ApiControllerBase
 
     /// <summary>200 with the result; when Power BI was requested and timed out the built-in result comes back with fallback = true and warningCode E-CRG-UPSTREAM-TIMEOUT.</summary>
     [HttpPost("custom")]
-    public Task<IActionResult> Run([FromBody] RunBody body, CancellationToken ct) => Send(new RunCustomReportCommand(body.TemplateId, body.Definition, body.Arguments, body.Target), ct);
+    public Task<IActionResult> Run([FromBody] RunBody body, CancellationToken ct)
+    {
+        return Send(new RunCustomReportCommand(body.TemplateId, body.Definition, body.Arguments, body.Target), ct);
+    }
 
     [HttpGet("formats")]
-    public Task<IActionResult> Formats(CancellationToken ct) => Send(new GetReportFormatsQuery(), ct);
+    public Task<IActionResult> Formats(CancellationToken ct)
+    {
+        return Send(new GetReportFormatsQuery(), ct);
+    }
 
     [HttpPost("render")]
-    public Task<IActionResult> Render([FromBody] RenderBody body, CancellationToken ct) => Send(new RenderReportQuery(body.TemplateId, body.Definition, body.Arguments, body.Format), ct);
+    public Task<IActionResult> Render([FromBody] RenderBody body, CancellationToken ct)
+    {
+        return Send(new RenderReportQuery(body.TemplateId, body.Definition, body.Arguments, body.Format), ct);
+    }
 
     [HttpPost("builder/definitions")]
-    public Task<IActionResult> Build([FromBody] ReportDefinitionDto body, CancellationToken ct) => Send(new BuildReportDefinitionCommand(body), ct);
+    public Task<IActionResult> Build([FromBody] ReportDefinitionDto body, CancellationToken ct)
+    {
+        return Send(new BuildReportDefinitionCommand(body), ct);
+    }
 
     [HttpGet("builder/fields")]
-    public Task<IActionResult> Fields([FromQuery] string dataSource, CancellationToken ct) => Send(new GetReportBuilderFieldsQuery(dataSource), ct);
+    public Task<IActionResult> Fields([FromQuery] string dataSource, CancellationToken ct)
+    {
+        return Send(new GetReportBuilderFieldsQuery(dataSource), ct);
+    }
 }

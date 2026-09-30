@@ -28,7 +28,7 @@ internal static class Json
 /// <see cref="AggregateMapping.ConfigureAggregate{TAggregate}"/>, so a concurrent overwrite never throws.</summary>
 internal static class LastWriteWinsMapping
 {
-    public static void ConfigureAggregateLastWriteWins<TAggregate>(this EntityTypeBuilder<TAggregate> builder) where TAggregate : class, JobPlatform.SharedKernel.Domain.IAggregateRoot
+    public static void ConfigureAggregateLastWriteWins<TAggregate>(this EntityTypeBuilder<TAggregate> builder) where TAggregate : class, JobPlatform.SharedKernel.Domain.Interfaces.IAggregateRoot
     {
         builder.Property<byte[]>("RowVersion");
         builder.Property<long>("Version").HasColumnName("AggregateVersion");

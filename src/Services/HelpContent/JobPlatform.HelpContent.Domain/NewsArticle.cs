@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using JobPlatform.HelpContent.Domain.Common;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 
 namespace JobPlatform.HelpContent.Domain;
 
@@ -24,7 +25,7 @@ public enum NewsMediaType
     Embed
 }
 
-/// <summary>Uploaded file reference for a news article's media item. Never the bytes themselves - those live behind Application.IMediaStorage.</summary>
+/// <summary>Uploaded file reference for a news article's media item. Never the bytes themselves - those live behind Application.Interfaces.IMediaStorage.</summary>
 public sealed class NewsMediaFile : ValueObject
 {
     public NewsMediaFile(string storageKey, long sizeBytes, string contentType)

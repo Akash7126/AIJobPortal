@@ -2,6 +2,7 @@ using JobPlatform.HelpContent.Application.Events;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.HelpContent.Domain.Common;
 using JobPlatform.HelpContent.Infrastructure.Persistence;
+using JobPlatform.HelpContent.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.TestSupport;
 using Microsoft.EntityFrameworkCore;

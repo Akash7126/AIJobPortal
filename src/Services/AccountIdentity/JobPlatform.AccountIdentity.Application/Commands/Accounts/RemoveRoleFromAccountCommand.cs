@@ -1,5 +1,5 @@
 using JobPlatform.AccountIdentity.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Security;
 

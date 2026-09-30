@@ -1,4 +1,5 @@
 using JobPlatform.PlatformAdministration.Application.DTOs.Common;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 
 namespace JobPlatform.PlatformAdministration.Application.Commands.Settings;
 

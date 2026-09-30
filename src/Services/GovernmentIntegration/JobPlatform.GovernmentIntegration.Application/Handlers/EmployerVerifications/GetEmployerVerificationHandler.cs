@@ -1,7 +1,8 @@
 using JobPlatform.GovernmentIntegration.Application.DTOs.EmployerVerifications;
+using JobPlatform.GovernmentIntegration.Application.Interfaces;
 using JobPlatform.GovernmentIntegration.Application.Queries.EmployerVerifications;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 

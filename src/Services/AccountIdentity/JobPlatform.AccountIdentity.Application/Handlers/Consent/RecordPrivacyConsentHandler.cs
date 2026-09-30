@@ -2,9 +2,9 @@ using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.Consent;
 using JobPlatform.AccountIdentity.Application.DTOs.Consent;
 using JobPlatform.AccountIdentity.Application.Services.Consent;
-using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Domain.Consent;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 

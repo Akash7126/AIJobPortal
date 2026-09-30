@@ -1,7 +1,8 @@
 using JobPlatform.HelpContent.Application.DTOs.Help;
+using JobPlatform.HelpContent.Application.Interfaces;
 using JobPlatform.HelpContent.Application.Queries.Help;
-using JobPlatform.HelpContent.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.HelpContent.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.HelpContent.Application.Handlers.Help;

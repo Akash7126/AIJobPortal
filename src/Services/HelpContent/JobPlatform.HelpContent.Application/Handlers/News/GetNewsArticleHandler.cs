@@ -1,8 +1,9 @@
 using JobPlatform.HelpContent.Application.DTOs.News;
+using JobPlatform.HelpContent.Application.Interfaces;
 using JobPlatform.HelpContent.Application.Queries.News;
 using JobPlatform.HelpContent.Domain;
 using JobPlatform.HelpContent.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.HelpContent.Application.Handlers.News;

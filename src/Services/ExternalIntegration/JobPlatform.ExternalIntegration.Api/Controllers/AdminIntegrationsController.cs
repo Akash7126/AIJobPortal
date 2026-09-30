@@ -17,13 +17,20 @@ public sealed class AdminIntegrationsController : ApiControllerBase
     public sealed record SuspendRequest(string Reason);
 
     [HttpPost("{id:guid}/approve")]
-    public Task<IActionResult> Approve(Guid id, [FromBody] ApproveRequest body, CancellationToken ct) =>
-        SendNoContent(new ApproveExternalJobSiteCommand(id, body.ApprovalBasis), ct);
+    public Task<IActionResult> Approve(Guid id, [FromBody] ApproveRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new ApproveExternalJobSiteCommand(id, body.ApprovalBasis), ct);
+    }
 
     [HttpPost("{id:guid}/activate")]
-    public Task<IActionResult> Activate(Guid id, CancellationToken ct) => SendNoContent(new ActivateIntegrationCommand(id), ct);
+    public Task<IActionResult> Activate(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new ActivateIntegrationCommand(id), ct);
+    }
 
     [HttpPost("{id:guid}/suspend")]
-    public Task<IActionResult> Suspend(Guid id, [FromBody] SuspendRequest body, CancellationToken ct) =>
-        SendNoContent(new SuspendIntegrationCommand(id, body.Reason), ct);
+    public Task<IActionResult> Suspend(Guid id, [FromBody] SuspendRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new SuspendIntegrationCommand(id, body.Reason), ct);
+    }
 }

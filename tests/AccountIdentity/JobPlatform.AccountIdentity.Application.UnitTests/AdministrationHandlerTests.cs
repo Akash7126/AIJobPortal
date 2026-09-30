@@ -7,6 +7,7 @@ using JobPlatform.AccountIdentity.Application.DTOs.Administration;
 using JobPlatform.AccountIdentity.Application.DTOs.Consent;
 using JobPlatform.AccountIdentity.Application.Events;
 using JobPlatform.AccountIdentity.Application.Handlers.Accounts;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Application.Queries.Accounts;
 using JobPlatform.AccountIdentity.Application.Queries.Administration;
 using JobPlatform.AccountIdentity.Application.Queries.Consent;
@@ -16,6 +17,7 @@ using JobPlatform.AccountIdentity.Domain.Accounts;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Common;
 using JobPlatform.AccountIdentity.Domain.Consent;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
 using JobPlatform.AccountIdentity.Domain.PasswordPolicies;
 using JobPlatform.AccountIdentity.Domain.Rbac;
 using JobPlatform.AccountIdentity.Domain.Sessions;
@@ -145,7 +147,7 @@ public class AdminAccountHandlerTests
 
         foreach (var (command, permission) in expected)
         {
-            var authorized = command.Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Abstractions.IAuthorizedRequest>().Which;
+            var authorized = command.Should().BeAssignableTo<JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IAuthorizedRequest>().Which;
             authorized.RequiredPermission.Should().Be(permission);
             authorized.AllowedActorTypes.Should().Equal(ActorType.Administrator);
             authorized.RequireMfa.Should().BeTrue();
@@ -219,7 +221,7 @@ public class ConfigurationHandlerTests
     private readonly FakeTimeProvider _clock = AppKit.Clock();
     private readonly Guid _adminId = Guid.NewGuid();
 
-    private JobPlatform.SharedKernel.Application.Ports.ICurrentUser Admin() => AppKit.User(_adminId, ActorType.Administrator, mfa: true);
+    private JobPlatform.SharedKernel.Application.Interfaces.Ports.ICurrentUser Admin() => AppKit.User(_adminId, ActorType.Administrator, mfa: true);
 
     [Fact]
     [Trait("Story", "US-3.1.5-02")]
@@ -405,7 +407,7 @@ public class AccessAuthorizerAndMapperTests
 
     private AccessAuthorizer Authorizer() => new(_roles, _log, _clock);
 
-    private sealed record NeedsPermission(string Permission, bool Mfa = false, ActorType[]? Actors = null) : JobPlatform.SharedKernel.Application.Abstractions.IAuthorizedRequest
+    private sealed record NeedsPermission(string Permission, bool Mfa = false, ActorType[]? Actors = null) : JobPlatform.SharedKernel.Application.Interfaces.Cqrs.IAuthorizedRequest
     {
         public IReadOnlyCollection<ActorType> AllowedActorTypes => Actors ?? Array.Empty<ActorType>();
         public string? RequiredPermission => Permission;

@@ -1,3 +1,4 @@
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Persistence;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.CandidateSourcing.Infrastructure.Adapters;
 using JobPlatform.CandidateSourcing.Infrastructure.Persistence;
@@ -6,6 +7,7 @@ using JobPlatform.SharedKernel.ApiContracts.JobSeekerProfile;
 using JobPlatform.SharedKernel.IntegrationEvents.GovernmentIntegration;
 using JobPlatform.SharedKernel.IntegrationEvents.JobSeekerProfile;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 using Microsoft.Extensions.DependencyInjection;
 

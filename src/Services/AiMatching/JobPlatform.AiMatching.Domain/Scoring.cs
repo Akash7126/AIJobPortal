@@ -1,3 +1,5 @@
+using JobPlatform.AiMatching.Domain.Interfaces.Services;
+
 namespace JobPlatform.AiMatching.Domain;
 
 /// <summary>The part of a job seeker's profile scoring needs (ACL view of BC-04; nothing else is stored here).</summary>
@@ -9,12 +11,6 @@ public sealed record ProfileMatchView(
 public sealed record PostingMatchView(
     Guid PostingId, long Version, bool IsActive, IReadOnlyList<string> RequiredSkills, EducationLevel? RequiredEducation, IReadOnlyList<string> RequiredTraining,
     string? Governorate, string? City, WorkArrangement Arrangement, int? MinYears, int? MaxYears, decimal? SalaryMin, decimal? SalaryMax);
-
-/// <summary>Similarity of two skill/training terms in 0..1 (1 = same). Lets the engine stay pure while an embedding model enriches near-synonyms.</summary>
-public interface ISkillSimilarity
-{
-    double Between(string a, string b);
-}
 
 /// <summary>Exact match on normalised text.</summary>
 public sealed class ExactSkillSimilarity : ISkillSimilarity

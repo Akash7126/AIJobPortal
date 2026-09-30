@@ -1,5 +1,7 @@
+using JobPlatform.JobPosting.Domain.Interfaces.Services;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 
 namespace JobPlatform.JobPosting.Domain;
 

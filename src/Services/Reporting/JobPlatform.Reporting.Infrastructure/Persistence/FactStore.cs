@@ -1,4 +1,4 @@
-using JobPlatform.Reporting.Application;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,7 +1,8 @@
 using JobPlatform.Notification.Application.DTOs.Admin;
+using JobPlatform.Notification.Application.Interfaces;
 using JobPlatform.Notification.Application.Queries.Admin;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

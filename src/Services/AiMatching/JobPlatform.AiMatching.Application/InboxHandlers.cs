@@ -1,13 +1,15 @@
 using JobPlatform.AiMatching.Application.Commands.Parsing;
 using JobPlatform.AiMatching.Application.Commands.Semantics;
 using JobPlatform.AiMatching.Application.DTOs.Semantics;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.IntegrationEvents.JobPosting;
 using JobPlatform.SharedKernel.IntegrationEvents.JobSeekerProfile;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.AiMatching.Application;
 

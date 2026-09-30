@@ -1,6 +1,6 @@
 using JobPlatform.HelpContent.Application.DTOs.Help;
 using JobPlatform.HelpContent.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.HelpContent.Application.Queries.Help;
 

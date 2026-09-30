@@ -1,7 +1,9 @@
 using FluentValidation;
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Application.DTOs.Performance;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.Reporting.Application;

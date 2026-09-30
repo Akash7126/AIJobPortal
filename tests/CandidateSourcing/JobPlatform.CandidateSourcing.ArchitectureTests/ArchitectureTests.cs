@@ -1,8 +1,8 @@
 using System.Reflection;
 using JobPlatform.CandidateSourcing.Api;
 using JobPlatform.CandidateSourcing.Application;
-using JobPlatform.CandidateSourcing.Domain;
 using JobPlatform.CandidateSourcing.Domain.Common;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
 using JobPlatform.CandidateSourcing.Infrastructure;
 using JobPlatform.TestSupport;
 
@@ -35,6 +35,14 @@ public class ArchitectureTests
     [Fact]
     public void NoBoundedContext_ReferencesAnotherOne() =>
         ArchitectureRules.ReferencedOtherBoundedContexts(Bc, Domain, Application, Infrastructure, Api).Should().BeEmpty();
+
+    [Fact]
+    public void Repositories_LiveInThePersistenceRepositoriesFolder() =>
+        ArchitectureRules.RepositoriesOutsideRepositoriesFolder(Infrastructure).Should().BeEmpty();
+
+    [Fact]
+    public void Interfaces_LiveInTheInterfacesFolderOfTheirLayer() =>
+        ArchitectureRules.InterfacesOutsideInterfacesFolders(Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
     public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>
@@ -72,7 +80,7 @@ public class ArchitectureTests
     public void ThisServicePublishesEventsThroughOneMapper()
     {
         var mappers = Application.GetTypes().Concat(Infrastructure.GetTypes())
-            .Where(t => typeof(JobPlatform.SharedKernel.Messaging.IDomainEventMapper).IsAssignableFrom(t) && t is { IsAbstract: false, IsInterface: false });
+            .Where(t => typeof(JobPlatform.SharedKernel.Messaging.Interfaces.IDomainEventMapper).IsAssignableFrom(t) && t is { IsAbstract: false, IsInterface: false });
         mappers.Should().ContainSingle();
     }
 }

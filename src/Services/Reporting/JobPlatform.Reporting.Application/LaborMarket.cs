@@ -1,5 +1,6 @@
 using System.Text.Json;
 using FluentValidation;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 
 namespace JobPlatform.Reporting.Application;

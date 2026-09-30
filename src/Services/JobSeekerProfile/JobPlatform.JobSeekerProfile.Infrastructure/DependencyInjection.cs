@@ -1,12 +1,13 @@
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
 using JobPlatform.BuildingBlocks.Infrastructure.Messaging;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.JobSeekerProfile.Application;
 using JobPlatform.JobSeekerProfile.Application.Inbox;
+using JobPlatform.JobSeekerProfile.Application.Interfaces;
 using JobPlatform.JobSeekerProfile.Application.ShareLink;
-using JobPlatform.JobSeekerProfile.Domain;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
 using JobPlatform.JobSeekerProfile.Infrastructure.Adapters;
 using JobPlatform.JobSeekerProfile.Infrastructure.Persistence;
+using JobPlatform.JobSeekerProfile.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.IntegrationEvents.AiMatching;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;

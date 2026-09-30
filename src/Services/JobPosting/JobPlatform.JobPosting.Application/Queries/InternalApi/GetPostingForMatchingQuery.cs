@@ -1,3 +1,4 @@
+using JobPlatform.SharedKernel.ApiContracts.Interfaces.JobPosting;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;
 
 namespace JobPlatform.JobPosting.Application.Queries.InternalApi;

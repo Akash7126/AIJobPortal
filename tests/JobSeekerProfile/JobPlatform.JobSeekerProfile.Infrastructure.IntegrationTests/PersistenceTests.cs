@@ -4,6 +4,7 @@ using JobPlatform.JobSeekerProfile.Application.Events;
 using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.JobSeekerProfile.Domain.Common;
 using JobPlatform.JobSeekerProfile.Infrastructure.Persistence;
+using JobPlatform.JobSeekerProfile.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.TestSupport;

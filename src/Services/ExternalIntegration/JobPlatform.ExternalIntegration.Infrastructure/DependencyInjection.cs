@@ -1,11 +1,12 @@
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
 using JobPlatform.BuildingBlocks.Infrastructure.Messaging;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.ExternalIntegration.Application;
 using JobPlatform.ExternalIntegration.Application.Events;
-using JobPlatform.ExternalIntegration.Domain;
+using JobPlatform.ExternalIntegration.Application.Interfaces;
+using JobPlatform.ExternalIntegration.Domain.Interfaces.Repositories;
 using JobPlatform.ExternalIntegration.Infrastructure.Adapters;
 using JobPlatform.ExternalIntegration.Infrastructure.Persistence;
+using JobPlatform.ExternalIntegration.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.Messaging;
 using Microsoft.Extensions.Configuration;

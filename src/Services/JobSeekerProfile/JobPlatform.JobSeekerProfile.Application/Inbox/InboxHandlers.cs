@@ -1,8 +1,9 @@
 using JobPlatform.JobSeekerProfile.Domain;
+using JobPlatform.JobSeekerProfile.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.IntegrationEvents.AccountIdentity;
 using JobPlatform.SharedKernel.IntegrationEvents.AiMatching;
 using JobPlatform.SharedKernel.IntegrationEvents.PlatformAdministration;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.JobSeekerProfile.Application.Inbox;
 

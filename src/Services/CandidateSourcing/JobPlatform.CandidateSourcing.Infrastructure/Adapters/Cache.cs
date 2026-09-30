@@ -1,5 +1,6 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Caching;
-using JobPlatform.CandidateSourcing.Application;
+using JobPlatform.BuildingBlocks.Infrastructure.Interfaces.Caching;
+using JobPlatform.CandidateSourcing.Application.Interfaces;
 
 namespace JobPlatform.CandidateSourcing.Infrastructure.Adapters;
 

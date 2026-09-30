@@ -19,21 +19,30 @@ public sealed class EmployerVerificationsController : ApiControllerBase
 
     [HttpPost]
     [Authorize(Policy = Policies.Employer)]
-    public Task<IActionResult> Submit([FromBody] RequestEmployerVerificationRequest body, CancellationToken ct) =>
-        Send(new RequestEmployerVerificationCommand(body.RegistrationNumber, body.VatNumber, body.MobileNumber, IdempotencyKey),
+    public Task<IActionResult> Submit([FromBody] RequestEmployerVerificationRequest body, CancellationToken ct)
+    {
+        return Send(new RequestEmployerVerificationCommand(body.RegistrationNumber, body.VatNumber, body.MobileNumber, IdempotencyKey),
             value => Accepted($"/api/v1/employer-verifications/{value.EmployerVerificationId}", value), ct);
+    }
 
     [HttpGet("{id:guid}")]
     [Authorize(Policy = Policies.Authenticated)]
-    public Task<IActionResult> Get(Guid id, CancellationToken ct) => Send(new GetEmployerVerificationQuery(id), ct);
+    public Task<IActionResult> Get(Guid id, CancellationToken ct)
+    {
+        return Send(new GetEmployerVerificationQuery(id), ct);
+    }
 
     [HttpGet("pending-review")]
     [Authorize(Policy = Policies.Administrator)]
-    public Task<IActionResult> ListPendingReview([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default) =>
-        Send(new ListPendingManualReviewQuery(page, pageSize), ct);
+    public Task<IActionResult> ListPendingReview([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
+    {
+        return Send(new ListPendingManualReviewQuery(page, pageSize), ct);
+    }
 
     [HttpPost("{id:guid}/manual-decision")]
     [Authorize(Policy = Policies.Administrator)]
-    public Task<IActionResult> DecideManually(Guid id, [FromBody] DecideRequest body, CancellationToken ct) =>
-        SendNoContent(new DecideEmployerVerificationManuallyCommand(id, body.Decision, body.Reason), ct);
+    public Task<IActionResult> DecideManually(Guid id, [FromBody] DecideRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new DecideEmployerVerificationManuallyCommand(id, body.Decision, body.Reason), ct);
+    }
 }

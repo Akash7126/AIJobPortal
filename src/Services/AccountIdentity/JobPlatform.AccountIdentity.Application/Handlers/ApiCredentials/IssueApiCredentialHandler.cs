@@ -1,11 +1,12 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
 using JobPlatform.AccountIdentity.Application.Commands.ApiCredentials;
 using JobPlatform.AccountIdentity.Application.DTOs.ApiCredentials;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Domain.ApiCredentials;
 using JobPlatform.AccountIdentity.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Persistence;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AccountIdentity.Application.Handlers.ApiCredentials;

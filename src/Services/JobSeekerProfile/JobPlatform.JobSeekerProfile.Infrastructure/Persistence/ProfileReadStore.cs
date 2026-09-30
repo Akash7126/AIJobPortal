@@ -1,9 +1,9 @@
-using JobPlatform.JobSeekerProfile.Application;
 using JobPlatform.JobSeekerProfile.Application.DTOs.Common;
 using JobPlatform.JobSeekerProfile.Application.DTOs.Documents;
 using JobPlatform.JobSeekerProfile.Application.DTOs.Profile;
 using JobPlatform.JobSeekerProfile.Application.DTOs.Resume;
 using JobPlatform.JobSeekerProfile.Application.DTOs.ShareLink;
+using JobPlatform.JobSeekerProfile.Application.Interfaces;
 using JobPlatform.JobSeekerProfile.Domain;
 using JobPlatform.JobSeekerProfile.Domain.Common;
 using Microsoft.EntityFrameworkCore;

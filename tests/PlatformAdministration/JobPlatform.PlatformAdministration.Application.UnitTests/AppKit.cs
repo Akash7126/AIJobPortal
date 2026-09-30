@@ -1,11 +1,11 @@
-using JobPlatform.PlatformAdministration.Application;
-using JobPlatform.PlatformAdministration.Domain;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Domain.Entities;
+using JobPlatform.PlatformAdministration.Domain.Interfaces.Repositories;
 using JobPlatform.PlatformAdministration.Domain.Offerings;
 using JobPlatform.PlatformAdministration.Domain.Reference;
 using JobPlatform.PlatformAdministration.Domain.Settings;
 using JobPlatform.PlatformAdministration.Domain.Taxonomy;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

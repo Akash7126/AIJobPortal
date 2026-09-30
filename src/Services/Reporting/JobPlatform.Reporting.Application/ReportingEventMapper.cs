@@ -1,8 +1,9 @@
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.Audit;
 using JobPlatform.SharedKernel.IntegrationEvents.Reporting;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.Reporting.Application;
 

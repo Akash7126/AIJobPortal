@@ -1,7 +1,9 @@
 using JobPlatform.Reporting.Application.Commands.Schedules;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Application.Services.Schedules;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

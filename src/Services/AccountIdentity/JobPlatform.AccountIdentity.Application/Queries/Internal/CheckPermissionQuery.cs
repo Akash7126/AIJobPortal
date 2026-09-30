@@ -1,5 +1,5 @@
 using JobPlatform.SharedKernel.ApiContracts.AccountIdentity;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.AccountIdentity.Application.Queries.Internal;
 

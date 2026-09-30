@@ -1,5 +1,4 @@
 using System.Net;
-using System.Net.Http.Json;
 using System.Text;
 using JobPlatform.Notification.Domain;
 using JobPlatform.Notification.Infrastructure.Persistence;
@@ -173,7 +172,7 @@ public class UnsubscribeApiTests : IClassFixture<ApiFactory>
     public async Task Get_WithAValidToken_ReturnsTheCategory_Anonymously()
     {
         var accountId = Guid.NewGuid();
-        var token = _factory.Services.GetRequiredService<Application.IUnsubscribeTokens>().Create(accountId, Categories.News);
+        var token = _factory.Services.GetRequiredService<Application.Interfaces.IUnsubscribeTokens>().Create(accountId, Categories.News);
 
         var response = await _factory.ClientFor(null).GetAsync($"/api/v1/unsubscribe/{Uri.EscapeDataString(token)}");
 

@@ -11,7 +11,7 @@ public enum MediaKind
     Other
 }
 
-/// <summary>Uploaded file reference. Never the bytes themselves - those live in <see cref="Application.IFileStorage"/>.</summary>
+/// <summary>Uploaded file reference. Never the bytes themselves - those live in <see cref="Application.Interfaces.IFileStorage"/>.</summary>
 public sealed class FileReference : ValueObject
 {
     public FileReference(string storageKey, string fileName, long sizeBytes, string contentType, string sha256)

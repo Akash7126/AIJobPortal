@@ -1,5 +1,5 @@
 using JobPlatform.CandidateSourcing.Application.DTOs.Insight;
-using JobPlatform.SharedKernel.Application.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
 
 namespace JobPlatform.CandidateSourcing.Application.Queries.Insight;
 

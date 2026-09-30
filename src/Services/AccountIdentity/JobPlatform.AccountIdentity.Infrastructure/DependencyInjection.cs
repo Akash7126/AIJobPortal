@@ -1,12 +1,14 @@
-using JobPlatform.AccountIdentity.Application.Abstractions;
-using JobPlatform.AccountIdentity.Domain.Common;
+using JobPlatform.AccountIdentity.Application.Interfaces;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Repositories;
+using JobPlatform.AccountIdentity.Domain.Interfaces.Services;
 using JobPlatform.AccountIdentity.Infrastructure.Caching;
 using JobPlatform.AccountIdentity.Infrastructure.Delivery;
 using JobPlatform.AccountIdentity.Infrastructure.Persistence;
+using JobPlatform.AccountIdentity.Infrastructure.Persistence.Repositories;
 using JobPlatform.AccountIdentity.Infrastructure.Security;
 using JobPlatform.BuildingBlocks.Infrastructure.DependencyInjection;
 using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
-using JobPlatform.SharedKernel.Application.Persistence;
+using JobPlatform.SharedKernel.Application.Interfaces.Persistence;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;

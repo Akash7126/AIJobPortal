@@ -3,9 +3,9 @@ using JobPlatform.CandidateSourcing.Application.Queries.Recommendations;
 using JobPlatform.CandidateSourcing.Application.Services.Recommendations;
 using JobPlatform.CandidateSourcing.Domain.Insight;
 using JobPlatform.CandidateSourcing.Domain.Ranking;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.CandidateSourcing.Application.Handlers.Recommendations;

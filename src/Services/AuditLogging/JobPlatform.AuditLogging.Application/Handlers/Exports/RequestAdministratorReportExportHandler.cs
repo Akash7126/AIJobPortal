@@ -2,8 +2,9 @@ using JobPlatform.AuditLogging.Application.Commands.Exports;
 using JobPlatform.AuditLogging.Application.DTOs.Exports;
 using JobPlatform.AuditLogging.Application.Exports;
 using JobPlatform.AuditLogging.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.AuditLogging.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AuditLogging.Application.Handlers.Exports;

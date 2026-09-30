@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
-using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace JobPlatform.AccountIdentity.Infrastructure.Security;

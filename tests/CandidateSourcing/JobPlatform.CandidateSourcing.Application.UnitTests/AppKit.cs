@@ -1,12 +1,13 @@
 using JobPlatform.CandidateSourcing.Application.DTOs.Search;
 using JobPlatform.CandidateSourcing.Application.DTOs.TalentPool;
-using JobPlatform.CandidateSourcing.Domain;
+using JobPlatform.CandidateSourcing.Application.Interfaces;
 using JobPlatform.CandidateSourcing.Domain.Insight;
+using JobPlatform.CandidateSourcing.Domain.Interfaces.Repositories;
 using JobPlatform.CandidateSourcing.Domain.Projection;
 using JobPlatform.CandidateSourcing.Domain.TalentPool;
 using JobPlatform.CandidateSourcing.Domain.Threshold;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Paging;
-using JobPlatform.SharedKernel.Application.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;
 using NSubstitute;

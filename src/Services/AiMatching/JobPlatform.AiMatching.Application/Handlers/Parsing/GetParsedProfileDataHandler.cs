@@ -1,8 +1,9 @@
 using JobPlatform.AiMatching.Application.DTOs.Parsing;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Application.Queries.Parsing;
 using JobPlatform.AiMatching.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AiMatching.Application.Handlers.Parsing;

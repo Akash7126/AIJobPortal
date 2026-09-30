@@ -3,6 +3,7 @@ using System.IO.Compression;
 using System.Security;
 using System.Text;
 using JobPlatform.Reporting.Application.DTOs.Common;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 
 namespace JobPlatform.Reporting.Application;

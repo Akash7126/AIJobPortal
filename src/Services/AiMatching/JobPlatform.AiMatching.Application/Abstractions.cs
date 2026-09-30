@@ -3,7 +3,7 @@ using JobPlatform.AiMatching.Application.Services.Matching;
 using JobPlatform.AiMatching.Application.Services.Parsing;
 using JobPlatform.AiMatching.Application.Services.Semantics;
 using JobPlatform.AiMatching.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +23,7 @@ public static class ApplicationAssembly
         services.AddScoped<PostingAnalysisService>();
         services.AddScoped<PostingStatusReaction>();
         services.AddSingleton<AiMatchingEventMapper>();
-        services.AddSingleton<JobPlatform.SharedKernel.Messaging.IDomainEventMapper>(sp => sp.GetRequiredService<AiMatchingEventMapper>());
+        services.AddSingleton<JobPlatform.SharedKernel.Messaging.Interfaces.IDomainEventMapper>(sp => sp.GetRequiredService<AiMatchingEventMapper>());
         return services;
     }
 }
@@ -88,7 +88,7 @@ public static class AiMatchingCodes
 
 public static class ActorMapping
 {
-    public static Actor ToActor(this JobPlatform.SharedKernel.Application.Ports.ICurrentUser user) =>
+    public static Actor ToActor(this JobPlatform.SharedKernel.Application.Interfaces.Ports.ICurrentUser user) =>
         new(user.UserId ?? Guid.Empty, user.ActorType ?? ActorType.Guest);
 }
 

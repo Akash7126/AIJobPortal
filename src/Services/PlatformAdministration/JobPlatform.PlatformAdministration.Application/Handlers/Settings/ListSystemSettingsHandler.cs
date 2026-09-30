@@ -1,6 +1,7 @@
 using JobPlatform.PlatformAdministration.Application.DTOs.Settings;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.PlatformAdministration.Application.Queries.Settings;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.PlatformAdministration.Application.Handlers.Settings;

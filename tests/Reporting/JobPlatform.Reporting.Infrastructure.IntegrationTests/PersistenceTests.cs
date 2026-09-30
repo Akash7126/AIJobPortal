@@ -2,6 +2,7 @@ using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.Reporting.Application;
 using JobPlatform.Reporting.Domain;
 using JobPlatform.Reporting.Infrastructure.Persistence;
+using JobPlatform.Reporting.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.TestSupport;
 using Microsoft.EntityFrameworkCore;

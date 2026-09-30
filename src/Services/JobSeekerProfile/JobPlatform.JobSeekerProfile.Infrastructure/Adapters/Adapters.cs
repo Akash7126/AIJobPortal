@@ -1,6 +1,5 @@
 using System.Net.Http.Json;
-using System.Text;
-using JobPlatform.JobSeekerProfile.Application;
+using JobPlatform.JobSeekerProfile.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 

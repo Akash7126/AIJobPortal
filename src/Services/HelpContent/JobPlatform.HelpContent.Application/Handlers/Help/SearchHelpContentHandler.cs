@@ -1,6 +1,7 @@
 using JobPlatform.HelpContent.Application.DTOs.Help;
+using JobPlatform.HelpContent.Application.Interfaces;
 using JobPlatform.HelpContent.Application.Queries.Help;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Results;
 

@@ -1,8 +1,10 @@
+using JobPlatform.EmployerOnboarding.Application.Interfaces;
 using JobPlatform.EmployerOnboarding.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Domain;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Domain.Interfaces;
 using JobPlatform.SharedKernel.IntegrationEvents.EmployerOnboarding;
 using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 
 namespace JobPlatform.EmployerOnboarding.Application.Events;
 

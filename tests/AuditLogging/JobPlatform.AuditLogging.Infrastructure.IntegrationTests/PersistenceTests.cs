@@ -1,6 +1,7 @@
 using JobPlatform.AuditLogging.Application;
 using JobPlatform.AuditLogging.Domain;
 using JobPlatform.AuditLogging.Infrastructure.Persistence;
+using JobPlatform.AuditLogging.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Paging;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.TestSupport;

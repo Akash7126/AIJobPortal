@@ -2,9 +2,10 @@ using System.Reflection;
 using JobPlatform.AiMatching.Application;
 using JobPlatform.AiMatching.Domain;
 using JobPlatform.AiMatching.Infrastructure.Persistence;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Domain;
-using JobPlatform.SharedKernel.Messaging;
+using JobPlatform.SharedKernel.Domain.Interfaces;
+using JobPlatform.SharedKernel.Messaging.Interfaces;
 using JobPlatform.TestSupport;
 using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
@@ -94,6 +95,14 @@ public class ArchitectureTests
 
         offenders.Should().BeEmpty("state changes only through behaviour methods; offenders: " + string.Join(", ", offenders));
     }
+
+    [Fact]
+    public void Repositories_LiveInThePersistenceRepositoriesFolder() =>
+        ArchitectureRules.RepositoriesOutsideRepositoriesFolder(Infrastructure).Should().BeEmpty();
+
+    [Fact]
+    public void Interfaces_LiveInTheInterfacesFolderOfTheirLayer() =>
+        ArchitectureRules.InterfacesOutsideInterfacesFolders(Domain, Application, Infrastructure, Api).Should().BeEmpty();
 
     [Fact]
     public void CommandsQueriesAndHandlers_FollowTheFeatureFolders_OneHandlerPerRequest() =>

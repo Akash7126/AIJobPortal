@@ -1,9 +1,9 @@
 using JobPlatform.PlatformAdministration.Application.Commands.Settings;
 using JobPlatform.PlatformAdministration.Application.DTOs.Common;
-using JobPlatform.PlatformAdministration.Domain;
 using JobPlatform.PlatformAdministration.Domain.Common;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.PlatformAdministration.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.Extensions.Logging;
 

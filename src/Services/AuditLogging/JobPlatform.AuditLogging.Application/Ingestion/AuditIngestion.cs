@@ -1,4 +1,5 @@
 using JobPlatform.AuditLogging.Domain;
+using JobPlatform.AuditLogging.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace JobPlatform.AuditLogging.Application.Ingestion;

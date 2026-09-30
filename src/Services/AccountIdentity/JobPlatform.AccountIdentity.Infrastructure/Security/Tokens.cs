@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using JobPlatform.AccountIdentity.Application.Abstractions;
+using JobPlatform.AccountIdentity.Application.Interfaces;
 using JobPlatform.AccountIdentity.Infrastructure.Persistence;
 using JobPlatform.SharedKernel.Security;
 using Microsoft.EntityFrameworkCore;

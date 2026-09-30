@@ -1,8 +1,8 @@
 using System.Reflection;
 using JobPlatform.ExternalIntegration.Application.Services.JobDataFlows;
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +16,7 @@ public static class ApplicationAssembly
     public static IServiceCollection AddExternalIntegrationApplication(this IServiceCollection services)
     {
         services.AddSingleton<Events.ExternalIntegrationEventMapper>();
-        services.AddSingleton<SharedKernel.Messaging.IDomainEventMapper>(sp => sp.GetRequiredService<Events.ExternalIntegrationEventMapper>());
+        services.AddSingleton<SharedKernel.Messaging.Interfaces.IDomainEventMapper>(sp => sp.GetRequiredService<Events.ExternalIntegrationEventMapper>());
         services.AddScoped<PartnerSyncOrchestrator>();
         return services;
     }

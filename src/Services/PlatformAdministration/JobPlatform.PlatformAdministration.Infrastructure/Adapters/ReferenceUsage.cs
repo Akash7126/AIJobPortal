@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
 using JobPlatform.PlatformAdministration.Application;
+using JobPlatform.PlatformAdministration.Application.Interfaces;
 using JobPlatform.SharedKernel.ApiContracts.JobPosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;

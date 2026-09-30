@@ -1,6 +1,6 @@
 using JobPlatform.ExternalIntegration.Application.DTOs.JobDataFlows;
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 
 namespace JobPlatform.ExternalIntegration.Application.Commands.JobDataFlows;
 

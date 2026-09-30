@@ -1,4 +1,5 @@
 using JobPlatform.Reporting.Application.DTOs.Common;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
 
 namespace JobPlatform.Reporting.Application;

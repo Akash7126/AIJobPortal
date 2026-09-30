@@ -1,6 +1,6 @@
 using JobPlatform.Notification.Application.DTOs.Admin;
 using JobPlatform.Notification.Domain;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 
 namespace JobPlatform.Notification.Application.Services.Admin;
 

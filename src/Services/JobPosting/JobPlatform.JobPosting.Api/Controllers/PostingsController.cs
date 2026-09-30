@@ -60,21 +60,27 @@ public sealed class PostingsController : ApiControllerBase
     [HttpPost("jobs/{id:guid}/renew")]
     [Authorize(Policy = Policies.Employer)]
     [ForbiddenCode("E-JCP-FORBIDDEN")]
-    public Task<IActionResult> Renew(Guid id, [FromBody] RenewRequest body, CancellationToken ct) =>
-        Send(new RenewJobPostingCommand(id, body.NewDeadlineUtc), Ok, ct);
+    public Task<IActionResult> Renew(Guid id, [FromBody] RenewRequest body, CancellationToken ct)
+    {
+        return Send(new RenewJobPostingCommand(id, body.NewDeadlineUtc), Ok, ct);
+    }
 
     /// <summary>US-3.2.4-01: explicit lifecycle transition (publish/pause/resume/expire/archive).</summary>
     [HttpPost("jobs/{id:guid}/status")]
     [Authorize(Policy = Policies.Employer)]
     [ForbiddenCode("E-JST-FORBIDDEN")]
-    public Task<IActionResult> ChangeStatus(Guid id, [FromBody] StatusRequest body, CancellationToken ct) =>
-        SendNoContent(new UpdateJobPostingStatusCommand(id, body.Status), ct);
+    public Task<IActionResult> ChangeStatus(Guid id, [FromBody] StatusRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new UpdateJobPostingStatusCommand(id, body.Status), ct);
+    }
 
     /// <summary>US-3.2.1-03: the employer's own postings.</summary>
     [HttpGet("jobs/mine")]
     [Authorize(Policy = Policies.Employer)]
-    public Task<IActionResult> Mine([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default) =>
-        Send(new ListMyJobPostingsQuery(status, page, pageSize), ct);
+    public Task<IActionResult> Mine([FromQuery] string? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
+    {
+        return Send(new ListMyJobPostingsQuery(status, page, pageSize), ct);
+    }
 
     /// <summary>US-4.1-02: anonymous guest browsing; US-3.2.2-01/02: 8-filter search (foundation THR-013 &lt;= 2 s).</summary>
     [HttpGet("jobs/search")]
@@ -82,27 +88,37 @@ public sealed class PostingsController : ApiControllerBase
     public Task<IActionResult> Search([FromQuery] string? keyword, [FromQuery] string? governorate, [FromQuery] string? city,
         [FromQuery] decimal? salaryMin, [FromQuery] decimal? salaryMax, [FromQuery] string? contractType, [FromQuery] DateTime? postedAfterUtc,
         [FromQuery] DateTime? deadlineBeforeUtc, [FromQuery] string? categoryCode, [FromQuery] string? sort, [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 20, CancellationToken ct = default) =>
-        Send(new SearchJobPostingsQuery(keyword, governorate, city, salaryMin, salaryMax, contractType, postedAfterUtc, deadlineBeforeUtc, categoryCode,
+        [FromQuery] int pageSize = 20, CancellationToken ct = default)
+    {
+        return Send(new SearchJobPostingsQuery(keyword, governorate, city, salaryMin, salaryMax, contractType, postedAfterUtc, deadlineBeforeUtc, categoryCode,
             sort, page, pageSize), ct);
+    }
 
     /// <summary>US-3.2.2-02: personalised recommendations (degrades to plain search when BC-10 is unavailable).</summary>
     [HttpGet("jobs/recommended")]
     [Authorize(Policy = Policies.JobSeeker)]
-    public Task<IActionResult> Recommended([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default) =>
-        Send(new GetRecommendedJobsQuery(page, pageSize), ct);
+    public Task<IActionResult> Recommended([FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
+    {
+        return Send(new GetRecommendedJobsQuery(page, pageSize), ct);
+    }
 
     /// <summary>US-3.2.1-02: the field list and allowed values for the posting form.</summary>
     [HttpGet("taxonomy/posting-schema")]
     [Authorize(Policy = Policies.Employer)]
-    public Task<IActionResult> Schema(CancellationToken ct) => Send(new GetJobPostingSchemaQuery(), ct);
+    public Task<IActionResult> Schema(CancellationToken ct)
+    {
+        return Send(new GetJobPostingSchemaQuery(), ct);
+    }
 
     /// <summary>US-3.2.1-01/03/04, US-4.1-02: a single posting (guest/anonymous; visibility-filtered). ETag is the committed RowVersion,
     /// usable as If-Match on a later PUT (this is always a fresh read, unlike a mutation's own response - see <see cref="PostingMutationResult"/>).</summary>
     [HttpGet("jobs/{id:guid}")]
-    public Task<IActionResult> Get(Guid id, CancellationToken ct) => Send(new GetJobPostingQuery(id), view =>
+    public Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
-        SetETag(view.RowVersion);
-        return Ok(view);
-    }, ct);
+        return Send(new GetJobPostingQuery(id), view =>
+        {
+            SetETag(view.RowVersion);
+            return Ok(view);
+        }, ct);
+    }
 }

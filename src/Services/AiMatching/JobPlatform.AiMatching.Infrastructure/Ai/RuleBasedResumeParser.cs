@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using JobPlatform.AiMatching.Application;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
 
 namespace JobPlatform.AiMatching.Infrastructure.Ai;

@@ -1,8 +1,10 @@
 using JobPlatform.AiMatching.Application.Commands.Shortlists;
 using JobPlatform.AiMatching.Application.DTOs.Shortlists;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.AiMatching.Application.Handlers.Shortlists;

@@ -1,8 +1,10 @@
 using JobPlatform.AiMatching.Application.Commands.Configuration;
 using JobPlatform.AiMatching.Application.Handlers.Configuration;
+using JobPlatform.AiMatching.Application.Interfaces;
 using JobPlatform.AiMatching.Domain;
+using JobPlatform.AiMatching.Domain.Interfaces.Repositories;
 using JobPlatform.SharedKernel.Application.Concurrency;
-using JobPlatform.SharedKernel.Application.Ports;
+using JobPlatform.SharedKernel.Application.Interfaces.Ports;
 using JobPlatform.SharedKernel.Application.Results;
 using JobPlatform.SharedKernel.Common.Enums;
 using Microsoft.Extensions.Time.Testing;

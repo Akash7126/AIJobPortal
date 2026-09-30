@@ -1,4 +1,5 @@
 using JobPlatform.ExternalIntegration.Application;
+using JobPlatform.ExternalIntegration.Application.Interfaces;
 
 namespace JobPlatform.ExternalIntegration.Infrastructure.Adapters;
 

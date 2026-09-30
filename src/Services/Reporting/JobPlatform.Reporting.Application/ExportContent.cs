@@ -1,6 +1,8 @@
 using System.Text.Json;
 using JobPlatform.Reporting.Application.DTOs.Common;
+using JobPlatform.Reporting.Application.Interfaces;
 using JobPlatform.Reporting.Domain;
+using JobPlatform.Reporting.Domain.Interfaces.Repositories;
 
 namespace JobPlatform.Reporting.Application;
 

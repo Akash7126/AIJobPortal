@@ -2,6 +2,7 @@ using JobPlatform.BuildingBlocks.Infrastructure.Persistence;
 using JobPlatform.JobPosting.Application.Events;
 using JobPlatform.JobPosting.Domain;
 using JobPlatform.JobPosting.Infrastructure.Persistence;
+using JobPlatform.JobPosting.Infrastructure.Persistence.Repositories;
 using JobPlatform.SharedKernel.Application.Persistence;
 using JobPlatform.SharedKernel.Common.ValueObjects;
 using JobPlatform.TestSupport;

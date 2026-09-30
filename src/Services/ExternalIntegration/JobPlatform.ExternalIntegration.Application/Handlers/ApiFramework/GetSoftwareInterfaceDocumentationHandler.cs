@@ -1,7 +1,9 @@
 using JobPlatform.ExternalIntegration.Application.DTOs.ApiFramework;
+using JobPlatform.ExternalIntegration.Application.Interfaces;
 using JobPlatform.ExternalIntegration.Application.Queries.ApiFramework;
 using JobPlatform.ExternalIntegration.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.ExternalIntegration.Domain.Interfaces.Repositories;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 
 namespace JobPlatform.ExternalIntegration.Application.Handlers.ApiFramework;

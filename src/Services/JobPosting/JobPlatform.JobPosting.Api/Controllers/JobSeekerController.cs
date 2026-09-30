@@ -29,30 +29,45 @@ public sealed class JobSeekerController : ApiControllerBase
     /// <summary>US-3.2.2-03: heart-button toggle.</summary>
     [HttpPut("favorites/{jobId:guid}")]
     [ForbiddenCode("E-JSF-FORBIDDEN")]
-    public Task<IActionResult> ToggleFavorite(Guid jobId, CancellationToken ct) =>
-        Send(new ToggleFavoriteJobCommand(jobId), favorited => Ok(new { favorited }), ct);
+    public Task<IActionResult> ToggleFavorite(Guid jobId, CancellationToken ct)
+    {
+        return Send(new ToggleFavoriteJobCommand(jobId), favorited => Ok(new { favorited }), ct);
+    }
 
     [HttpGet("favorites")]
-    public Task<IActionResult> ListFavorites(CancellationToken ct) => Send(new ListFavoritesQuery(), ct);
+    public Task<IActionResult> ListFavorites(CancellationToken ct)
+    {
+        return Send(new ListFavoritesQuery(), ct);
+    }
 
     /// <summary>US-3.2.2-04: save a search (an identical one is reused).</summary>
     [HttpPost("saved-searches")]
     [ForbiddenCode("E-JSF-FORBIDDEN")]
-    public Task<IActionResult> SaveSearch([FromBody] SavedSearchRequest body, CancellationToken ct) =>
-        Send(new SaveSearchCommand(body.Keyword, body.Governorate, body.City, body.SalaryMin, body.SalaryMax, body.ContractType, body.PostedAfterUtc,
+    public Task<IActionResult> SaveSearch([FromBody] SavedSearchRequest body, CancellationToken ct)
+    {
+        return Send(new SaveSearchCommand(body.Keyword, body.Governorate, body.City, body.SalaryMin, body.SalaryMax, body.ContractType, body.PostedAfterUtc,
             body.DeadlineBeforeUtc, body.CategoryCode, body.NotifyOnMatch), result => Ok(result), ct);
+    }
 
     [HttpGet("saved-searches")]
-    public Task<IActionResult> ListSavedSearches(CancellationToken ct) => Send(new ListSavedSearchesQuery(), ct);
+    public Task<IActionResult> ListSavedSearches(CancellationToken ct)
+    {
+        return Send(new ListSavedSearchesQuery(), ct);
+    }
 
     [HttpPatch("saved-searches/{id:guid}")]
     [ForbiddenCode("E-JSF-FORBIDDEN")]
-    public Task<IActionResult> UpdateSavedSearch(Guid id, [FromBody] NotifyRequest body, CancellationToken ct) =>
-        SendNoContent(new UpdateSavedSearchCommand(id, body.NotifyOnMatch), ct);
+    public Task<IActionResult> UpdateSavedSearch(Guid id, [FromBody] NotifyRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new UpdateSavedSearchCommand(id, body.NotifyOnMatch), ct);
+    }
 
     [HttpDelete("saved-searches/{id:guid}")]
     [ForbiddenCode("E-JSF-FORBIDDEN")]
-    public Task<IActionResult> DeleteSavedSearch(Guid id, CancellationToken ct) => SendNoContent(new DeleteSavedSearchCommand(id), ct);
+    public Task<IActionResult> DeleteSavedSearch(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new DeleteSavedSearchCommand(id), ct);
+    }
 
     /// <summary>US-3.2.3-01: bookmark a posting or a stored filter.</summary>
     [HttpPost("interested")]
@@ -65,9 +80,15 @@ public sealed class JobSeekerController : ApiControllerBase
     }
 
     [HttpGet("interested")]
-    public Task<IActionResult> ListInterested(CancellationToken ct) => Send(new ListInterestedListQuery(), ct);
+    public Task<IActionResult> ListInterested(CancellationToken ct)
+    {
+        return Send(new ListInterestedListQuery(), ct);
+    }
 
     [HttpDelete("interested/{id:guid}")]
     [ForbiddenCode("E-JIP-FORBIDDEN")]
-    public Task<IActionResult> DeleteInterested(Guid id, CancellationToken ct) => SendNoContent(new DeleteInterestedListEntryCommand(id), ct);
+    public Task<IActionResult> DeleteInterested(Guid id, CancellationToken ct)
+    {
+        return SendNoContent(new DeleteInterestedListEntryCommand(id), ct);
+    }
 }

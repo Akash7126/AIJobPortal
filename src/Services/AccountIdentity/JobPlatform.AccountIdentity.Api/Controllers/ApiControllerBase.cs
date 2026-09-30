@@ -1,5 +1,5 @@
 using JobPlatform.BuildingBlocks.Infrastructure.Http;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Application.Results;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +9,21 @@ namespace JobPlatform.AccountIdentity.Api.Controllers;
 [ApiController]
 public abstract class ApiControllerBase : ControllerBase
 {
-    protected ISender Sender => HttpContext.RequestServices.GetRequiredService<ISender>();
+    protected ISender Sender
+    {
+        get
+        {
+            return HttpContext.RequestServices.GetRequiredService<ISender>();
+        }
+    }
 
-    protected string? IdempotencyKey => Request.Headers["Idempotency-Key"].FirstOrDefault();
+    protected string? IdempotencyKey
+    {
+        get
+        {
+            return Request.Headers["Idempotency-Key"].FirstOrDefault();
+        }
+    }
 
     /// <summary>Optimistic-concurrency precondition of an update (foundation section 11). Absent = unconditional.</summary>
     protected string? IfMatch

@@ -1,5 +1,6 @@
 using JobPlatform.AuditLogging.Application;
 using JobPlatform.AuditLogging.Application.DTOs.AuditLog;
+using JobPlatform.AuditLogging.Application.Interfaces;
 using JobPlatform.AuditLogging.Domain;
 using JobPlatform.SharedKernel.Application.Paging;
 using Microsoft.EntityFrameworkCore;

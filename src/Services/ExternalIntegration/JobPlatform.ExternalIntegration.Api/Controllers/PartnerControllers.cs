@@ -34,34 +34,51 @@ public sealed class IntegrationController : PartnerControllerBase
     public sealed record AttributionVisibilityRequest(string Visibility);
 
     [HttpPost("integrations/register")]
-    public Task<IActionResult> Register([FromBody] RegisterRequest body, CancellationToken ct) =>
-        Send(new RegisterExternalJobSiteCommand(body.SourcePlatformName, body.BaseUrl, body.RecommendedByMolPef),
+    public Task<IActionResult> Register([FromBody] RegisterRequest body, CancellationToken ct)
+    {
+        return Send(new RegisterExternalJobSiteCommand(body.SourcePlatformName, body.BaseUrl, body.RecommendedByMolPef),
             value => Created($"/api/v1/partner/integration", value), ct);
+    }
 
     [HttpGet("integration")]
-    public Task<IActionResult> Get(CancellationToken ct) => Send(new GetIntegrationQuery(), value =>
+    public Task<IActionResult> Get(CancellationToken ct)
     {
-        SetETag(value.RowVersion);
-        return Ok(value);
-    }, ct);
+        return Send(new GetIntegrationQuery(), value =>
+        {
+            SetETag(value.RowVersion);
+            return Ok(value);
+        }, ct);
+    }
 
     [HttpPut("integration/models")]
-    public Task<IActionResult> Enable([FromBody] EnableRequest body, CancellationToken ct) =>
-        SendNoContent(new EnableIntegrationCommand(body.PullEnabled, body.PushEnabled), ct);
+    public Task<IActionResult> Enable([FromBody] EnableRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new EnableIntegrationCommand(body.PullEnabled, body.PushEnabled), ct);
+    }
 
     [HttpPut("sync-schedule")]
-    public Task<IActionResult> ConfigureSyncSchedule([FromBody] SyncScheduleRequest body, CancellationToken ct) =>
-        SendNoContent(new ConfigureSyncScheduleCommand(body.Mode, body.Cron), ct);
+    public Task<IActionResult> ConfigureSyncSchedule([FromBody] SyncScheduleRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new ConfigureSyncScheduleCommand(body.Mode, body.Cron), ct);
+    }
 
     [HttpPost("sync-runs")]
-    public Task<IActionResult> StartSyncRun(CancellationToken ct) => Send(new StartSyncRunCommand(), value => Accepted(value), ct);
+    public Task<IActionResult> StartSyncRun(CancellationToken ct)
+    {
+        return Send(new StartSyncRunCommand(), value => Accepted(value), ct);
+    }
 
     [HttpPut("attribution-visibility")]
-    public Task<IActionResult> ConfigureAttributionVisibility([FromBody] AttributionVisibilityRequest body, CancellationToken ct) =>
-        SendNoContent(new ConfigureAttributionVisibilityCommand(body.Visibility), ct);
+    public Task<IActionResult> ConfigureAttributionVisibility([FromBody] AttributionVisibilityRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new ConfigureAttributionVisibilityCommand(body.Visibility), ct);
+    }
 
     [HttpPost("sandbox")]
-    public Task<IActionResult> ProvisionSandbox(CancellationToken ct) => Send(new ProvisionSandboxCommand(), value => Created("", value), ct);
+    public Task<IActionResult> ProvisionSandbox(CancellationToken ct)
+    {
+        return Send(new ProvisionSandboxCommand(), value => Created("", value), ct);
+    }
 }
 
 /// <summary>US-3.1.3-03 (push) and US-3.1.3-09 (source edits/closures sync).</summary>
@@ -74,14 +91,18 @@ public sealed class JobDataController : PartnerControllerBase
     public sealed record SyncAttributionRequest(string Operation, DateTime? Deadline, string? Description);
 
     [HttpPost("jobs")]
-    public Task<IActionResult> Push([FromBody] PushJobRequest body, CancellationToken ct) =>
-        Send(new PushJobDataCommand(body.SourceJobId, body.Title, body.Summary, body.Skills, body.ContractType, body.WorkFormat,
+    public Task<IActionResult> Push([FromBody] PushJobRequest body, CancellationToken ct)
+    {
+        return Send(new PushJobDataCommand(body.SourceJobId, body.Title, body.Summary, body.Skills, body.ContractType, body.WorkFormat,
                 body.ApplicationDeadline, body.Location, body.SourceUrl, IdempotencyKey),
             value => value.Created ? Created($"/api/v1/partner/jobs/{value.PlatformJobId}", value) : Ok(value), ct);
+    }
 
     [HttpPatch("jobs/{platformJobId}")]
-    public Task<IActionResult> SyncAttribution(string platformJobId, [FromBody] SyncAttributionRequest body, CancellationToken ct) =>
-        SendNoContent(new SyncJobPostAttributionCommand(platformJobId, body.Operation, body.Deadline, body.Description), ct);
+    public Task<IActionResult> SyncAttribution(string platformJobId, [FromBody] SyncAttributionRequest body, CancellationToken ct)
+    {
+        return SendNoContent(new SyncJobPostAttributionCommand(platformJobId, body.Operation, body.Deadline, body.Description), ct);
+    }
 }
 
 /// <summary>US-3.1.3-04, US-3.4.1-03: partner-configured field mapping and the platform's standard schema.</summary>
@@ -90,22 +111,31 @@ public sealed class MappingController : PartnerControllerBase
     public sealed record ConfigureMappingRequest(IReadOnlyList<MappingRuleInput> Rules, string StandardSchemaVersion);
 
     [HttpPut("mapping")]
-    public Task<IActionResult> Configure([FromBody] ConfigureMappingRequest body, CancellationToken ct) =>
-        Send(new ConfigureJobDataMappingCommand(body.Rules, body.StandardSchemaVersion), ct);
+    public Task<IActionResult> Configure([FromBody] ConfigureMappingRequest body, CancellationToken ct)
+    {
+        return Send(new ConfigureJobDataMappingCommand(body.Rules, body.StandardSchemaVersion), ct);
+    }
 
     [HttpGet("mapping")]
-    public Task<IActionResult> Get(CancellationToken ct) => Send(new GetJobDataMappingQuery(), ct);
+    public Task<IActionResult> Get(CancellationToken ct)
+    {
+        return Send(new GetJobDataMappingQuery(), ct);
+    }
 
     [HttpGet("standard-schema")]
-    public Task<IActionResult> StandardSchema(CancellationToken ct) => Send(new GetStandardSchemaQuery(), ct);
+    public Task<IActionResult> StandardSchema(CancellationToken ct)
+    {
+        return Send(new GetStandardSchemaQuery(), ct);
+    }
 }
 
 /// <summary>US-3.1.3-12 (credentialed schema documentation), US-4.3-02 (authorised-partner interface specs).</summary>
 public sealed class PartnerDocumentationController : PartnerControllerBase
 {
     [HttpGet("schema-documentation")]
-    public Task<IActionResult> SchemaDocumentation([FromQuery] string version, CancellationToken ct) =>
-        Send(new ViewApiSchemaDocumentationCommand(version), value =>
+    public Task<IActionResult> SchemaDocumentation([FromQuery] string version, CancellationToken ct)
+    {
+        return Send(new ViewApiSchemaDocumentationCommand(version), value =>
         {
             if (value.Deprecated)
             {
@@ -118,7 +148,11 @@ public sealed class PartnerDocumentationController : PartnerControllerBase
 
             return Ok(value);
         }, ct);
+    }
 
     [HttpGet("~/api/v1/docs/{version}/interfaces")]
-    public Task<IActionResult> Interfaces(string version, CancellationToken ct) => Send(new GetSoftwareInterfaceDocumentationQuery(version), ct);
+    public Task<IActionResult> Interfaces(string version, CancellationToken ct)
+    {
+        return Send(new GetSoftwareInterfaceDocumentationQuery(version), ct);
+    }
 }

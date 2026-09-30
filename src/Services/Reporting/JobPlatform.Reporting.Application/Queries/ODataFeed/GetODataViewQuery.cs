@@ -1,6 +1,6 @@
 using JobPlatform.Reporting.Application.DTOs.Common;
 using JobPlatform.Reporting.Domain;
-using JobPlatform.SharedKernel.Application.Abstractions;
+using JobPlatform.SharedKernel.Application.Interfaces.Cqrs;
 using JobPlatform.SharedKernel.Common.Enums;
 
 namespace JobPlatform.Reporting.Application.Queries.ODataFeed;
